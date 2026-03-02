@@ -3,6 +3,7 @@ import { AreaPage } from "./pages/area-page/area-page";
 import { ProfessionalPage } from "./pages/professional-page/professional-page";
 import { AppointmentTypePage } from "./pages/appointment-type-page/appointment-type-page";
 import { ClientPage } from "./pages/client-page/client-page";
+import { UserPage } from "./pages/user-page/user-page";
 
 export const MAINTENANCE_ROUTES: Routes = [
   {
@@ -21,4 +22,8 @@ export const MAINTENANCE_ROUTES: Routes = [
     path: 'client',
     component: ClientPage
   },
+  {
+    path: 'user',
+    component: UserPage
+  }
 ]
