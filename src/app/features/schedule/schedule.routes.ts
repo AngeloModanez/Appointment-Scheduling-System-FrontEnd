@@ -3,6 +3,7 @@ import { TodayAppointmentPage } from "./pages/today-appointment-page/today-appoi
 import { ScheduleAppointmentPage } from "./pages/schedule-appointment-page/schedule-appointment-page";
 import { CancelAppointmentPage } from "./pages/cancel-appointment-page/cancel-appointment-page";
 import { ClientHistoryPage } from "./pages/client-history-page/client-history-page";
+import { ProfessionalSchedulePage } from "./pages/professional-schedule-page/professional-schedule-page";
 
 export const SCHEDULE_ROUTES: Routes = [
   {
@@ -20,5 +21,9 @@ export const SCHEDULE_ROUTES: Routes = [
   {
     path: 'client-history',
     component: ClientHistoryPage
+  },
+  {
+    path: 'professional-schedule',
+    component: ProfessionalSchedulePage
   }
 ]
