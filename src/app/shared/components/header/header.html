@@ -9,19 +9,19 @@
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="">Home</a>
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
         </li>
 
         <li class="nav-item" ngbDropdown>
           <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdownManagement" role="button">Management</a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdownManagement" class="dropdown-menu dropdown-menu-start">
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="area">Areas</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="professional">Professionals</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointment-type">Appointment Types</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/area">Areas</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/professional">Professionals</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/appointment-type">Appointment Types</a>
             <hr class="dropdown-divider">
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="client">Clients</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/client">Clients</a>
             <hr class="dropdown-divider">
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="user">Users</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/user">Users</a>
           </div>
         </li>
 
