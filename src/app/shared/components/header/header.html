@@ -9,19 +9,20 @@
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
         </li>
 
         <li class="nav-item" ngbDropdown>
           <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdownManagement" role="button">Management</a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdownManagement" class="dropdown-menu dropdown-menu-start">
-            <a ngbDropdownItem (click)="$event.preventDefault()">Areas</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()">Professionals</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()">Appointment Types</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/areas">Areas</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/professionals">Professionals</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/types">Appointment
+              Types</a>
             <hr class="dropdown-divider">
-            <a ngbDropdownItem (click)="$event.preventDefault()">Clients</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/clients">Clients</a>
             <hr class="dropdown-divider">
-            <a ngbDropdownItem (click)="$event.preventDefault()">Users</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/users">Users</a>
           </div>
         </li>
 
@@ -29,13 +30,18 @@
           <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdownAppointments"
             role="button">Appointments</a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdownAppointments" class="dropdown-menu dropdown-menu-start">
-            <a ngbDropdownItem (click)="$event.preventDefault()">Today’s Appointments</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()">Schedule Appointment</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()">Cancel Appointment</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointments/today">Today’s
+              Appointments</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointments/create">Schedule
+              Appointment</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointments/cancel">Cancel
+              Appointment</a>
             <hr class="dropdown-divider">
-            <a ngbDropdownItem (click)="$event.preventDefault()">Client History</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointments/history">Client
+              History</a>
             <hr class="dropdown-divider">
-            <a ngbDropdownItem (click)="$event.preventDefault()">Professional Schedule</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointments/professional">Professional
+              Schedule</a>
           </div>
         </li>
       </ul>
@@ -43,9 +49,10 @@
       <ul class="navbar-nav ms-auto">
         <div class="d-flex">
           <div class="my-auto me-3">
-            Attendant: <span class="fw-bold">John Doe</span>
+            <span class="fw-bold me-1">{{getName()}}</span>
+            <span>({{getRole()}})</span>
           </div>
-          <button class="btn btn-outline-secondary" type="submit">Logout</button>
+          <button class="btn btn-outline-secondary" type="submit" (click)="logout()">Logout</button>
         </div>
       </ul>
     </div>
