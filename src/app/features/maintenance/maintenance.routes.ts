@@ -26,4 +26,4 @@ export const MAINTENANCE_ROUTES: Routes = [
     path: 'user',
     component: UserPage
   }
-]
+];
