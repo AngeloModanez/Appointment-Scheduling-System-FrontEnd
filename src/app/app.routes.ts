@@ -12,5 +12,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/maintenance/maintenance.routes')
         .then(r => r.MAINTENANCE_ROUTES)
+  },
+  {
+    path: 'schedule',
+    loadChildren: () =>
+      import('./features/schedule/schedule.routes')
+        .then(r => r.SCHEDULE_ROUTES)
   }
 ];
