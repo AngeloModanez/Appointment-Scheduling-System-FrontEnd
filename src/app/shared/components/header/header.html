@@ -17,7 +17,8 @@
           <div ngbDropdownMenu aria-labelledby="navbarDropdownManagement" class="dropdown-menu dropdown-menu-start">
             <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/area">Areas</a>
             <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/professional">Professionals</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/appointment-type">Appointment Types</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/appointment-type">Appointment
+              Types</a>
             <hr class="dropdown-divider">
             <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/client">Clients</a>
             <hr class="dropdown-divider">
@@ -29,9 +30,12 @@
           <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdownAppointments"
             role="button">Appointments</a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdownAppointments" class="dropdown-menu dropdown-menu-start">
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/today-appointment">Today’s Appointments</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/schedule-appointment">Schedule Appointment</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()">Cancel Appointment</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/today-appointment">Today’s
+              Appointments</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/schedule-appointment">Schedule
+              Appointment</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/cancel-appointment">Cancel
+              Appointment</a>
             <hr class="dropdown-divider">
             <a ngbDropdownItem (click)="$event.preventDefault()">Client History</a>
             <hr class="dropdown-divider">
