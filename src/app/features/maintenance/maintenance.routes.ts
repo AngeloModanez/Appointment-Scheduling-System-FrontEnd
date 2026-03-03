@@ -7,23 +7,23 @@ import { UserPage } from "./pages/user-page/user-page";
 
 export const MAINTENANCE_ROUTES: Routes = [
   {
-    path: 'area',
+    path: 'areas',
     component: AreaPage
   },
   {
-    path: 'professional',
+    path: 'professionals',
     component: ProfessionalPage
   },
   {
-    path: 'appointment-type',
+    path: 'types',
     component: AppointmentTypePage
   },
   {
-    path: 'client',
+    path: 'clients',
     component: ClientPage
   },
   {
-    path: 'user',
+    path: 'users',
     component: UserPage
   }
 ];

@@ -14,7 +14,7 @@ export const routes: Routes = [
         .then(r => r.MAINTENANCE_ROUTES)
   },
   {
-    path: 'schedule',
+    path: 'appointments',
     loadChildren: () =>
       import('./features/schedule/schedule.routes')
         .then(r => r.SCHEDULE_ROUTES)

@@ -15,14 +15,14 @@
         <li class="nav-item" ngbDropdown>
           <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdownManagement" role="button">Management</a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdownManagement" class="dropdown-menu dropdown-menu-start">
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/area">Areas</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/professional">Professionals</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/appointment-type">Appointment
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/areas">Areas</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/professionals">Professionals</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/types">Appointment
               Types</a>
             <hr class="dropdown-divider">
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/client">Clients</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/clients">Clients</a>
             <hr class="dropdown-divider">
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/user">Users</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="management/users">Users</a>
           </div>
         </li>
 
@@ -30,17 +30,18 @@
           <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdownAppointments"
             role="button">Appointments</a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdownAppointments" class="dropdown-menu dropdown-menu-start">
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/today-appointment">Today’s
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointments/today">Today’s
               Appointments</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/schedule-appointment">Schedule
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointments/create">Schedule
               Appointment</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/cancel-appointment">Cancel
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointments/cancel">Cancel
               Appointment</a>
             <hr class="dropdown-divider">
-            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/client-history">Client History</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointments/history">Client
+              History</a>
             <hr class="dropdown-divider">
-            <a ngbDropdownItem (click)="$event.preventDefault()"
-              routerLink="schedule/professional-schedule">Professional Schedule</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointments/professional">Professional
+              Schedule</a>
           </div>
         </li>
       </ul>

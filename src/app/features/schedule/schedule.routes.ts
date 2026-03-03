@@ -7,23 +7,23 @@ import { ProfessionalSchedulePage } from "./pages/professional-schedule-page/pro
 
 export const SCHEDULE_ROUTES: Routes = [
   {
-    path: 'today-appointment',
+    path: 'today',
     component: TodayAppointmentPage
   },
   {
-    path: 'schedule-appointment',
+    path: 'create',
     component: ScheduleAppointmentPage
   },
   {
-    path: 'cancel-appointment',
+    path: 'cancel',
     component: CancelAppointmentPage
   },
   {
-    path: 'client-history',
+    path: 'history',
     component: ClientHistoryPage
   },
   {
-    path: 'professional-schedule',
+    path: 'professional',
     component: ProfessionalSchedulePage
   }
 ];
