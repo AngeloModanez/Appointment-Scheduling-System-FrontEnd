@@ -9,5 +9,15 @@ import { RouterLink } from "@angular/router";
   styleUrl: './header.scss',
 })
 export class Header {
+  getName(): string {
+    return "John Doe";
+  }
 
+  getRole(): string {
+    return "admin"
+  }
+
+  logout() {
+    console.log("logout");
+  }
 }

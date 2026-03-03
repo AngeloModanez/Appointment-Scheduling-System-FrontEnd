@@ -26,4 +26,4 @@ export const SCHEDULE_ROUTES: Routes = [
     path: 'professional-schedule',
     component: ProfessionalSchedulePage
   }
-]
+];
