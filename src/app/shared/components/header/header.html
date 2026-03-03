@@ -30,7 +30,7 @@
             role="button">Appointments</a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdownAppointments" class="dropdown-menu dropdown-menu-start">
             <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/today-appointment">Today’s Appointments</a>
-            <a ngbDropdownItem (click)="$event.preventDefault()">Schedule Appointment</a>
+            <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="schedule/schedule-appointment">Schedule Appointment</a>
             <a ngbDropdownItem (click)="$event.preventDefault()">Cancel Appointment</a>
             <hr class="dropdown-divider">
             <a ngbDropdownItem (click)="$event.preventDefault()">Client History</a>
