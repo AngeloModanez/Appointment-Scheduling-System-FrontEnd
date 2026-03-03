@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { TodayAppointmentPage } from "./pages/today-appointment-page/today-appointment-page";
 import { ScheduleAppointmentPage } from "./pages/schedule-appointment-page/schedule-appointment-page";
 import { CancelAppointmentPage } from "./pages/cancel-appointment-page/cancel-appointment-page";
+import { ClientHistoryPage } from "./pages/client-history-page/client-history-page";
 
 export const SCHEDULE_ROUTES: Routes = [
   {
@@ -15,5 +16,9 @@ export const SCHEDULE_ROUTES: Routes = [
   {
     path: 'cancel-appointment',
     component: CancelAppointmentPage
+  },
+  {
+    path: 'client-history',
+    component: ClientHistoryPage
   }
 ]
