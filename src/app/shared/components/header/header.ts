@@ -6,7 +6,7 @@ import { RouterLink } from "@angular/router";
   selector: 'app-header',
   imports: [NgbDropdown, NgbDropdownToggle, NgbDropdownMenu, NgbDropdownItem, RouterLink],
   templateUrl: './header.html',
-  styleUrl: './header.scss',
+  styles: ``,
 })
 export class Header {
   getName(): string {
