@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-appointment-type-page',
   imports: [],
   templateUrl: './appointment-type-page.html',
-  styleUrl: './appointment-type-page.scss',
+  styles: ``,
 })
 export class AppointmentTypePage {
 

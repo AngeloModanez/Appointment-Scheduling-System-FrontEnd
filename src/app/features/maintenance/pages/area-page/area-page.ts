@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-area-page',
   imports: [],
   templateUrl: './area-page.html',
-  styleUrl: './area-page.scss',
+  styles: ``,
 })
 export class AreaPage {
 

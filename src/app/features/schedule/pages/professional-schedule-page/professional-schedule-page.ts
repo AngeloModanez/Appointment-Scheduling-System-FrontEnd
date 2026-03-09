@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-professional-schedule-page',
   imports: [],
   templateUrl: './professional-schedule-page.html',
-  styleUrl: './professional-schedule-page.scss',
+  styles: ``,
 })
 export class ProfessionalSchedulePage {
 
