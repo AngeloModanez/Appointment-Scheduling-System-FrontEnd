@@ -1,39 +1,28 @@
-<div class="container my-3">
-  <div class="border rounded shadow-sm p-3">
-    <div class="row align-items-center">
-      <div class="col-9 display-6">Clients Registration:</div>
-      <div class="col-3 text-end">
-        <a href="" class="btn btn-primary">New Client</a>
-      </div>
-    </div>
+<app-page-layout title="Clients Registration" btn="New Client" (goTo)="goToNewClient()">
+  <app-table-search-input placeholder="Search clients" (search)="filterClients($event)">
+  </app-table-search-input>
 
-    <div class="mt-4">
-      <app-table-search-input placeholder="Search clients" (search)="filterClients($event)">
-      </app-table-search-input>
+  <app-table>
+    <tr table-head>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Date of Birth</th>
+      <th scope="col">Delete</th>
+    </tr>
 
-      <app-table>
-        <tr table-head>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Phone Number</th>
-          <th scope="col">Date of Birth</th>
-          <th scope="col">Delete</th>
-        </tr>
-
-        <ng-container table-body>
-          <tr>
-            <th scope="row">1</th>
-            <td>
-              <a href="/prototype/pages/client.html">Maria Lucia</a>
-            </td>
-            <td>+55 (11) 9975-1539</td>
-            <td>11/22/2026</td>
-            <td>
-              <img src="/icons/trash-fill.svg" width="20" height="20" alt="Delete client">
-            </td>
-          </tr>
-        </ng-container>
-      </app-table>
-    </div>
-  </div>
-</div>
+    <ng-container table-body>
+      <tr>
+        <th scope="row">1</th>
+        <td>
+          <a href="/prototype/pages/client.html">Maria Lucia</a>
+        </td>
+        <td>+55 (11) 9975-1539</td>
+        <td>11/22/2026</td>
+        <td>
+          <img src="/icons/trash-fill.svg" width="20" height="20" alt="Delete client">
+        </td>
+      </tr>
+    </ng-container>
+  </app-table>
+</app-page-layout>

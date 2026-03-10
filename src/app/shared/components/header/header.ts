@@ -9,6 +9,7 @@ import { RouterLink } from "@angular/router";
   styles: ``,
 })
 export class Header {
+
   getName(): string {
     return "John Doe";
   }

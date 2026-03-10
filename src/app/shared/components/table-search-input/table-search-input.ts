@@ -9,7 +9,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class TableSearchInput {
   value = '';
+  
   @Input() placeholder = 'Search';
+
   @Output() search = new EventEmitter<string>();
 
   onSearch() {
