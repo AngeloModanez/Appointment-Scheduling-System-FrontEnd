@@ -1,0 +1,94 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "name": "Maria Lucia",
+      "phone": "11 99751-5390",
+      "dateOfBirth": "2006-11-22"
+    },
+    {
+      "id": 2,
+      "name": "Carlos Eduardo",
+      "phone": "21 98844-1023",
+      "dateOfBirth": "1995-04-12"
+    },
+    {
+      "id": 3,
+      "name": "Fernanda Oliveira",
+      "phone": "31 97655-8890",
+      "dateOfBirth": "1988-09-30"
+    },
+    {
+      "id": 4,
+      "name": "João Pedro Martins",
+      "phone": "19 99123-4456",
+      "dateOfBirth": "2001-02-14"
+    },
+    {
+      "id": 5,
+      "name": "Ana Carolina Souza",
+      "phone": "41 98567-7781",
+      "dateOfBirth": "1999-07-08"
+    },
+    {
+      "id": 6,
+      "name": "Ricardo Alves",
+      "phone": "51 99234-6678",
+      "dateOfBirth": "1985-12-19"
+    },
+    {
+      "id": 7,
+      "name": "Juliana Ferreira",
+      "phone": "61 97345-2210",
+      "dateOfBirth": "1993-03-25"
+    },
+    {
+      "id": 8,
+      "name": "Bruno Henrique",
+      "phone": "71 98411-9034",
+      "dateOfBirth": "1997-10-11"
+    },
+    {
+      "id": 9,
+      "name": "Patricia Gomes",
+      "phone": "81 99001-4455",
+      "dateOfBirth": "1982-06-03"
+    },
+    {
+      "id": 10,
+      "name": "Lucas Andrade",
+      "phone": "91 97532-8809",
+      "dateOfBirth": "2000-01-17"
+    },
+    {
+      "id": 11,
+      "name": "Gabriela Costa",
+      "phone": "27 98144-3321",
+      "dateOfBirth": "1996-05-27"
+    },
+    {
+      "id": 12,
+      "name": "Thiago Ribeiro",
+      "phone": "48 98977-5522",
+      "dateOfBirth": "1989-08-09"
+    },
+    {
+      "id": 13,
+      "name": "Camila Barros",
+      "phone": "85 97220-6643",
+      "dateOfBirth": "1994-11-05"
+    },
+    {
+      "id": 14,
+      "name": "Rafael Teixeira",
+      "phone": "16 99388-7710",
+      "dateOfBirth": "1987-04-21"
+    },
+    {
+      "id": 15,
+      "name": "Larissa Mendes",
+      "phone": "34 98654-1123",
+      "dateOfBirth": "1998-02-13"
+    }
+  ]
+}
