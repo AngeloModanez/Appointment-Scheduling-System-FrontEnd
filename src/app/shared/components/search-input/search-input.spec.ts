@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableSearchInput } from './table-search-input';
+import { SearchInput } from './search-input';
 
-describe('TableSearchInput', () => {
-  let component: TableSearchInput;
-  let fixture: ComponentFixture<TableSearchInput>;
+describe('SearchInput', () => {
+  let component: SearchInput;
+  let fixture: ComponentFixture<SearchInput>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TableSearchInput]
+      imports: [SearchInput]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TableSearchInput);
+    fixture = TestBed.createComponent(SearchInput);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

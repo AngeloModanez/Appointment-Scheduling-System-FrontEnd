@@ -7,8 +7,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styles: ``,
 })
 export class PageLayout {
-  @Input() title = 'Title';
-  @Input() btn = 'Button';
+  @Input() title = '';
+  @Input() buttonName = '';
 
   @Output() goTo = new EventEmitter<void>();
 

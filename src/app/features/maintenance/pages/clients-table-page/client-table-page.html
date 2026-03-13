@@ -1,6 +1,6 @@
-<app-page-layout title="Clients Registration" btn="New Client" (goTo)="goToNewClient()">
-  <app-table-search-input placeholder="Search clients" (search)="filterClients($event)">
-  </app-table-search-input>
+<app-page-layout title="Clients Registration" buttonName="New Client" (goTo)="goToNewClient()">
+  <app-search-input placeholder="Search clients">
+  </app-search-input>
 
   <app-table>
     <tr table-head>
@@ -12,17 +12,19 @@
     </tr>
 
     <ng-container table-body>
+      @for (client of clients(); track client.id) {
       <tr>
-        <th scope="row">1</th>
+        <th scope="row">{{client.id}}</th>
         <td>
-          <a href="/prototype/pages/client.html">Maria Lucia</a>
+          <a>{{client.name}}</a>
         </td>
-        <td>+55 (11) 9975-1539</td>
-        <td>11/22/2026</td>
+        <td>{{client.phone}}</td>
+        <td>{{client.dateOfBirth}}</td>
         <td>
           <img src="/icons/trash-fill.svg" width="20" height="20" alt="Delete client">
         </td>
       </tr>
+      }
     </ng-container>
   </app-table>
 </app-page-layout>
