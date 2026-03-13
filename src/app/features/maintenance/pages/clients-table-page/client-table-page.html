@@ -20,7 +20,7 @@
         </td>
         <td>{{client.phone}}</td>
         <td>{{client.dateOfBirth}}</td>
-        <td>
+        <td (click)="delete(client)">
           <img src="/icons/trash-fill.svg" width="20" height="20" alt="Delete client">
         </td>
       </tr>

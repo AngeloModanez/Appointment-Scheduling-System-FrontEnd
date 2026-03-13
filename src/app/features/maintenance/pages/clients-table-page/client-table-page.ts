@@ -41,6 +41,12 @@ export class ClientTablePage implements OnInit {
     });
   }
 
+  delete(client: Client) {
+    this.clientService.delete(client).subscribe(() => {
+      this.clients.update(list => list.filter(c => c.id !== client.id));
+    });
+  }
+
   goToNewClient() {
     this.router.navigate(['/']);
   }

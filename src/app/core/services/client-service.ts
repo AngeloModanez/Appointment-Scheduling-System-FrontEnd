@@ -15,4 +15,9 @@ export class ClientService {
     let url = `${this.baseUrl}?name_like=${clientNameFilter}`;
     return this.http.get<Client[]>(url);
   }
+
+  delete(client: Client): Observable<void> {
+    let url = `${this.baseUrl}/${client.id}`;
+    return this.http.delete<void>(url);
+  }
 }
