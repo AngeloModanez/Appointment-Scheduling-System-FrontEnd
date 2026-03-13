@@ -1,15 +1,15 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { Client } from '../../../../core/models/client';
-import { ClientService } from '../../../../core/services/client-service';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Client } from '@models/client';
+import { ClientService } from '@services/client-service';
 import { FormsModule } from '@angular/forms';
-import { PageLayout } from "../../../../shared/components/page-layout/page-layout";
+import { PageLayout } from '@components/page-layout/page-layout';
 import { Router } from '@angular/router';
-import { SearchInput } from '../../../../shared/components/search-input/search-input';
-import { Table } from "../../../../shared/components/table/table";
+import { SearchInput } from '@components/search-input/search-input';
+import { Table } from '@components/table/table';
 
 @Component({
   selector: 'app-client-table-page',
-  imports: [ FormsModule, PageLayout, SearchInput, Table],
+  imports: [FormsModule, PageLayout, SearchInput, Table],
   templateUrl: './client-table-page.html',
   styles: ``,
 })
@@ -20,6 +20,16 @@ export class ClientTablePage implements OnInit {
 
   clients = signal<Client[]>([]);
   filter = signal('');
+
+  filterClient(term: string) {
+    this.filter.set(term);
+  }
+
+  filteredClients = computed(() =>
+    this.clients().filter(c =>
+      c.name.toLowerCase().includes(this.filter().toLowerCase())
+    )
+  );
 
   ngOnInit(): void {
     this.loadClients();

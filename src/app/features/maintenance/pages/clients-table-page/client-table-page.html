@@ -1,5 +1,5 @@
 <app-page-layout title="Clients Registration" buttonName="New Client" (goTo)="goToNewClient()">
-  <app-search-input placeholder="Search clients">
+  <app-search-input placeholder="Search clients" (search)="filter.set($event)">
   </app-search-input>
 
   <app-table>
@@ -12,7 +12,7 @@
     </tr>
 
     <ng-container table-body>
-      @for (client of clients(); track client.id) {
+      @for (client of filteredClients(); track client.id) {
       <tr>
         <th scope="row">{{client.id}}</th>
         <td>

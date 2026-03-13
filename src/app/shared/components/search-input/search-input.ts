@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,4 +9,5 @@ import { FormsModule } from '@angular/forms';
 })
 export class SearchInput {
   @Input() placeholder = '';
+  @Output() search = new EventEmitter<string>();
 }

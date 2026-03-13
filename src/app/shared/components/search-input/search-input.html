@@ -3,5 +3,5 @@
     <img src="/icons/search.svg" width="20" height="20" alt="Search">
   </button>
 
-  <input class="form-control" [placeholder]="placeholder">
+  <input class="form-control" [placeholder]="placeholder" (input)="search.emit($any($event.target).value)">
 </div>
