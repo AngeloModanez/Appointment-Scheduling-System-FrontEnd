@@ -21,10 +21,6 @@ export class ClientTablePage implements OnInit {
   clients = signal<Client[]>([]);
   filter = signal('');
 
-  filterClient(term: string) {
-    this.filter.set(term);
-  }
-
   filteredClients = computed(() =>
     this.clients().filter(c =>
       c.name.toLowerCase().includes(this.filter().toLowerCase())

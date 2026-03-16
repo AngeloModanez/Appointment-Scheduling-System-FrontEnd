@@ -1,7 +1,7 @@
-<div class="input-group mb-3">
-  <button class="btn btn-outline-light px-3 border" type="button">
-    <img src="/icons/search.svg" width="20" height="20" alt="Search">
-  </button>
+<div class="position-relative mb-3">
+  <img src="/icons/search.svg" alt="Search" width="18" height="18"
+    class="position-absolute top-50 translate-middle-y ms-3 opacity-50">
 
-  <input class="form-control" [placeholder]="placeholder" (input)="search.emit($any($event.target).value)">
+  <input type="text" class="form-control w-100 rounded-pill ps-5" [placeholder]="placeholder"
+    (input)="onInput($any($event.target).value)">
 </div>
