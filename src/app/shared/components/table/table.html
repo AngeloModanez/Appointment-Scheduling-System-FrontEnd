@@ -1,9 +1,11 @@
-<table class="table table-bordered table-hover text-center">
-  <thead class="table-light">
-    <ng-content select="[table-head]"></ng-content>
-  </thead>
+<div class="table-responsive shadow-sm">
+  <table class="table table-light table-striped table-hover align-middle text-center">
+    <thead>
+      <ng-content select="[table-head]"></ng-content>
+    </thead>
 
-  <tbody class="table-group-divider">
-    <ng-content select="[table-body]"></ng-content>
-  </tbody>
-</table>
+    <tbody>
+      <ng-content select="[table-body]"></ng-content>
+    </tbody>
+  </table>
+</div>
