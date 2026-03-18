@@ -17,7 +17,7 @@
         <th scope="row" class="text-muted">{{client.id}}</th>
         <td class="fw-semibold">{{client.name}}</td>
         <td>{{client.phone}}</td>
-        <td>{{client.dateOfBirth}}</td>
+        <td>{{client.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
         <td>
           <button class="btn btn-sm">
             <img src="/icons/trash-fill.svg" width="16" height="16" alt="Delete">

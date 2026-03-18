@@ -1,6 +1,7 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Client } from '@models/client';
 import { ClientService } from '@services/client-service';
+import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap/pagination';
 import { PageLayout } from '@components/page-layout/page-layout';
@@ -11,7 +12,7 @@ import { Page } from '@models/page';
 
 @Component({
   selector: 'app-client-table-page',
-  imports: [FormsModule, NgbPagination, PageLayout, SearchInput, Table],
+  imports: [DatePipe, FormsModule, NgbPagination, PageLayout, SearchInput, Table],
   templateUrl: './client-table-page.html',
   styles: ``,
 })
