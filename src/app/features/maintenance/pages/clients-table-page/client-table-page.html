@@ -4,10 +4,19 @@
 
   <app-table>
     <tr table-head>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Date of Birth</th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'id'" (clicked)="sort.set('id')">#</app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'name'" (clicked)="sort.set('name')">Name</app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'phone'" (clicked)="sort.set('phone')">Phone Number</app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'dateOfBirth'" (clicked)="sort.set('dateOfBirth')">Date of
+          Birth</app-sort-button>
+      </th>
       <th scope="col">Delete</th>
     </tr>
 
@@ -20,7 +29,7 @@
         <td>{{client.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
         <td>
           <button class="btn btn-sm" (click)="deleteClient(client)">
-            <img src="/icons/trash-fill.svg" width="16" height="16" alt="Delete">
+            <i class="bi bi-trash-fill fs-5"></i>
           </button>
         </td>
       </tr>
@@ -28,5 +37,5 @@
     </ng-container>
   </app-table>
 
-  <ngb-pagination [collectionSize]="clientPage().totalElements" [(page)]="page" (pageChange)="pageChange()" />
+  <ngb-pagination [collectionSize]="clientPage().totalElements" [(page)]="page" />
 </app-page-layout>

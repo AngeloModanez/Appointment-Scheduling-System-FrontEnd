@@ -11,8 +11,8 @@ export class ClientService {
 
   baseUrl = "http://localhost:3000/clients";
 
-  getClients(nameFilter: string, page: number): Observable<HttpResponse<Client[]>> {
-    let url = `${this.baseUrl}?name_like=${nameFilter}&_page=${page}&_limit=10&_sort=name`;
+  getClients(nameFilter: string, page: number, sort: string): Observable<HttpResponse<Client[]>> {
+    let url = `${this.baseUrl}?name_like=${nameFilter}&_page=${page}&_limit=10&_sort=${sort}`;
     return this.http.get<Client[]>(url, { observe: 'response' });
   }
 

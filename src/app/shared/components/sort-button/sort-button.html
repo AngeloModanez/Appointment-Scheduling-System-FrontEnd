@@ -1,0 +1,5 @@
+<button class="btn btn-sm px-2 py-1 border-0" [class.fw-bold]="active()" [class.border-bottom]="active()"
+  [class.border-2]="active()" [class.border-primary]="active()" [class.text-primary]="active()"
+  [class.text-muted]="!active()" (click)="clicked.emit()">
+  <ng-content />
+</button>
