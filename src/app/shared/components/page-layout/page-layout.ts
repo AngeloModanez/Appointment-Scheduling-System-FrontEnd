@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-page-layout',
@@ -7,10 +7,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styles: ``,
 })
 export class PageLayout {
-  @Input() title = '';
-  @Input() buttonName = '';
+  title = input<string>();
+  buttonName = input<string>();
 
-  @Output() goTo = new EventEmitter<void>();
+  goTo = output();
 
   onButtonClick() {
     this.goTo.emit();

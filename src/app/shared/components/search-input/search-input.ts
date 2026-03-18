@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
   styles: ``,
 })
 export class SearchInput {
-  @Input() placeholder = '';
-  @Output() search = new EventEmitter<string>();
+  placeholder = input.required<string>();
+  search = output<string>();
 
   timeout: any;
 
