@@ -5,19 +5,26 @@
   <app-table>
     <tr table-head>
       <th scope="col">
-        <app-sort-button [active]="sort() === 'id'" (clicked)="sort.set('id')">#</app-sort-button>
+        <app-sort-button [active]="sort() === 'id'" (clicked)="sort.set('id')">
+          #
+        </app-sort-button>
       </th>
       <th scope="col">
-        <app-sort-button [active]="sort() === 'name'" (clicked)="sort.set('name')">Name</app-sort-button>
+        <app-sort-button [active]="sort() === 'name'" (clicked)="sort.set('name')">
+          Full Name
+        </app-sort-button>
       </th>
       <th scope="col">
-        <app-sort-button [active]="sort() === 'phone'" (clicked)="sort.set('phone')">Phone Number</app-sort-button>
+        <app-sort-button [active]="sort() === 'phone'" (clicked)="sort.set('phone')">
+          Phone Number
+        </app-sort-button>
       </th>
       <th scope="col">
-        <app-sort-button [active]="sort() === 'dateOfBirth'" (clicked)="sort.set('dateOfBirth')">Date of
-          Birth</app-sort-button>
+        <app-sort-button [active]="sort() === 'dateOfBirth'" (clicked)="sort.set('dateOfBirth')">
+          Date of Birth
+        </app-sort-button>
       </th>
-      <th scope="col">Delete</th>
+      <th scope="col">Actions</th>
     </tr>
 
     <ng-container table-body>
@@ -37,5 +44,7 @@
     </ng-container>
   </app-table>
 
-  <ngb-pagination [collectionSize]="clientPage().totalElements" [(page)]="page" />
+  <div class="d-flex justify-content-center mt-3">
+    <ngb-pagination [collectionSize]="clientPage().totalElements" [(page)]="page" />
+  </div>
 </app-page-layout>

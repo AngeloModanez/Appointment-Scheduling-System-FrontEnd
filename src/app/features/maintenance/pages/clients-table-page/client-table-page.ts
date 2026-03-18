@@ -29,7 +29,7 @@ export class ClientTablePage {
 
   filter = signal('');
   page = signal(1);
-  sort = signal('');
+  sort = signal('id');
 
   constructor() {
     effect(() => {
