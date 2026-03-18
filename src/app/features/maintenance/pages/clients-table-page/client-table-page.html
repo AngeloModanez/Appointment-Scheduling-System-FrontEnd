@@ -19,7 +19,7 @@
         <td>{{client.phone}}</td>
         <td>{{client.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
         <td>
-          <button class="btn btn-sm">
+          <button class="btn btn-sm" (click)="deleteClient(client)">
             <img src="/icons/trash-fill.svg" width="16" height="16" alt="Delete">
           </button>
         </td>

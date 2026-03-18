@@ -44,6 +44,14 @@ export class ClientTablePage implements OnInit {
     });
   }
 
+  deleteClient(client: Client) {
+    this.clientService.delete(client).subscribe({
+      next: () => {
+        this.loadClients();
+      }
+    })
+  }
+
   pageChange() {
     this.loadClients();
   }

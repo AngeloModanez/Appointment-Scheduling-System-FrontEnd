@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 export class ClientService {
   private http = inject(HttpClient);
 
-  baseUrl = "http://localhost:3000/clients"
+  baseUrl = "http://localhost:3000/clients";
 
   getClients(nameFilter: string, page: number): Observable<HttpResponse<Client[]>> {
     let url = `${this.baseUrl}?name_like=${nameFilter}&_page=${page}&_limit=10&_sort=name`;
