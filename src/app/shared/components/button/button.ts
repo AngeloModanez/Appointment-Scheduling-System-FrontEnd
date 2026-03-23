@@ -11,4 +11,5 @@ export class Button {
   buttonName = input<string>('Button');
   routerLink = input<string>('');
   btnClass = input<string>('btn btn-primary');
+  disable = input<boolean>(false);
 }

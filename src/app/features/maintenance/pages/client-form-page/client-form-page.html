@@ -1,22 +1,20 @@
 <app-page-layout title="Client Form">
-  <form>
+  <form [formGroup]="clientForm" (ngSubmit)="save()">
     <div class="mb-4">
-      <app-form-input type="text" title="Client Name" id="clientName" placeholder="João Silva" />
+      <app-form-input type="text" title="Client Name" id="clientName" placeholder="João Silva" [control]="cfName" />
     </div>
-
     <div class="row mb-4">
       <div class="col-6">
-        <app-form-input type="text" title="Phone Number" id="phoneNumber" placeholder="(11) 99999-9999" />
+        <app-form-input type="text" title="Phone Number" id="phoneNumber" placeholder="(11) 99999-9999"
+          [control]="cfPhone" />
       </div>
-
       <div class="col-6">
-        <app-form-input type="date" title="Date of Birth" id="dateOfBirth" />
+        <app-form-input type="date" title="Date of Birth" id="dateOfBirth" [control]="cfDateOfBirth" />
       </div>
     </div>
-
-    <div class="flex text-end">
-      <app-button btnClass="btn btn-secondary me-2" buttonName="Cancel"></app-button>
-      <app-button buttonName="Confirm"></app-button>
+    <div class="d-flex justify-content-end gap-2">
+      <app-button btnClass="btn btn-secondary" buttonName="Cancel" (click)="cancel()" />
+      <app-button buttonName="Confirm" [disable]="clientForm.invalid" (click)="save()" />
     </div>
   </form>
 </app-page-layout>

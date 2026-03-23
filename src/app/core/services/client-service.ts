@@ -20,4 +20,8 @@ export class ClientService {
     let url = `${this.baseUrl}/${client.id}`;
     return this.http.delete<void>(url);
   }
+
+  save(client: Client): Observable<void> {
+    return this.http.post<void>(this.baseUrl, client);
+  }
 }

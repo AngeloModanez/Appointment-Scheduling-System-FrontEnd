@@ -1,3 +1,3 @@
-<a type="button" [class]="btnClass()" [routerLink]="routerLink()">
+<button type="button" [class]="btnClass()" [disabled]="disable()" [routerLink]="routerLink() || null">
   {{ buttonName() }}
-</a>
+</button>
