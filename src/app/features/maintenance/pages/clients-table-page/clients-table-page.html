@@ -1,7 +1,9 @@
-<app-page-layout title="Clients Registration" buttonName="New Client" (goTo)="goToNewClient()">
-  <app-search-input placeholder="Search clients name" (search)="filterClients($event)">
-  </app-search-input>
+<app-page-layout title="Clients Registration">
+  <app-button layout-button buttonName="New Client" routerLink="/management/client-form"></app-button>
 
+  <app-search-input placeholder="Search clients name" (search)="filterClients($event)"></app-search-input>
+
+  @if (clientPage().content.length > 0) {
   <app-table>
     <tr table-head>
       <th scope="col">
@@ -30,10 +32,10 @@
     <ng-container table-body>
       @for (client of clientPage().content; track $index) {
       <tr>
-        <th scope="row" class="text-muted">{{client.id}}</th>
-        <td class="fw-semibold">{{client.name}}</td>
-        <td>{{client.phone}}</td>
-        <td>{{client.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
+        <th scope="row" class="text-muted">{{ client.id }}</th>
+        <td class="fw-semibold">{{ client.name }}</td>
+        <td>{{ client.phone }}</td>
+        <td>{{ client.dateOfBirth | date: 'dd/MM/yyyy' }}</td>
         <td>
           <button class="btn btn-sm" (click)="deleteClient(client)">
             <i class="bi bi-trash-fill fs-5"></i>
@@ -47,4 +49,8 @@
   <div class="d-flex justify-content-center mt-3">
     <ngb-pagination [collectionSize]="clientPage().totalElements" [(page)]="page" />
   </div>
+  } @else {
+  <app-card icon="bi-person-x" title="No clients found" message="Try a different search or add a new client"></app-card>
+  }
+
 </app-page-layout>

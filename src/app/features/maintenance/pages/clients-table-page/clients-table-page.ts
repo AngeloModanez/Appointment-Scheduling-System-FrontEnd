@@ -6,21 +6,23 @@ import { FormsModule } from '@angular/forms';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap/pagination';
 import { PageLayout } from '@components/page-layout/page-layout';
 import { Page } from '@models/page';
-import { Router } from '@angular/router';
 import { SearchInput } from '@components/search-input/search-input';
 import { SortButton } from '@components/sort-button/sort-button';
 import { Table } from '@components/table/table';
+import { Button } from "@components/button/button";
+import { Card } from "@components/card/card";
 
 @Component({
   selector: 'app-client-table-page',
-  imports: [DatePipe, FormsModule, NgbPagination, PageLayout, SearchInput, SortButton, Table],
-  templateUrl: './client-table-page.html',
+  imports: [DatePipe, FormsModule, NgbPagination, PageLayout, SearchInput, SortButton, Table, Button, Card],
+  templateUrl: './clients-table-page.html',
   styles: ``,
 })
-export class ClientTablePage {
+export class ClientsTablePage {
 
-  private router = inject(Router);
   private clientService = inject(ClientService);
+
+  form='/management/client-form'
 
   clientPage = signal<Page<Client>>({
     content: [],
@@ -70,9 +72,5 @@ export class ClientTablePage {
   filterClients(value: string) {
     this.filter.set(value);
     this.page.set(1);
-  }
-
-  goToNewClient() {
-    this.router.navigate(['/']);
   }
 }
