@@ -1,0 +1,10 @@
+<div class="mb-3">
+  <label [for]="id()" class="form-label fw-semibold text-dark mb-1">
+    {{ title() }}
+  </label>
+  <input [type]="type()" [id]="id()" [placeholder]="placeholder()"
+    class="form-control rounded-3 px-3" />
+  <div class="text-danger mt-1">
+    <small><sup>*</sup> {{ title() }} is required</small>
+  </div>
+</div>
