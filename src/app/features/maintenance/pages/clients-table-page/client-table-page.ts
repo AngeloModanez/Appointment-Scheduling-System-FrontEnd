@@ -1,0 +1,78 @@
+import { Component, effect, inject, signal } from '@angular/core';
+import { Client } from '@models/client';
+import { ClientService } from '@services/client-service';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgbPagination } from '@ng-bootstrap/ng-bootstrap/pagination';
+import { PageLayout } from '@components/page-layout/page-layout';
+import { Page } from '@models/page';
+import { Router } from '@angular/router';
+import { SearchInput } from '@components/search-input/search-input';
+import { SortButton } from '@components/sort-button/sort-button';
+import { Table } from '@components/table/table';
+
+@Component({
+  selector: 'app-client-table-page',
+  imports: [DatePipe, FormsModule, NgbPagination, PageLayout, SearchInput, SortButton, Table],
+  templateUrl: './client-table-page.html',
+  styles: ``,
+})
+export class ClientTablePage {
+
+  private router = inject(Router);
+  private clientService = inject(ClientService);
+
+  clientPage = signal<Page<Client>>({
+    content: [],
+    totalElements: 0
+  });
+
+  filter = signal('');
+  page = signal(1);
+  sort = signal('id');
+
+  constructor() {
+    effect(() => {
+      const filter = this.filter();
+      const page = this.page();
+      const sort = this.sort();
+
+      this.clientService.getClients(filter, page, sort).subscribe({
+        next: response => {
+          this.clientPage.set({
+            content: response.body ?? [],
+            totalElements: parseInt(response.headers.get("X-Total-Count") || "0")
+          });
+        }
+      });
+    })
+  }
+
+  loadClients() {
+    this.clientService.getClients(this.filter(), this.page(), this.sort()).subscribe({
+      next: response => {
+        this.clientPage.set({
+          content: response.body ?? [],
+          totalElements: parseInt(response.headers.get("X-Total-Count") || "0")
+        });
+      }
+    });
+  }
+
+  deleteClient(client: Client) {
+    this.clientService.delete(client).subscribe({
+      next: () => {
+        this.loadClients();
+      }
+    })
+  }
+
+  filterClients(value: string) {
+    this.filter.set(value);
+    this.page.set(1);
+  }
+
+  goToNewClient() {
+    this.router.navigate(['/']);
+  }
+}

@@ -6,7 +6,7 @@ import { Header } from './shared/components/header/header';
   selector: 'app-root',
   imports: [RouterOutlet, Header],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styles: ``,
 })
 export class App {
   protected readonly title = signal('Appointment-FrontEnd');

@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-professional-page',
   imports: [],
   templateUrl: './professional-page.html',
-  styleUrl: './professional-page.scss',
+  styles: ``,
 })
 export class ProfessionalPage {
 

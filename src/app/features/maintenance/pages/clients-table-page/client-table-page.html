@@ -1,0 +1,50 @@
+<app-page-layout title="Clients Registration" buttonName="New Client" (goTo)="goToNewClient()">
+  <app-search-input placeholder="Search clients name" (search)="filterClients($event)">
+  </app-search-input>
+
+  <app-table>
+    <tr table-head>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'id'" (clicked)="sort.set('id')">
+          #
+        </app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'name'" (clicked)="sort.set('name')">
+          Full Name
+        </app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'phone'" (clicked)="sort.set('phone')">
+          Phone Number
+        </app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'dateOfBirth'" (clicked)="sort.set('dateOfBirth')">
+          Date of Birth
+        </app-sort-button>
+      </th>
+      <th scope="col">Actions</th>
+    </tr>
+
+    <ng-container table-body>
+      @for (client of clientPage().content; track $index) {
+      <tr>
+        <th scope="row" class="text-muted">{{client.id}}</th>
+        <td class="fw-semibold">{{client.name}}</td>
+        <td>{{client.phone}}</td>
+        <td>{{client.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
+        <td>
+          <button class="btn btn-sm" (click)="deleteClient(client)">
+            <i class="bi bi-trash-fill fs-5"></i>
+          </button>
+        </td>
+      </tr>
+      }
+    </ng-container>
+  </app-table>
+
+  <div class="d-flex justify-content-center mt-3">
+    <ngb-pagination [collectionSize]="clientPage().totalElements" [(page)]="page" />
+  </div>
+</app-page-layout>

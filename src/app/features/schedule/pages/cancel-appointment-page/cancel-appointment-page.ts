@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-cancel-appointment-page',
   imports: [],
   templateUrl: './cancel-appointment-page.html',
-  styleUrl: './cancel-appointment-page.scss',
+  styles: ``,
 })
 export class CancelAppointmentPage {
 

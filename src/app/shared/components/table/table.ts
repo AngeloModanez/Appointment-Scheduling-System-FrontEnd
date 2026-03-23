@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-area-page',
+  selector: 'app-table',
   imports: [],
-  templateUrl: './area-page.html',
+  templateUrl: './table.html',
   styles: ``,
 })
-export class AreaPage {
+export class Table {
 
 }
