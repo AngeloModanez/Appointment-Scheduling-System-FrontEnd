@@ -1,0 +1,22 @@
+<app-page-layout title="Client Form">
+  <form>
+    <div class="mb-4">
+      <app-form-input type="text" title="Client Name" id="clientName" placeholder="João Silva" />
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-6">
+        <app-form-input type="text" title="Phone Number" id="phoneNumber" placeholder="(11) 99999-9999" />
+      </div>
+
+      <div class="col-6">
+        <app-form-input type="date" title="Date of Birth" id="dateOfBirth" />
+      </div>
+    </div>
+
+    <div class="flex text-end">
+      <app-button btnClass="btn btn-secondary me-2" buttonName="Cancel"></app-button>
+      <app-button buttonName="Confirm"></app-button>
+    </div>
+  </form>
+</app-page-layout>
