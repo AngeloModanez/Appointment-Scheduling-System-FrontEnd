@@ -28,6 +28,10 @@ export const MAINTENANCE_ROUTES: Routes = [
     component: ClientFormPage
   },
   {
+    path: 'client-form/:id',
+    component: ClientFormPage
+  },
+  {
     path: 'users',
     component: UserPage
   }

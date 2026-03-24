@@ -11,10 +11,11 @@ import { SortButton } from '@components/sort-button/sort-button';
 import { Table } from '@components/table/table';
 import { Button } from "@components/button/button";
 import { Card } from "@components/card/card";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-client-table-page',
-  imports: [DatePipe, FormsModule, NgbPagination, PageLayout, SearchInput, SortButton, Table, Button, Card],
+  imports: [DatePipe, FormsModule, NgbPagination, PageLayout, SearchInput, SortButton, Table, Button, Card, RouterLink],
   templateUrl: './clients-table-page.html',
   styles: ``,
 })

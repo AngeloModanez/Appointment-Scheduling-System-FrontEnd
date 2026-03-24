@@ -16,12 +16,22 @@ export class ClientService {
     return this.http.get<Client[]>(url, { observe: 'response' });
   }
 
-  delete(client: Client): Observable<void> {
-    let url = `${this.baseUrl}/${client.id}`;
-    return this.http.delete<void>(url);
+  getClientById(id: number): Observable<Client> {
+    let url = `${this.baseUrl}/${id}`;
+    return this.http.get<Client>(url);
   }
 
   save(client: Client): Observable<void> {
     return this.http.post<void>(this.baseUrl, client);
+  }
+
+  update(client: Client): Observable<void> {
+    let url = `${this.baseUrl}/${client.id}`;
+    return this.http.put<void>(url, client);
+  }
+
+  delete(client: Client): Observable<void> {
+    let url = `${this.baseUrl}/${client.id}`;
+    return this.http.delete<void>(url);
   }
 }
