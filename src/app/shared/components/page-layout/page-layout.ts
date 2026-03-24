@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-page-layout',
@@ -7,12 +7,5 @@ import { Component, input, output } from '@angular/core';
   styles: ``,
 })
 export class PageLayout {
-  title = input<string>();
-  buttonName = input<string>();
-
-  goTo = output();
-
-  onButtonClick() {
-    this.goTo.emit();
-  }
+  title = input.required<string>();
 }

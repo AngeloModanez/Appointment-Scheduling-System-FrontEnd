@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClientTablePage } from './client-table-page';
+import { FormInput } from './form-input';
 
-describe('ClientTablePage', () => {
-  let component: ClientTablePage;
-  let fixture: ComponentFixture<ClientTablePage>;
+describe('FormInput', () => {
+  let component: FormInput;
+  let fixture: ComponentFixture<FormInput>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClientTablePage]
+      imports: [FormInput]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ClientTablePage);
+    fixture = TestBed.createComponent(FormInput);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
