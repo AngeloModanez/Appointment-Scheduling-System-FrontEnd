@@ -37,7 +37,7 @@
         <td>{{ client.phone }}</td>
         <td>{{ client.dateOfBirth | date: 'dd/MM/yyyy' }}</td>
         <td>
-          <button class="btn btn-sm" (click)="deleteClient(client)">
+          <button class="btn btn-sm" (click)="deleteClient(client, modalConfirm)">
             <i class="bi bi-trash-fill fs-5"></i>
           </button>
         </td>
@@ -54,3 +54,13 @@
   }
 
 </app-page-layout>
+
+<app-modal #modalConfirm title="Delete Client">
+  @if (selectedClient) {
+  <p>Are you sure you want to delete <span class="fw-bold">{{ selectedClient.name }}</span>?</p>
+  }
+  <ng-container modal-footer>
+    <app-button btnClass="btn btn-outline-secondary" buttonName="Cancel" (click)="modalConfirm.close(false)" />
+    <app-button buttonName="Delete" (click)="modalConfirm.close(true)" />
+  </ng-container>
+</app-modal>

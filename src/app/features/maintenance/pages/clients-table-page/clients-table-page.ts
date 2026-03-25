@@ -13,10 +13,11 @@ import { Button } from "@components/button/button";
 import { Card } from "@components/card/card";
 import { RouterLink } from "@angular/router";
 import { ToastService } from '@services/toast-service';
+import { Modal } from "@components/modal/modal";
 
 @Component({
   selector: 'app-client-table-page',
-  imports: [DatePipe, FormsModule, NgbPagination, PageLayout, SearchInput, SortButton, Table, Button, Card, RouterLink],
+  imports: [DatePipe, FormsModule, NgbPagination, PageLayout, SearchInput, SortButton, Table, Button, Card, RouterLink, Modal],
   templateUrl: './clients-table-page.html',
   styles: ``,
 })
@@ -36,6 +37,8 @@ export class ClientsTablePage {
   page = signal(1);
   sort = signal('id');
 
+  selectedClient!: Client;
+
   constructor() {
     effect(() => {
       const filter = this.filter();
@@ -46,11 +49,11 @@ export class ClientsTablePage {
         next: response => {
           this.clientPage.set({
             content: response.body ?? [],
-            totalElements: parseInt(response.headers.get("X-Total-Count") || "0")
+            totalElements: parseInt(response.headers.get("X-Total-Count") || "0"),
           });
         }
       });
-    })
+    });
   }
 
   loadClients() {
@@ -58,19 +61,24 @@ export class ClientsTablePage {
       next: response => {
         this.clientPage.set({
           content: response.body ?? [],
-          totalElements: parseInt(response.headers.get("X-Total-Count") || "0")
+          totalElements: parseInt(response.headers.get("X-Total-Count") || "0"),
         });
       }
     });
   }
 
-  deleteClient(client: Client) {
-    this.clientService.delete(client).subscribe({
-      next: () => {
-        this.toastService.success(`${client.name} deleted successfully!`);
-        this.loadClients();
-      },
-      error: () => this.toastService.error("Failed to delete client. Try again.")
+  deleteClient(client: Client, modalConfirm: Modal) {
+    this.selectedClient = client;
+    modalConfirm.open().then(confirm => {
+      if (confirm) {
+        this.clientService.delete(client).subscribe({
+          next: () => {
+            this.toastService.success(`${client.name} deleted successfully!`);
+            this.loadClients();
+          },
+          error: () => this.toastService.error("Failed to delete client. Try again.")
+        });
+      }
     });
   }
 
