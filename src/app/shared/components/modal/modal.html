@@ -1,0 +1,12 @@
+<ng-template #modal let-modal>
+  <div class="modal-header border-0 pb-0">
+    <h4 class="modal-title fw-semibold mb-0">{{ title() }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.close(false)"></button>
+  </div>
+  <div class="modal-body text-muted">
+    <ng-content />
+  </div>
+  <div class="modal-footer">
+    <ng-content select="[modal-footer]" />
+  </div>
+</ng-template>
