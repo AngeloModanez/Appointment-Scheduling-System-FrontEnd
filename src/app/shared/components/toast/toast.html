@@ -1,0 +1,6 @@
+@for (toast of toastService.toasts; track $index) {
+<ngb-toast class="p-2 text-center" [header]="toast.header" [class]="toast.className" [autohide]="true"
+  [delay]="toast.delay || 5000" (hidden)="toastService.remove(toast)">
+  <h6>{{ toast.textOrTpl }}</h6>
+</ngb-toast>
+}
