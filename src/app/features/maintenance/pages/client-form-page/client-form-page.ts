@@ -6,6 +6,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ClientService } from '@services/client-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '@models/client';
+import { ToastService } from '@services/toast-service';
 
 @Component({
   selector: 'app-client-form-page',
@@ -19,6 +20,7 @@ export class ClientFormPage {
   private clientService = inject(ClientService);
   private formBuilder = inject(FormBuilder);
   private activatedRoute = inject(ActivatedRoute);
+  private toastService = inject(ToastService);
 
   clientForm = this.formBuilder.group({
     id: [0],
@@ -54,13 +56,19 @@ export class ClientFormPage {
       const client = this.clientForm.value as Client;
       if (this.isEditing) {
         this.clientService.update(client).subscribe({
-          next: () => this.router.navigate(['/management/clients-table']),
-          error: () => alert("Error on save Client")
-        })
+          next: () => {
+            this.toastService.success("Client update successfully!");
+            this.router.navigate(['/management/clients-table']);
+          },
+          error: () => this.toastService.error("Failed to update client. Try again."),
+        });
       } else {
         this.clientService.save(client).subscribe({
-          next: () => this.router.navigate(['/management/clients-table']),
-          error: () => alert("Error on save Client")
+          next: () => {
+            this.toastService.success("Client created successfully!");
+            this.router.navigate(['/management/clients-table']);
+          },
+          error: () => this.toastService.error("Failed to create client. Try again."),
         });
       }
     }

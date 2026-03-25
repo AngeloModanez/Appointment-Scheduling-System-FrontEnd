@@ -1,0 +1,11 @@
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1200;">
+  @for (toast of toastService.toasts; track $index) {
+  <ngb-toast [class]="toast.className" [autohide]="true" [delay]="toast.delay || 4000"
+    (hidden)="toastService.remove(toast)">
+    <div class="d-flex align-items-center gap-2">
+      <i [class]="toast.icon"></i>
+      <span>{{ toast.textOrTpl }}</span>
+    </div>
+  </ngb-toast>
+  }
+</div>

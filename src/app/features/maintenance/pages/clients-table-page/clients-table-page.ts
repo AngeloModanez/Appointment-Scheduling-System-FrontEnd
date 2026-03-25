@@ -12,6 +12,7 @@ import { Table } from '@components/table/table';
 import { Button } from "@components/button/button";
 import { Card } from "@components/card/card";
 import { RouterLink } from "@angular/router";
+import { ToastService } from '@services/toast-service';
 
 @Component({
   selector: 'app-client-table-page',
@@ -22,8 +23,9 @@ import { RouterLink } from "@angular/router";
 export class ClientsTablePage {
 
   private clientService = inject(ClientService);
+  private toastService = inject(ToastService);
 
-  form='/management/client-form'
+  form = '/management/client-form'
 
   clientPage = signal<Page<Client>>({
     content: [],
@@ -65,9 +67,11 @@ export class ClientsTablePage {
   deleteClient(client: Client) {
     this.clientService.delete(client).subscribe({
       next: () => {
+        this.toastService.success(`${client.name} deleted successfully!`);
         this.loadClients();
-      }
-    })
+      },
+      error: () => this.toastService.error("Failed to delete client. Try again.")
+    });
   }
 
   filterClients(value: string) {
