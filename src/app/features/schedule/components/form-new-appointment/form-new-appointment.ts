@@ -6,6 +6,8 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 import { Professional } from '@models/professional';
 import { SelectOption } from '@models/select-options';
 import { AppointmentType } from '@models/appointment-type';
+import { OperatorFunction } from 'rxjs';
+import { Client } from '@models/client';
 
 @Component({
   selector: 'app-form-new-appointment',
@@ -19,12 +21,15 @@ export class FormNewAppointment {
   areas = input<Area[]>([]);
   appointmentTypes = input<AppointmentType[]>([]);
   professionals = input<Professional[]>([]);
+  searchClients = input<OperatorFunction<string, readonly Client[]>>();
+
   selectedAreaEvent = output<Area>();
 
   appointmentForm = this.formBuilder.group({
     area: [null, Validators.required],
     professional: [{ value: null, disabled: true }, Validators.required],
     appointmentType: [null, Validators.required],
+    client: [null, Validators.required],
   });
 
   areaOptions = computed<SelectOption[]>(() =>
@@ -47,8 +52,11 @@ export class FormNewAppointment {
       this.aProfessional.enable();
     }
   }
+  
+  formatClient = (client: Client) => client.name;
 
   get aArea() { return this.appointmentForm.get("area") as FormControl }
   get aProfessional() { return this.appointmentForm.get("professional") as FormControl }
   get aAppointmentType() { return this.appointmentForm.get("appointmentType") as FormControl }
+  get aClient() { return this.appointmentForm.get("client") as FormControl }
 }

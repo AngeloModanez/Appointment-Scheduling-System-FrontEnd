@@ -7,6 +7,9 @@ import { Area } from '@models/area';
 import { Professional } from '@models/professional';
 import { AppointmentTypeService } from '@services/appointment-type-service';
 import { AppointmentType } from '@models/appointment-type';
+import { ClientService } from '@services/client-service';
+import { debounceTime, distinctUntilChanged, filter, Observable, switchMap } from 'rxjs';
+import { Client } from '@models/client';
 
 @Component({
   selector: 'app-new-appointment',
@@ -17,6 +20,7 @@ import { AppointmentType } from '@models/appointment-type';
 export class NewAppointment {
   areaService = inject(AreaService);
   appointmentTypeService = inject(AppointmentTypeService);
+  clientService = inject(ClientService);
 
   areas = signal<Area[]>([]);
   appointmentTypes = signal<AppointmentType[]>([]);
@@ -25,6 +29,15 @@ export class NewAppointment {
   constructor() {
     this.loadAreas();
     this.loadAppointmentTypes();
+  }
+
+  searchClients = (text: Observable<string>): Observable<Client[]> => {
+    return text.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      filter(term => term.length >= 2),
+      switchMap(term => this.clientService.getClientsWithNameContaining(term))
+    )
   }
 
   loadAreas() {

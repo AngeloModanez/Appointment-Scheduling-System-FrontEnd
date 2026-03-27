@@ -8,9 +8,8 @@
   <app-form-select title="Appointment Type" id="appointmentType" placeholder="Select a Type"
     [control]="aAppointmentType" [options]="appointmentTypeOptions()" />
 
-  <app-form-input type="text" title="Type" id="type" placeholder="Select a Type" />
-
-  <app-form-input type="text" title="Client" id="client" placeholder="Select a Client" />
+  <app-form-input type="text" title="Client" id="client" placeholder="Search a client" [control]="aClient"
+    [typeahead]="searchClients()" [resultFormatter]="formatClient" [inputFormatter]="formatClient" />
   <span class="small text-muted mt-0">Confirm client phone: (15) 9975-1539</span>
 
   <app-form-input type="text" title="Comments" id="comment" placeholder="Write Observation" />

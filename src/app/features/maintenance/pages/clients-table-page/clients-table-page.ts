@@ -50,7 +50,7 @@ export class ClientsTablePage {
   }
 
   loadClients(filter: string, page: number, sort: string) {
-    this.clientService.getClients(filter, page, sort).subscribe({
+    this.clientService.getClientsPage(filter, page, sort).subscribe({
       next: response => {
         this.clientPage.set({
           content: response.body ?? [],
