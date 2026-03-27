@@ -11,14 +11,6 @@
     {
       "id": 3,
       "name": "Cardiology"
-    },
-    {
-      "id": 4,
-      "name": "Dermatology"
-    },
-    {
-      "id": 5,
-      "name": "Pediatrics"
     }
   ],
   "professionals": [
@@ -40,20 +32,6 @@
       "id": 3,
       "name": "Dr. Lucas Oliveira",
       "phone": "+55 (11) 98888-1234",
-      "active": true,
-      "areaId": 3
-    },
-    {
-      "id": 4,
-      "name": "Dr. Sarah Thompson",
-      "phone": "+1 (646) 555-7788",
-      "active": false,
-      "areaId": 4
-    },
-    {
-      "id": 5,
-      "name": "Dr. Gabriel Santos",
-      "phone": "+55 (21) 97777-8899",
       "active": false,
       "areaId": 1
     }
@@ -70,10 +48,6 @@
     {
       "id": 3,
       "type": "Routine Checkup"
-    },
-    {
-      "id": 4,
-      "type": "Emergency Appointment"
     }
   ],
   "clients": [
