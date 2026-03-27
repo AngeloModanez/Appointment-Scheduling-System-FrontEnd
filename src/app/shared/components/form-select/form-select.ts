@@ -1,15 +1,17 @@
-import { Component, input } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { Component, input, output } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
+import { SelectOption } from '@models/selectOptions';
 
 @Component({
   selector: 'app-form-select',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './form-select.html',
-  styles: ``,
 })
 export class FormSelect {
   title = input.required<string>();
   id = input.required<string>();
-  change = input();
+  placeholder = input<string>('Select an option');
   control = input<FormControl>(new FormControl());
+  options = input<SelectOption[]>([]);
+  changed = output<any>();
 }
