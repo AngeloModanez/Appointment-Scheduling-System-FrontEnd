@@ -1,5 +1,5 @@
 import { Component, inject, input, TemplateRef, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal',
@@ -8,7 +8,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styles: ``,
 })
 export class Modal {
-  modalService = inject(NgbModal);
+  private modalService = inject(NgbModal);
+  private modalRef!: NgbModalRef;
 
   @ViewChild("modal")
   private modalContent!: TemplateRef<Modal>;
@@ -16,10 +17,11 @@ export class Modal {
   title = input<string>();
 
   open() {
-    return this.modalService.open(this.modalContent, {}).result
+    this.modalRef = this.modalService.open(this.modalContent, {});
+    return this.modalRef.result;
   }
 
   close(result: boolean) {
-    this.modalService.dismissAll(result);
+    this.modalRef.close(result);
   }
 }
