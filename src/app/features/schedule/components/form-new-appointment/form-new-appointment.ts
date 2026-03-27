@@ -4,7 +4,8 @@ import { Area } from '@models/area';
 import { FormSelect } from "@components/form-select/form-select";
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Professional } from '@models/professional';
-import { SelectOption } from '@models/selectOptions';
+import { SelectOption } from '@models/select-options';
+import { AppointmentType } from '@models/appointment-type';
 
 @Component({
   selector: 'app-form-new-appointment',
@@ -16,12 +17,14 @@ export class FormNewAppointment {
   private formBuilder = inject(FormBuilder);
 
   areas = input<Area[]>([]);
+  appointmentTypes = input<AppointmentType[]>([]);
   professionals = input<Professional[]>([]);
   selectedAreaEvent = output<Area>();
 
   appointmentForm = this.formBuilder.group({
     area: [null, Validators.required],
-    professional: [null, Validators.required],
+    professional: [{ value: null, disabled: true }, Validators.required],
+    appointmentType: [null, Validators.required],
   });
 
   areaOptions = computed<SelectOption[]>(() =>
@@ -32,14 +35,20 @@ export class FormNewAppointment {
     this.professionals().map(p => ({ value: p.id, label: p.name }))
   );
 
+  appointmentTypeOptions = computed<SelectOption[]>(() =>
+    this.appointmentTypes().map(at => ({ value: at.id, label: at.type }))
+  );
+
   onAreaChange(areaId: any) {
     const area = this.areas().find(a => a.id == areaId);
     if (area) {
       this.selectedAreaEvent.emit(area);
       this.aProfessional.reset();
+      this.aProfessional.enable();
     }
   }
 
   get aArea() { return this.appointmentForm.get("area") as FormControl }
   get aProfessional() { return this.appointmentForm.get("professional") as FormControl }
+  get aAppointmentType() { return this.appointmentForm.get("appointmentType") as FormControl }
 }
