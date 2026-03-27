@@ -1,0 +1,14 @@
+<app-page-layout title="Schedule an Appointment">
+  <div class="row mt-5">
+    <div class="col-6">
+      <app-form-new-appointment [areas]="areas()"
+        (selectedAreaEvent)="onSelectedArea($event)"></app-form-new-appointment>
+    </div>
+    <div class="col-6">
+      <div class="container">
+        Calendar
+      </div>
+    </div>
+  </div>
+  <app-button btnClass="btn btn-primary w-100" buttonName="Schedule" />
+</app-page-layout>

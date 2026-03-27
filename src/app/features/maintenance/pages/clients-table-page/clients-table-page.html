@@ -1,5 +1,5 @@
 <app-page-layout title="Clients Registration">
-  <app-button layout-button buttonName="New Client" routerLink="/management/client-form"></app-button>
+  <app-button layout-button buttonName="New Client" [routerLink]="form"></app-button>
 
   <app-search-input placeholder="Search clients name" (search)="filterClients($event)"></app-search-input>
 

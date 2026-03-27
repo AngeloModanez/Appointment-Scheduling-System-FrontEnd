@@ -45,19 +45,12 @@ export class ClientsTablePage {
       const page = this.page();
       const sort = this.sort();
 
-      this.clientService.getClients(filter, page, sort).subscribe({
-        next: response => {
-          this.clientPage.set({
-            content: response.body ?? [],
-            totalElements: parseInt(response.headers.get("X-Total-Count") || "0"),
-          });
-        }
-      });
+      this.loadClients(filter, page, sort);
     });
   }
 
-  loadClients() {
-    this.clientService.getClients(this.filter(), this.page(), this.sort()).subscribe({
+  loadClients(filter: string, page: number, sort: string) {
+    this.clientService.getClients(filter, page, sort).subscribe({
       next: response => {
         this.clientPage.set({
           content: response.body ?? [],
@@ -74,12 +67,12 @@ export class ClientsTablePage {
         this.clientService.delete(client).subscribe({
           next: () => {
             this.toastService.success(`${client.name} deleted successfully!`);
-            this.loadClients();
+            this.loadClients(this.filter(), this.page(), this.sort());
           },
           error: () => this.toastService.error("Failed to delete client. Try again.")
         });
       }
-    });
+    }).catch(() => { });
   }
 
   filterClients(value: string) {
