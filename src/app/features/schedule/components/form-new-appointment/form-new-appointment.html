@@ -1,0 +1,16 @@
+<form [formGroup]="appointmentForm">
+  <app-form-select title="Select an Area" id="area" [control]="aArea" (change)="onAreaChange()">
+    @for (area of areas(); track $index) {
+    <option [value]="area.id">{{ area.name }}</option>
+    }
+  </app-form-select>
+
+  <app-form-input type="text" title="Select a Professional" id="professional" placeholder="Select an Professional" />
+
+  <app-form-input type="text" title="Select a Type" id="type" placeholder="Select an Type" />
+
+  <app-form-input type="text" title="Select the Client" id="client" placeholder="Select a Client" />
+  <span class="small text-muted mt-0">Confirm client phone: (15) 9975-1539</span>
+
+  <app-form-input type="text" title="Comments" id="comment" placeholder="Write Observation" />
+</form>

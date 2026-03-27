@@ -1,100 +1,171 @@
 {
-  "clients": [
+  "areas": [
     {
       "id": 1,
-      "name": "Maria Lucia",
-      "phone": "11 99751-9999",
-      "dateOfBirth": "2006-11-22"
+      "name": "General Practice"
     },
     {
       "id": 2,
-      "name": "Carlos Eduardo",
-      "phone": "21 98844-1023",
-      "dateOfBirth": "1995-04-12"
+      "name": "Physiotherapy"
     },
     {
       "id": 3,
-      "name": "Fernanda Oliveira",
-      "phone": "31 97655-8890",
-      "dateOfBirth": "1988-09-30"
+      "name": "Cardiology"
     },
     {
       "id": 4,
-      "name": "João Pedro Martins",
-      "phone": "19 99123-4456",
-      "dateOfBirth": "2001-02-14"
+      "name": "Dermatology"
     },
     {
       "id": 5,
-      "name": "Ana Carolina Souza",
-      "phone": "41 98567-7781",
-      "dateOfBirth": "1999-07-08"
+      "name": "Pediatrics"
+    }
+  ],
+  "professionals": [
+    {
+      "id": 1,
+      "name": "Dr. Michael Johnson",
+      "phone": "+1 (212) 555-0198",
+      "active": true,
+      "areaId": 1
+    },
+    {
+      "id": 2,
+      "name": "Dr. Emily Carter",
+      "phone": "+1 (310) 555-2211",
+      "active": true,
+      "areaId": 2
+    },
+    {
+      "id": 3,
+      "name": "Dr. Lucas Oliveira",
+      "phone": "+55 (11) 98888-1234",
+      "active": true,
+      "areaId": 3
+    },
+    {
+      "id": 4,
+      "name": "Dr. Sarah Thompson",
+      "phone": "+1 (646) 555-7788",
+      "active": false,
+      "areaId": 4
+    },
+    {
+      "id": 5,
+      "name": "Dr. Gabriel Santos",
+      "phone": "+55 (21) 97777-8899",
+      "active": false,
+      "areaId": 5
+    }
+  ],
+  "appointmentTypes": [
+    {
+      "id": 1,
+      "type": "General Consultation"
+    },
+    {
+      "id": 2,
+      "type": "Follow-up Visit"
+    },
+    {
+      "id": 3,
+      "type": "Routine Checkup"
+    },
+    {
+      "id": 4,
+      "type": "Emergency Appointment"
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "name": "Emma Wilson",
+      "phone": "+1 (917) 555-1122",
+      "dateOfBirth": "1992-05-14"
+    },
+    {
+      "id": 2,
+      "name": "Liam Anderson",
+      "phone": "+1 (646) 555-3344",
+      "dateOfBirth": "1988-11-02"
+    },
+    {
+      "id": 3,
+      "name": "Olivia Martinez",
+      "phone": "+1 (305) 555-7788",
+      "dateOfBirth": "1995-07-23"
+    },
+    {
+      "id": 4,
+      "name": "Noah Thompson",
+      "phone": "+1 (213) 555-8899",
+      "dateOfBirth": "2000-01-30"
+    },
+    {
+      "id": 5,
+      "name": "Ava Robinson",
+      "phone": "+1 (312) 555-6677",
+      "dateOfBirth": "1997-09-18"
     },
     {
       "id": 6,
-      "name": "Ricardo Alves",
-      "phone": "51 99234-6678",
-      "dateOfBirth": "1985-12-19"
+      "name": "William Clark",
+      "phone": "+1 (408) 555-2233",
+      "dateOfBirth": "1985-03-12"
     },
     {
       "id": 7,
-      "name": "Juliana Ferreira",
-      "phone": "61 97345-2210",
-      "dateOfBirth": "1993-03-25"
+      "name": "Sophia Lewis",
+      "phone": "+1 (718) 555-9988",
+      "dateOfBirth": "1999-06-27"
     },
     {
       "id": 8,
-      "name": "Bruno Henrique",
-      "phone": "71 98411-9034",
-      "dateOfBirth": "1997-10-11"
+      "name": "James Walker",
+      "phone": "+1 (917) 555-5566",
+      "dateOfBirth": "1993-12-09"
     },
     {
       "id": 9,
-      "name": "Patricia Gomes",
-      "phone": "81 99001-4455",
-      "dateOfBirth": "1982-06-03"
+      "name": "Isabella Hall",
+      "phone": "+1 (646) 555-1111",
+      "dateOfBirth": "2001-04-05"
     },
     {
       "id": 10,
-      "name": "Lucas Andrade",
-      "phone": "91 97532-8809",
-      "dateOfBirth": "2000-01-17"
+      "name": "Benjamin Allen",
+      "phone": "+1 (202) 555-2222",
+      "dateOfBirth": "1987-08-21"
     },
     {
       "id": 11,
-      "name": "Gabriela Costa",
-      "phone": "27 98144-3321",
-      "dateOfBirth": "1996-05-27"
+      "name": "Lucas Andrade",
+      "phone": "+55 (11) 97532-8809",
+      "dateOfBirth": "2000-01-17"
     },
     {
       "id": 12,
-      "name": "Thiago Ribeiro",
-      "phone": "48 98977-5522",
-      "dateOfBirth": "1989-08-09"
+      "name": "Fernanda Oliveira",
+      "phone": "+55 (31) 97655-8890",
+      "dateOfBirth": "1988-09-30"
     },
     {
       "id": 13,
-      "name": "Camila Barros",
-      "phone": "85 97220-6643",
-      "dateOfBirth": "1994-11-05"
+      "name": "Carlos Eduardo",
+      "phone": "+55 (21) 98844-1023",
+      "dateOfBirth": "1995-04-12"
     },
     {
       "id": 14,
-      "name": "Rafael Teixeira",
-      "phone": "16 99388-7710",
-      "dateOfBirth": "1987-04-21"
+      "name": "Juliana Ferreira",
+      "phone": "+55 (61) 97345-2210",
+      "dateOfBirth": "1993-03-25"
     },
     {
       "id": 15,
-      "name": "Larissa Mendes",
-      "phone": "34 98654-1123",
-      "dateOfBirth": "1998-02-13"
-    },
-    {
-      "id": 16,
-      "name": "Angelo",
-      "phone": "(11) 9999-9999",
-      "dateOfBirth": "2026-03-02"
+      "name": "Rafael Teixeira",
+      "phone": "+55 (16) 99388-7710",
+      "dateOfBirth": "1987-04-21"
     }
   ]
 }
