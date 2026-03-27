@@ -1,8 +1,8 @@
 <app-page-layout title="Schedule an Appointment">
   <div class="row mt-5">
     <div class="col-6">
-      <app-form-new-appointment [areas]="areas()"
-        (selectedAreaEvent)="onSelectedArea($event)"></app-form-new-appointment>
+      <app-form-new-appointment [areas]="areas()" [professionals]="professionalsByArea()"
+        (selectedAreaEvent)="onSelectedArea($event)" />
     </div>
     <div class="col-6">
       <div class="container">

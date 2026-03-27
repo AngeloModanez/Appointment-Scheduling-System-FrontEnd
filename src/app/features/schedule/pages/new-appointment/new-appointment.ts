@@ -4,6 +4,7 @@ import { FormNewAppointment } from "@features/schedule/components/form-new-appoi
 import { Button } from "@components/button/button";
 import { AreaService } from '@services/area-service';
 import { Area } from '@models/area';
+import { Professional } from '@models/professional';
 
 @Component({
   selector: 'app-new-appointment',
@@ -15,6 +16,7 @@ export class NewAppointment {
   areaService = inject(AreaService);
 
   areas = signal<Area[]>([]);
+  professionalsByArea = signal<Professional[]>([]);
 
   constructor() {
     this.loadAreas();
@@ -27,6 +29,10 @@ export class NewAppointment {
   }
 
   onSelectedArea(area: Area) {
-    alert(area.id + " " + area.name);
+    this.areaService.getProfessionalsFromArea(area).subscribe({
+      next: professionals => {
+        this.professionalsByArea.set(professionals);
+      }
+    });
   }
 }
