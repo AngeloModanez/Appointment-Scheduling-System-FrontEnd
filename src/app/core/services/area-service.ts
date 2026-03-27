@@ -20,4 +20,9 @@ export class AreaService {
     let url = `${this.baseUrl}/${area.id}/professionals`;
     return this.http.get<Professional[]>(url);
   }
+
+  getActiveProfessionalsFromArea(area: Area): Observable<Professional[]> {
+    let url = `${this.baseUrl}/${area.id}/professionals?active=true`;
+    return this.http.get<Professional[]>(url);
+  }
 }

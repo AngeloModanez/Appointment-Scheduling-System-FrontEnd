@@ -29,7 +29,7 @@ export class NewAppointment {
   }
 
   onSelectedArea(area: Area) {
-    this.areaService.getProfessionalsFromArea(area).subscribe({
+    this.areaService.getActiveProfessionalsFromArea(area).subscribe({
       next: professionals => {
         this.professionalsByArea.set(professionals);
       }
