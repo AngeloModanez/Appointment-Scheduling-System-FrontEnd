@@ -14,7 +14,8 @@ export class FormInput {
   id = input.required<string>();
   placeholder = input<string>('');
   control = input<FormControl>(new FormControl());
-  typeahead = input<OperatorFunction<string, readonly any[]>>(); // 👈 opcional
-  resultFormatter = input<(item: any) => string>(); // 👈 como exibir o resultado
-  inputFormatter = input<(item: any) => string>();  // 👈 como exibir no input
+  typeahead = input<OperatorFunction<string, readonly any[]>>();
+  resultFormatter = input<(item: any) => string>();
+  inputFormatter = input<(item: any) => string>();
+  errorMessage = input<string>('');
 }

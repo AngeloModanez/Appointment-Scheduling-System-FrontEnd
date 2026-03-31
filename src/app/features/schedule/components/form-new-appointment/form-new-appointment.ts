@@ -2,7 +2,7 @@ import { Component, computed, inject, input, OnInit, output } from '@angular/cor
 import { FormInput } from "@components/form-input/form-input";
 import { Area } from '@models/area';
 import { FormSelect } from "@components/form-select/form-select";
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Professional } from '@models/professional';
 import { SelectOption } from '@models/select-options';
 import { AppointmentType } from '@models/appointment-type';
@@ -25,11 +25,18 @@ export class FormNewAppointment {
 
   selectedAreaEvent = output<Area>();
 
+  clientValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (!value) return null;
+    if (typeof value === 'object' && value.id) return null;
+    return { invalidClient: true };
+  }
+
   appointmentForm = this.formBuilder.group({
     area: [null, Validators.required],
     professional: [{ value: null, disabled: true }, Validators.required],
     appointmentType: [null, Validators.required],
-    client: [null, Validators.required],
+    client: [null, [Validators.required, this.clientValidator]],
     comment: ['']
   });
 

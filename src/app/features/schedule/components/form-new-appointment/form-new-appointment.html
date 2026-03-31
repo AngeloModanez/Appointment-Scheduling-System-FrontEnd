@@ -8,11 +8,13 @@
   <app-form-select title="Appointment Type" id="appointmentType" placeholder="Select a Type"
     [control]="afAppointmentType" [options]="appointmentTypeOptions()" />
 
-  <app-form-input type="text" title="Client" id="client" placeholder="Search a client" [control]="afClient"
-    [typeahead]="searchClients()" [resultFormatter]="formatClient" [inputFormatter]="formatClient" />
-  @if (selectedClient?.phone) {
-  <span class="small text-muted mt-0">Confirm client phone: {{ selectedClient?.phone }}</span>
-  }
+  <app-form-input type="text" title="Client" id="client" placeholder="Type and select from list" [control]="afClient"
+    [typeahead]="searchClients()" [resultFormatter]="formatClient" [inputFormatter]="formatClient"
+    errorMessage="Select a valid client from the list">
+    @if (selectedClient?.phone) {
+    <span class="small text-muted mt-0">Confirm client phone: {{ selectedClient?.phone }}</span>
+    }
+  </app-form-input>
 
   <div class="mb-4">
     <label for="comment" class="form-label fw-semibold text-dark mb-1">

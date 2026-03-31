@@ -7,7 +7,8 @@
     [ngbTypeahead]="typeahead()!" [resultFormatter]="resultFormatter()!" [inputFormatter]="inputFormatter()!" />
   @if (control().invalid && control().touched) {
   <div class="text-danger mt-1">
-    <small><sup>*</sup> {{ title() }} is required</small>
+    <small><sup>*</sup>{{ errorMessage() || title() + ' is required' }}</small>
   </div>
   }
+  <ng-content></ng-content>
 </div>
