@@ -11,5 +11,6 @@
       </div>
     </div>
   </div>
-  <app-button btnClass="btn btn-primary w-100" buttonName="Schedule" />
+  <app-button btnClass="btn btn-primary w-100" buttonName="Schedule" (click)="createAppointment()"
+    [disable]="formNewAppointment?.appointmentForm?.invalid ?? true" />
 </app-page-layout>

@@ -1,16 +1,24 @@
 <form [formGroup]="appointmentForm">
-  <app-form-select title="Area" id="area" placeholder="Select an Area" [control]="aArea" [options]="areaOptions()"
+  <app-form-select title="Area" id="area" placeholder="Select an Area" [control]="afArea" [options]="areaOptions()"
     (changed)="onAreaChange($event)" />
 
-  <app-form-select title="Professional" id="professional" placeholder="Select a Professional" [control]="aProfessional"
+  <app-form-select title="Professional" id="professional" placeholder="Select a Professional" [control]="afProfessional"
     [options]="professionalOptions()" />
 
   <app-form-select title="Appointment Type" id="appointmentType" placeholder="Select a Type"
-    [control]="aAppointmentType" [options]="appointmentTypeOptions()" />
+    [control]="afAppointmentType" [options]="appointmentTypeOptions()" />
 
-  <app-form-input type="text" title="Client" id="client" placeholder="Search a client" [control]="aClient"
+  <app-form-input type="text" title="Client" id="client" placeholder="Search a client" [control]="afClient"
     [typeahead]="searchClients()" [resultFormatter]="formatClient" [inputFormatter]="formatClient" />
-  <span class="small text-muted mt-0">Confirm client phone: (15) 9975-1539</span>
+  @if (selectedClient?.phone) {
+  <span class="small text-muted mt-0">Confirm client phone: {{ selectedClient?.phone }}</span>
+  }
 
-  <app-form-input type="text" title="Comments" id="comment" placeholder="Write Observation" />
+  <div class="mb-4">
+    <label for="comment" class="form-label fw-semibold text-dark mb-1">
+      Comments
+    </label>
+    <textarea id="comment" formControlName="comment" placeholder="Write Observation" class="form-control rounded-3 px-3"
+      rows="3"></textarea>
+  </div>
 </form>

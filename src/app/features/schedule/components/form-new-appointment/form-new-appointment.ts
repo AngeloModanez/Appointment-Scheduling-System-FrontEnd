@@ -30,6 +30,7 @@ export class FormNewAppointment {
     professional: [{ value: null, disabled: true }, Validators.required],
     appointmentType: [null, Validators.required],
     client: [null, Validators.required],
+    comment: ['']
   });
 
   areaOptions = computed<SelectOption[]>(() =>
@@ -48,15 +49,19 @@ export class FormNewAppointment {
     const area = this.areas().find(a => a.id == areaId);
     if (area) {
       this.selectedAreaEvent.emit(area);
-      this.aProfessional.reset();
-      this.aProfessional.enable();
+      this.afProfessional.reset();
+      this.afProfessional.enable();
     }
   }
-  
+
   formatClient = (client: Client) => client.name;
 
-  get aArea() { return this.appointmentForm.get("area") as FormControl }
-  get aProfessional() { return this.appointmentForm.get("professional") as FormControl }
-  get aAppointmentType() { return this.appointmentForm.get("appointmentType") as FormControl }
-  get aClient() { return this.appointmentForm.get("client") as FormControl }
+  get selectedClient(): Client | null {
+    return this.appointmentForm.controls["client"].value;
+  }
+
+  get afArea() { return this.appointmentForm.get("area") as FormControl }
+  get afProfessional() { return this.appointmentForm.get("professional") as FormControl }
+  get afAppointmentType() { return this.appointmentForm.get("appointmentType") as FormControl }
+  get afClient() { return this.appointmentForm.get("client") as FormControl }
 }

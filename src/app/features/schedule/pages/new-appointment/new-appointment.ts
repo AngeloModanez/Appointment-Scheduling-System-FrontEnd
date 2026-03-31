@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, ViewChild } from '@angular/core';
 import { PageLayout } from "@components/page-layout/page-layout";
 import { FormNewAppointment } from "@features/schedule/components/form-new-appointment/form-new-appointment";
 import { Button } from "@components/button/button";
@@ -21,6 +21,9 @@ export class NewAppointment {
   areaService = inject(AreaService);
   appointmentTypeService = inject(AppointmentTypeService);
   clientService = inject(ClientService);
+
+  @ViewChild(FormNewAppointment)
+  formNewAppointment?: FormNewAppointment;
 
   areas = signal<Area[]>([]);
   appointmentTypes = signal<AppointmentType[]>([]);
@@ -58,5 +61,14 @@ export class NewAppointment {
         this.professionalsByArea.set(professionals);
       }
     });
+  }
+
+  createAppointment() {
+    if (this.formNewAppointment) {
+      this.formNewAppointment.appointmentForm.markAllAsTouched();
+      if (this.formNewAppointment.appointmentForm.valid) {
+        console.log(this.formNewAppointment.appointmentForm.value);
+      }
+    }
   }
 }
