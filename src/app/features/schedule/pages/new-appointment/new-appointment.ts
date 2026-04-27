@@ -10,10 +10,11 @@ import { AppointmentType } from '@models/appointment-type';
 import { ClientService } from '@services/client-service';
 import { debounceTime, distinctUntilChanged, filter, Observable, switchMap } from 'rxjs';
 import { Client } from '@models/client';
+import { Calendar } from "@features/schedule/components/calendar/calendar";
 
 @Component({
   selector: 'app-new-appointment',
-  imports: [PageLayout, FormNewAppointment, Button],
+  imports: [PageLayout, FormNewAppointment, Button, Calendar],
   templateUrl: './new-appointment.html',
   styles: ``,
 })
