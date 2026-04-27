@@ -14,72 +14,22 @@
   </div>
 
   <div class="row">
+    <div class="col week-day">Sun</div>
     <div class="col week-day">Mon</div>
     <div class="col week-day">Tue</div>
     <div class="col week-day">Wed</div>
     <div class="col week-day">Thu</div>
     <div class="col week-day">Fri</div>
     <div class="col week-day">Sat</div>
-    <div class="col week-day">Sun</div>
   </div>
 
+  @for (row of [0, 1, 2, 3, 4, 5]; track $index) {
   <div class="row">
-    <div class="col day day-off"></div>
-    <div class="col day day-off"></div>
-    <div class="col day day-off"></div>
-    <div class="col day day-off"></div>
-    <div class="col day day-off"></div>
-    <div class="col day day-off"></div>
-    <div class="col day day-off">1</div>
+    @for (dayOfMonth of days().slice(row * 7, (row + 1) * 7); track $index) {
+    <div class="col day day-available">
+      {{dayOfMonth.day || "&nbsp;"}}
+    </div>
+    }
   </div>
-
-  <div class="row">
-    <div class="col day day-available">2</div>
-    <div class="col day day-available">3</div>
-    <div class="col day day-available">4</div>
-    <div class="col day day-available">5</div>
-    <div class="col day day-available">6</div>
-    <div class="col day day-off">7</div>
-    <div class="col day day-off">8</div>
-  </div>
-
-  <div class="row">
-    <div class="col day day-off">9</div>
-    <div class="col day day-off">10</div>
-    <div class="col day day-off">11</div>
-    <div class="col day day-off">12</div>
-    <div class="col day day-off">13</div>
-    <div class="col day day-off">14</div>
-    <div class="col day day-off">15</div>
-  </div>
-
-  <div class="row">
-    <div class="col day day-available">16</div>
-    <div class="col day day-available">17</div>
-    <div class="col day day-available">18</div>
-    <div class="col day day-available">19</div>
-    <div class="col day day-available">20</div>
-    <div class="col day day-off">21</div>
-    <div class="col day day-off">22</div>
-  </div>
-
-  <div class="row">
-    <div class="col day day-available">23</div>
-    <div class="col day day-available">24</div>
-    <div class="col day day-selected">25</div>
-    <div class="col day day-available">26</div>
-    <div class="col day day-available">27</div>
-    <div class="col day day-off">28</div>
-    <div class="col day day-off">29</div>
-  </div>
-
-  <div class="row">
-    <div class="col day day-available">30</div>
-    <div class="col day day-available">31</div>
-    <div class="col day day-off"></div>
-    <div class="col day day-off"></div>
-    <div class="col day day-off"></div>
-    <div class="col day day-off"></div>
-    <div class="col day day-off"></div>
-  </div>
+  }
 </div>

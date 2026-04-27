@@ -17,7 +17,15 @@ export class Calendar {
   }
 
   loadCalendar() {
-    this.days.set([... this.getDaysInMonth(this.calendarDate().getFullYear(), this.calendarDate().getMonth())]);
+    this.days.set([
+      ... this.getInitialBlankDays(this.calendarDate().getFullYear(), this.calendarDate().getMonth()),
+      ... this.getDaysInMonth(this.calendarDate().getFullYear(), this.calendarDate().getMonth())
+    ]);
+
+    this.days.set([
+      ... this.days(),
+      ... this.getFinalBlankDays(this.days().length)
+    ]);
   }
 
   getDaysInMonth(year: number, month: number): Day[] {
@@ -31,8 +39,41 @@ export class Calendar {
     return days;
   }
 
+  getInitialBlankDays(year: number, month: number): Day[] {
+    let firstDay = this.getFirstDayInMonth(year, month);
+    let emptyDays = firstDay.getDay();
+    let days: Day[] = []
+
+    for (let i = 0; i < emptyDays; i++) {
+      days.push({} as Day);
+    }
+
+    return days;
+  }
+
+  getFinalBlankDays(length: number): Day[] {
+    let rest = 7 - length % 7;
+    let days: Day[] = [];
+
+    for (let i = 0; i < rest; i++) {
+      days.push({} as Day);
+    }
+
+    if (days.length + length == 35) {
+      for (let i = 0; i < 7; i++) {
+        days.push({} as Day);
+      }
+    }
+
+    return days;
+  }
+
   getNumberOfDays(year: number, month: number): any {
     return new Date(year, month + 1, 0).getDate();
+  }
+
+  getFirstDayInMonth(year: number, month: number): Date {
+    return new Date(year, month, 1);
   }
 
   onNextMonth() {
