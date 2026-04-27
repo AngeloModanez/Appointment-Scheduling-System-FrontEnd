@@ -1,21 +1,20 @@
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+
+export interface Toast {
+  textOrTpl: string;
+  className?: string;
+  icon?: string;
+  delay?: number;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  toasts: any[] = [];
+  toasts = signal<Toast[]>([]);
 
-  show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
-    this.toasts.push({ textOrTpl, ...options });
-  }
-
-  remove(toasts: any) {
-    this.toasts = this.toasts.filter((t) => t !== toasts);
-  }
-
-  clear() {
-    this.toasts.splice(0, this.toasts.length);
+  show(textOrTpl: string, options: Partial<Toast> = {}) {
+    this.toasts.update(toasts => [...toasts, { textOrTpl, ...options }]);
   }
 
   success(text: string) {
@@ -30,5 +29,13 @@ export class ToastService {
       className: 'bg-danger text-white border-0',
       icon: 'bi bi-x-circle-fill'
     });
+  }
+
+  remove(toast: Toast) {
+    this.toasts.update(toasts => toasts.filter(t => t !== toast));
+  }
+
+  clear() {
+    this.toasts.set([]);
   }
 }

@@ -1,12 +1,14 @@
-<div class="mb-3">
+<div class="mb-4">
   <label [for]="id()" class="form-label fw-semibold text-dark mb-1">
     {{ title() }}
   </label>
   <input [type]="type()" [id]="id()" [placeholder]="placeholder()" [formControl]="control()"
-    class="form-control rounded-3 px-3" [class.is-invalid]="control().invalid && control().touched" />
+    class="form-control rounded-3 px-3" [class.is-invalid]="control().invalid && control().touched"
+    [ngbTypeahead]="typeahead()!" [resultFormatter]="resultFormatter()!" [inputFormatter]="inputFormatter()!" />
   @if (control().invalid && control().touched) {
   <div class="text-danger mt-1">
-    <small><sup>*</sup> {{ title() }} is required</small>
+    <small><sup>*</sup>{{ errorMessage() || title() + ' is required' }}</small>
   </div>
   }
+  <ng-content></ng-content>
 </div>

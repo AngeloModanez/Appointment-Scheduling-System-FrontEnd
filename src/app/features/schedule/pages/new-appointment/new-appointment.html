@@ -1,0 +1,16 @@
+<app-page-layout title="Schedule an Appointment">
+  <div class="row mt-5">
+    <div class="col-6">
+      <app-form-new-appointment [areas]="areas()" [appointmentTypes]="appointmentTypes()"
+        [professionals]="professionalsByArea()" [searchClients]="searchClients"
+        (selectedAreaEvent)="onSelectedArea($event)" />
+    </div>
+    <div class="col-6">
+      <div class="container">
+        Calendar
+      </div>
+    </div>
+  </div>
+  <app-button btnClass="btn btn-primary w-100" buttonName="Schedule" (click)="createAppointment()"
+    [disable]="formNewAppointment?.appointmentForm?.invalid ?? true" />
+</app-page-layout>

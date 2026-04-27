@@ -1,0 +1,17 @@
+<div class="mb-4">
+  <label [for]="id()" class="form-label fw-semibold text-dark mb-1">
+    {{ title() }}
+  </label>
+  <select [id]="id()" [formControl]="control()" class="form-select rounded-3 px-3"
+    [class.is-invalid]="control().invalid && control().touched" (change)="changed.emit(control().value)">
+    <option [value]="null" disabled selected>{{ placeholder() }}</option>
+    @for (option of options(); track $index) {
+    <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+  @if (control().invalid && control().touched) {
+  <div class="text-danger mt-1">
+    <small><sup>*</sup>{{ title() }} is required</small>
+  </div>
+  }
+</div>

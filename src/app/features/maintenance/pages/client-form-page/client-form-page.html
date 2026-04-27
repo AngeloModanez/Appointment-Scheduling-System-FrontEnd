@@ -1,9 +1,8 @@
 <app-page-layout title="Client Form">
   <form [formGroup]="clientForm" (ngSubmit)="save()">
-    <div class="mb-4">
-      <app-form-input type="text" title="Client Name" id="clientName" placeholder="João Silva" [control]="cfName" />
-    </div>
-    <div class="row mb-4">
+    <app-form-input type="text" title="Client Name" id="clientName" placeholder="João Silva" [control]="cfName" />
+
+    <div class="row">
       <div class="col-6">
         <app-form-input type="text" title="Phone Number" id="phoneNumber" placeholder="(11) 99999-9999"
           [control]="cfPhone" />
