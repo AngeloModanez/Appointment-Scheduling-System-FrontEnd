@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { DatePipe, TitleCasePipe } from '@angular/common';
+import { Day } from './models/day';
 
 @Component({
   selector: 'app-calendar',
@@ -9,11 +10,36 @@ import { DatePipe, TitleCasePipe } from '@angular/common';
 })
 export class Calendar {
   calendarDate = signal<Date>(new Date());
+  days = signal<Day[]>([]);
+
+  constructor() {
+    this.loadCalendar();
+  }
+
+  loadCalendar() {
+    this.days.set([... this.getDaysInMonth(this.calendarDate().getFullYear(), this.calendarDate().getMonth())]);
+  }
+
+  getDaysInMonth(year: number, month: number): Day[] {
+    let numberOfDays: number = this.getNumberOfDays(year, month);
+    let days: Day[] = []
+
+    for (let i = 1; i <= numberOfDays; i++) {
+      days.push({ day: i, available: true });
+    }
+
+    return days;
+  }
+
+  getNumberOfDays(year: number, month: number): any {
+    return new Date(year, month + 1, 0).getDate();
+  }
 
   onNextMonth() {
     this.calendarDate.set(new Date(this.calendarDate()))
     this.calendarDate().setMonth(this.calendarDate().getMonth() + 1);
     this.calendarDate().setDate(1);
+    this.loadCalendar();
   }
 
   onPreviousMonth() {
@@ -22,13 +48,15 @@ export class Calendar {
     previousDate.setDate(1);
 
     if (previousDate >= new Date()) {
-      return this.calendarDate.set(previousDate);
+      this.calendarDate.set(previousDate);
+    } else {
+      if (this.isDateCurrentMonthYear(previousDate)) {
+        previousDate.setDate(new Date().getDate());
+        this.calendarDate.set(previousDate);
+      }
     }
 
-    if (this.isDateCurrentMonthYear(previousDate)) {
-      previousDate.setDate(new Date().getDate());
-      this.calendarDate.set(previousDate);
-    }
+    this.loadCalendar();
   }
 
   showPreviousMonth(): boolean {
