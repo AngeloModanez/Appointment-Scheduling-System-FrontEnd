@@ -11,6 +11,7 @@ import { Day } from './models/day';
 export class Calendar {
   calendarDate = signal<Date>(new Date());
   days = signal<Day[]>([]);
+  availableDays = signal<number[]>([1, 5, 8, 15, 21]);
 
   constructor() {
     this.loadCalendar();
@@ -33,7 +34,11 @@ export class Calendar {
     let days: Day[] = []
 
     for (let i = 1; i <= numberOfDays; i++) {
-      days.push({ day: i, available: true });
+      if (this.availableDays().includes(i)) {
+        days.push({ day: i, available: true });
+      } else {
+        days.push({ day: i, available: false });
+      }
     }
 
     return days;
