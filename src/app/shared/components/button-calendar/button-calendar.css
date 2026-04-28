@@ -5,6 +5,7 @@
   margin: 2px;
   font-size: 0.85rem;
   transition: background-color 0.15s ease;
+  user-select: none;
 }
 
 .day-off-month {

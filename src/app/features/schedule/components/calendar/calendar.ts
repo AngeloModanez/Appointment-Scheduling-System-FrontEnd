@@ -1,12 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Day } from './models/day';
+import { ButtonCalendar } from "@components/button-calendar/button-calendar";
 
 @Component({
   selector: 'app-calendar',
-  imports: [DatePipe, TitleCasePipe],
+  imports: [DatePipe, TitleCasePipe, ButtonCalendar],
   templateUrl: './calendar.html',
-  styleUrl: './calendar.css',
+  styles: ``,
 })
 export class Calendar {
   calendarDate = signal<Date>(new Date());
