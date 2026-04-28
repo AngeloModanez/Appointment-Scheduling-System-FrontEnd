@@ -12,6 +12,7 @@ export class Calendar {
   calendarDate = signal<Date>(new Date());
   days = signal<Day[]>([]);
   availableDays = signal<number[]>([1, 5, 8, 15, 21]);
+  selectedDay = signal<number>(0);
 
   constructor() {
     this.loadCalendar();
@@ -27,6 +28,10 @@ export class Calendar {
       ... this.days(),
       ... this.getFinalBlankDays(this.days().length)
     ]);
+  }
+
+  onSelectedDay(day: number) {
+    this.selectedDay.set(day);
   }
 
   getDaysInMonth(year: number, month: number): Day[] {
@@ -86,6 +91,7 @@ export class Calendar {
     this.calendarDate().setMonth(this.calendarDate().getMonth() + 1);
     this.calendarDate().setDate(1);
     this.loadCalendar();
+    this.selectedDay.set(0);
   }
 
   onPreviousMonth() {
@@ -103,6 +109,7 @@ export class Calendar {
     }
 
     this.loadCalendar();
+    this.selectedDay.set(0);
   }
 
   showPreviousMonth(): boolean {
