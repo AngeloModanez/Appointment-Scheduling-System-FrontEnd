@@ -1,44 +1,35 @@
-.previous-month {
-  cursor: pointer;
-}
-
-.month-year {
-  font-weight: 500;
-}
-
-.next-month {
-  cursor: pointer;
-}
-
-.week-day {
-  font-weight: 500;
-  padding: 6px;
-  margin: 1px;
-}
-
 .day {
   font-weight: 500;
-  border-radius: 5px;
-  padding: 8px;
-  margin: 1px;
-  font-size: 0.9rem;
-  color: #ffffff;
+  border-radius: 8px;
+  padding: 10px 4px;
+  margin: 2px;
+  font-size: 0.85rem;
+  transition: background-color 0.15s ease;
+}
+
+.day-off-month {
+  background-color: #f8f9fa;
+  color: #dee2e6;
+  pointer-events: none;
 }
 
 .day-off {
-  background-color: #ebebeb;
-  color: #808080
+  background-color: #dee2e6;
+  color: #6c757d;
 }
 
 .day-available {
-  background-color: #9d9ea1;
+  background-color: #0d6efd;
+  color: #ffffff;
 }
 
 .day-available:hover {
   cursor: pointer;
-  background-color: #439e43;
+  background-color: #0b5ed7;
 }
 
 .day-selected {
-  background-color: #439e43;
+  background-color: #198754;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(25, 135, 84, 0.4);
 }
