@@ -23,7 +23,8 @@ export class FormNewAppointment {
   professionals = input<Professional[]>([]);
   searchClients = input<OperatorFunction<string, readonly Client[]>>();
 
-  selectedAreaEvent = output<Area>();
+  selectedArea = output<Area>();
+  selectedProfessional = output<Professional>();
 
   clientValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
@@ -55,9 +56,16 @@ export class FormNewAppointment {
   onAreaChange(areaId: any) {
     const area = this.areas().find(a => a.id == areaId);
     if (area) {
-      this.selectedAreaEvent.emit(area);
+      this.selectedArea.emit(area);
       this.afProfessional.reset();
       this.afProfessional.enable();
+    }
+  }
+
+  onProfessionalChange(professionalId: any) {
+    const professional = this.professionals().find(p => p.id == professionalId);
+    if (professional) {
+      this.selectedProfessional.emit(professional);
     }
   }
 

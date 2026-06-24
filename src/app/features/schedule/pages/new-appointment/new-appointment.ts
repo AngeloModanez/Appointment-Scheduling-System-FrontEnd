@@ -64,6 +64,10 @@ export class NewAppointment {
     this.availableDays.set([]);
   }
 
+  onSelectedProfessional(professional: Professional) {
+    alert(professional);
+  }
+
   onSelectedDate(date: Date) {
     this.appointmentDate.set(date);
   }
