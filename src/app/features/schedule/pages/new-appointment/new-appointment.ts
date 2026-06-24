@@ -11,6 +11,7 @@ import { ClientService } from '@services/client-service';
 import { debounceTime, distinctUntilChanged, filter, Observable, switchMap } from 'rxjs';
 import { Client } from '@models/client';
 import { Calendar } from "@features/schedule/components/calendar/calendar";
+import { ProfessionalService } from '@services/professional-service';
 
 @Component({
   selector: 'app-new-appointment',
@@ -22,6 +23,7 @@ export class NewAppointment {
   areaService = inject(AreaService);
   appointmentTypeService = inject(AppointmentTypeService);
   clientService = inject(ClientService);
+  professionalService = inject(ProfessionalService);
 
   @ViewChild(FormNewAppointment)
   formNewAppointment?: FormNewAppointment;
@@ -32,11 +34,11 @@ export class NewAppointment {
   availableDays = signal<number[]>([]);
   calendarDate = signal<Date>(new Date());
   appointmentDate = signal<Date | null>(null);
+  selectedProfessional: Professional = {} as Professional;
 
   constructor() {
     this.loadAreas();
     this.loadAppointmentTypes();
-    this.loadAvailableDays();
   }
 
   searchClients = (text: Observable<string>): Observable<Client[]> => {
@@ -60,19 +62,20 @@ export class NewAppointment {
     })
   }
 
-  loadAvailableDays() {
-    this.availableDays.set([]);
-  }
-
   onSelectedProfessional(professional: Professional) {
-    alert(professional);
+    this.selectedProfessional = professional;
+    this.professionalService.getAvailableDays(this.selectedProfessional, this.calendarDate()).subscribe({
+      next: days => this.availableDays.set(days)
+    });
   }
 
   onSelectedDate(date: Date) {
+    this.calendarDate.set(date);
     this.appointmentDate.set(date);
   }
 
   onSelectedArea(area: Area) {
+    this.availableDays.set([]);
     this.areaService.getActiveProfessionalsFromArea(area).subscribe({
       next: professionals => {
         this.professionalsByArea.set(professionals);
