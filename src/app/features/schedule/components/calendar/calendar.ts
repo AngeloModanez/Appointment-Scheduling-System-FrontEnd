@@ -11,10 +11,13 @@ import { ButtonCalendar } from "@components/button-calendar/button-calendar";
 })
 export class Calendar {
   calendarDate = signal<Date>(new Date());
+  availableDays = input<number[]>([]);
+
+  changedDate = output<Date>();
+  changedMonth = output<Date>();
+
   days = signal<Day[]>([]);
   selectedDay = signal<number>(0);
-  availableDays = input<number[]>([]);
-  selectedDate = output<Date>();
 
   constructor() {
     effect(() => {
@@ -38,9 +41,7 @@ export class Calendar {
 
   onSelectedDay(day: number) {
     this.selectedDay.set(day);
-    const date = new Date(this.calendarDate());
-    date.setDate(day);
-    this.selectedDate.emit(date);
+    this.changedDate.emit(new Date(this.calendarDate().getFullYear(), this.calendarDate().getMonth(), this.selectedDay()));
   }
 
   getDaysInMonth(year: number, month: number): Day[] {
@@ -100,6 +101,7 @@ export class Calendar {
     this.calendarDate().setMonth(this.calendarDate().getMonth() + 1);
     this.calendarDate().setDate(1);
     this.loadCalendar();
+    this.changedMonth.emit(new Date(this.calendarDate()));
     this.selectedDay.set(0);
   }
 
@@ -118,6 +120,7 @@ export class Calendar {
     }
 
     this.loadCalendar();
+    this.changedMonth.emit(new Date(this.calendarDate()));
     this.selectedDay.set(0);
   }
 

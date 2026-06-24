@@ -7,7 +7,7 @@
     </div>
     <div class="col-6">
       <div class="container">
-        <app-calendar [availableDays]="availableDays()" (selectedDate)="onDateSelected($event)" />
+        <app-calendar [availableDays]="availableDays()" (changedDate)="onSelectedDate($event)" />
       </div>
     </div>
   </div>

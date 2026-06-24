@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal, ViewChild } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { PageLayout } from "@components/page-layout/page-layout";
 import { FormNewAppointment } from "@features/schedule/components/form-new-appointment/form-new-appointment";
 import { Button } from "@components/button/button";
@@ -30,6 +30,7 @@ export class NewAppointment {
   appointmentTypes = signal<AppointmentType[]>([]);
   professionalsByArea = signal<Professional[]>([]);
   availableDays = signal<number[]>([]);
+  calendarDate = signal<Date>(new Date());
   appointmentDate = signal<Date | null>(null);
 
   constructor() {
@@ -60,10 +61,10 @@ export class NewAppointment {
   }
 
   loadAvailableDays() {
-    this.availableDays.set([1, 5, 8, 15, 21]);
+    this.availableDays.set([]);
   }
 
-  onDateSelected(date: Date) {
+  onSelectedDate(date: Date) {
     this.appointmentDate.set(date);
   }
 
