@@ -29,10 +29,13 @@ export class NewAppointment {
   areas = signal<Area[]>([]);
   appointmentTypes = signal<AppointmentType[]>([]);
   professionalsByArea = signal<Professional[]>([]);
+  availableDays = signal<number[]>([]);
+  appointmentDate = signal<Date | null>(null);
 
   constructor() {
     this.loadAreas();
     this.loadAppointmentTypes();
+    this.loadAvailableDays();
   }
 
   searchClients = (text: Observable<string>): Observable<Client[]> => {
@@ -56,6 +59,14 @@ export class NewAppointment {
     })
   }
 
+  loadAvailableDays() {
+    this.availableDays.set([1, 5, 8, 15, 21]);
+  }
+
+  onDateSelected(date: Date) {
+    this.appointmentDate.set(date);
+  }
+
   onSelectedArea(area: Area) {
     this.areaService.getActiveProfessionalsFromArea(area).subscribe({
       next: professionals => {
@@ -67,8 +78,11 @@ export class NewAppointment {
   createAppointment() {
     if (this.formNewAppointment) {
       this.formNewAppointment.appointmentForm.markAllAsTouched();
-      if (this.formNewAppointment.appointmentForm.valid) {
-        console.log(this.formNewAppointment.appointmentForm.value);
+      if (this.formNewAppointment.appointmentForm.valid && this.appointmentDate()) {
+        console.log({
+          ...this.formNewAppointment.appointmentForm.value,
+          date: this.appointmentDate()
+        });
       }
     }
   }

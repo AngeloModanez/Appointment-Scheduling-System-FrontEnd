@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, input, output, signal, untracked } from '@angular/core';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Day } from './models/day';
 import { ButtonCalendar } from "@components/button-calendar/button-calendar";
@@ -12,11 +12,16 @@ import { ButtonCalendar } from "@components/button-calendar/button-calendar";
 export class Calendar {
   calendarDate = signal<Date>(new Date());
   days = signal<Day[]>([]);
-  availableDays = signal<number[]>([1, 5, 8, 15, 21]);
   selectedDay = signal<number>(0);
+  availableDays = input<number[]>([]);
+  selectedDate = output<Date>();
 
   constructor() {
-    this.loadCalendar();
+    effect(() => {
+      this.availableDays();
+      this.calendarDate();
+      untracked(() => this.loadCalendar());
+    });
   }
 
   loadCalendar() {
@@ -33,6 +38,9 @@ export class Calendar {
 
   onSelectedDay(day: number) {
     this.selectedDay.set(day);
+    const date = new Date(this.calendarDate());
+    date.setDate(day);
+    this.selectedDate.emit(date);
   }
 
   getDaysInMonth(year: number, month: number): Day[] {
