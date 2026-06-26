@@ -64,6 +64,7 @@ export class NewAppointment {
 
   onSelectedProfessional(professional: Professional) {
     this.selectedProfessional = professional;
+    this.calendarDate.set(new Date());
     this.professionalService.getAvailableDays(this.selectedProfessional, this.calendarDate()).subscribe({
       next: days => this.availableDays.set(days)
     });
