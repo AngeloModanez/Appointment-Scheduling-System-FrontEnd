@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal, ViewChild } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { PageLayout } from "@components/page-layout/page-layout";
 import { FormNewAppointment } from "@features/schedule/components/form-new-appointment/form-new-appointment";
 import { Button } from "@components/button/button";
@@ -10,10 +10,12 @@ import { AppointmentType } from '@models/appointment-type';
 import { ClientService } from '@services/client-service';
 import { debounceTime, distinctUntilChanged, filter, Observable, switchMap } from 'rxjs';
 import { Client } from '@models/client';
+import { Calendar } from "@features/schedule/components/calendar/calendar";
+import { ProfessionalService } from '@services/professional-service';
 
 @Component({
   selector: 'app-new-appointment',
-  imports: [PageLayout, FormNewAppointment, Button],
+  imports: [PageLayout, FormNewAppointment, Button, Calendar],
   templateUrl: './new-appointment.html',
   styles: ``,
 })
@@ -21,6 +23,7 @@ export class NewAppointment {
   areaService = inject(AreaService);
   appointmentTypeService = inject(AppointmentTypeService);
   clientService = inject(ClientService);
+  professionalService = inject(ProfessionalService);
 
   @ViewChild(FormNewAppointment)
   formNewAppointment?: FormNewAppointment;
@@ -28,6 +31,10 @@ export class NewAppointment {
   areas = signal<Area[]>([]);
   appointmentTypes = signal<AppointmentType[]>([]);
   professionalsByArea = signal<Professional[]>([]);
+  availableDays = signal<number[]>([]);
+  calendarDate = signal<Date>(new Date());
+  appointmentDate = signal<Date | null>(null);
+  selectedProfessional: Professional = {} as Professional;
 
   constructor() {
     this.loadAreas();
@@ -55,7 +62,21 @@ export class NewAppointment {
     })
   }
 
+  onSelectedProfessional(professional: Professional) {
+    this.selectedProfessional = professional;
+    this.calendarDate.set(new Date());
+    this.professionalService.getAvailableDays(this.selectedProfessional, this.calendarDate()).subscribe({
+      next: days => this.availableDays.set(days)
+    });
+  }
+
+  onSelectedDate(date: Date) {
+    this.calendarDate.set(date);
+    this.appointmentDate.set(date);
+  }
+
   onSelectedArea(area: Area) {
+    this.availableDays.set([]);
     this.areaService.getActiveProfessionalsFromArea(area).subscribe({
       next: professionals => {
         this.professionalsByArea.set(professionals);
@@ -66,8 +87,11 @@ export class NewAppointment {
   createAppointment() {
     if (this.formNewAppointment) {
       this.formNewAppointment.appointmentForm.markAllAsTouched();
-      if (this.formNewAppointment.appointmentForm.valid) {
-        console.log(this.formNewAppointment.appointmentForm.value);
+      if (this.formNewAppointment.appointmentForm.valid && this.appointmentDate()) {
+        console.log({
+          ...this.formNewAppointment.appointmentForm.value,
+          date: this.appointmentDate()
+        });
       }
     }
   }

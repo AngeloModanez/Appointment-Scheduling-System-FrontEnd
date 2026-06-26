@@ -3,7 +3,7 @@
     (changed)="onAreaChange($event)" />
 
   <app-form-select title="Professional" id="professional" placeholder="Select a Professional" [control]="afProfessional"
-    [options]="professionalOptions()" />
+    [options]="professionalOptions()" (changed)="onProfessionalChange($event)" />
 
   <app-form-select title="Appointment Type" id="appointmentType" placeholder="Select a Type"
     [control]="afAppointmentType" [options]="appointmentTypeOptions()" />

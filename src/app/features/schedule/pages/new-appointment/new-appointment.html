@@ -1,13 +1,16 @@
+{{calendarDate()}}
+{{selectedProfessional}}
+
 <app-page-layout title="Schedule an Appointment">
   <div class="row mt-5">
     <div class="col-6">
       <app-form-new-appointment [areas]="areas()" [appointmentTypes]="appointmentTypes()"
-        [professionals]="professionalsByArea()" [searchClients]="searchClients"
-        (selectedAreaEvent)="onSelectedArea($event)" />
+        [professionals]="professionalsByArea()" [searchClients]="searchClients" (selectedArea)="onSelectedArea($event)"
+        (selectedProfessional)="onSelectedProfessional($event)" />
     </div>
     <div class="col-6">
       <div class="container">
-        Calendar
+        <app-calendar [availableDays]="availableDays()" (changedDate)="onSelectedDate($event)" />
       </div>
     </div>
   </div>

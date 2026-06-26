@@ -1,0 +1,27 @@
+<div class="calendar text-center">
+  <div class="row mb-3 align-items-center">
+    <div class="col" style="cursor: pointer">
+      @if (showPreviousMonth()) {
+      <i class="bi bi-chevron-left" (click)="onPreviousMonth()"></i>
+      }
+    </div>
+    <div class="col fw-medium">
+      {{ calendarDate() | date: 'MMMM yyyy' | titlecase }}
+    </div>
+    <div class="col" style="cursor: pointer">
+      <i class="bi bi-chevron-right" (click)="onNextMonth()"></i>
+    </div>
+  </div>
+  <div class="row">
+    @for (day of ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']; track $index) {
+    <div class="col fw-medium py-1 px-1 mx-1">{{ day }}</div>
+    }
+  </div>
+  @for (row of [0,1,2,3,4,5]; track $index) {
+  <div class="row">
+    @for (dayOfMonth of days().slice(row * 7, (row + 1) * 7); track $index) {
+    <app-button-calendar [day]="dayOfMonth" [selectedDay]="selectedDay()" (dayClicked)="onSelectedDay($event)" />
+    }
+  </div>
+  }
+</div>

@@ -1,0 +1,36 @@
+.day {
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 10px 4px;
+  margin: 2px;
+  font-size: 0.85rem;
+  transition: background-color 0.15s ease;
+  user-select: none;
+}
+
+.day-off-month {
+  background-color: #f8f9fa;
+  color: #dee2e6;
+  pointer-events: none;
+}
+
+.day-off {
+  background-color: #dee2e6;
+  color: #6c757d;
+}
+
+.day-available {
+  background-color: #0d6efd;
+  color: #ffffff;
+}
+
+.day-available:hover {
+  cursor: pointer;
+  background-color: #0b5ed7;
+}
+
+.day-selected {
+  background-color: #198754;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(25, 135, 84, 0.4);
+}
