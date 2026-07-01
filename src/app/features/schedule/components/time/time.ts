@@ -1,11 +1,10 @@
 import { Component, input, signal } from '@angular/core';
 import { TimeModel } from './models/time-model';
 import { TimeSlot } from "@components/time-slot/time-slot";
-import { TimePipe } from "../../../../shared/pipes/time-pipe";
 
 @Component({
   selector: 'app-time',
-  imports: [TimeSlot, TimePipe],
+  imports: [TimeSlot],
   templateUrl: './time.html',
   styles: ``,
 })
