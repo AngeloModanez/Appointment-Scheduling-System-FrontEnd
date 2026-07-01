@@ -1,9 +1,10 @@
 import { Component, computed, input, output, ViewEncapsulation } from '@angular/core';
-import { Time } from '@features/schedule/components/calendar/models/time';
+import { TimeModel } from '@features/schedule/components/time/models/time-model';
+import { TimePipe } from "../../pipes/time-pipe";
 
 @Component({
   selector: 'app-time-slot',
-  imports: [],
+  imports: [TimePipe],
   templateUrl: './time-slot.html',
   styleUrl: './time-slot.css',
   encapsulation: ViewEncapsulation.None,
@@ -14,13 +15,13 @@ import { Time } from '@features/schedule/components/calendar/models/time';
 })
 
 export class TimeSlot {
-  slot = input.required<Time>();
+  slot = input.required<TimeModel>();
   selectedSlot = input<string>('');
   slotClicked = output<string>();
 
   onClick() {
     if (this.slot().available) {
-      this.slotClicked.emit(this.slot().time);
+      this.slotClicked.emit(this.slot().startTime);
     }
   }
 
@@ -28,7 +29,7 @@ export class TimeSlot {
     const s = this.slot();
     const classes = ['col', 'slot'];
     if (!s.available) classes.push('slot-off');
-    else if (s.time === this.selectedSlot()) classes.push('slot-selected');
+    else if (s.startTime === this.selectedSlot()) classes.push('slot-selected');
     else classes.push('slot-available');
     return classes.join(' ');
   });
