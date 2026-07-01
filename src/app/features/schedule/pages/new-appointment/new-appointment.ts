@@ -12,10 +12,11 @@ import { debounceTime, distinctUntilChanged, filter, Observable, switchMap } fro
 import { Client } from '@models/client';
 import { Calendar } from "@features/schedule/components/calendar/calendar";
 import { ProfessionalService } from '@services/professional-service';
+import { Time } from "@features/schedule/components/time/time";
 
 @Component({
   selector: 'app-new-appointment',
-  imports: [PageLayout, FormNewAppointment, Button, Calendar],
+  imports: [PageLayout, FormNewAppointment, Button, Calendar, Time],
   templateUrl: './new-appointment.html',
   styles: ``,
 })
