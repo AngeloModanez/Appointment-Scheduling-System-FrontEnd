@@ -3,7 +3,7 @@
   @for (row of [0,1]; track $index) {
   <div class="row">
     @for (time of times().slice(row*8, (row+1)*8); track $index) {
-    <app-time-slot [slot]="time" />
+    <app-time-slot [slot]="time" [selectedSlot]="selectedTime()" (slotClicked)="onSelectedTime($event)" />
     }
   </div>
   }

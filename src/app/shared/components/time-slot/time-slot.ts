@@ -16,12 +16,12 @@ import { TimePipe } from "../../pipes/time-pipe";
 
 export class TimeSlot {
   slot = input.required<TimeModel>();
-  selectedSlot = input<string>('');
-  slotClicked = output<string>();
+  selectedSlot = input<TimeModel>();
+  slotClicked = output<TimeModel>();
 
   onClick() {
     if (this.slot().available) {
-      this.slotClicked.emit(this.slot().startTime);
+      this.slotClicked.emit(this.slot());
     }
   }
 
@@ -29,7 +29,7 @@ export class TimeSlot {
     const s = this.slot();
     const classes = ['col', 'slot'];
     if (!s.available) classes.push('slot-off');
-    else if (s.startTime === this.selectedSlot()) classes.push('slot-selected');
+    else if (s.startTime === this.selectedSlot()?.startTime) classes.push('slot-selected');
     else classes.push('slot-available');
     return classes.join(' ');
   });
