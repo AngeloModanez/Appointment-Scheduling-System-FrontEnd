@@ -7,11 +7,12 @@
     </div>
     <div class="col-6">
       <div class="container">
-        <app-calendar [availableDays]="availableDays()" (changedDate)="onSelectedDate($event)" />
+        <app-calendar [availableDays]="availableDays()" [calendarDate]="calendarDate()"
+          (changedDate)="onSelectedDate($event)" (changedMonth)="onChangedMonth($event)" />
       </div>
-        <app-time />
+      <app-time [availableTimes]="availableTimes()" (selectedTimeEvent)="onSelectedTime($event)" />
     </div>
   </div>
   <app-button btnClass="btn btn-primary w-100" buttonName="Schedule" (click)="createAppointment()"
-    [disable]="formNewAppointment?.appointmentForm?.invalid ?? true" />
+    [disable]="(formNewAppointment?.appointmentForm?.invalid ?? true) || !appointmentDate() || !appointmentTime()" />
 </app-page-layout>

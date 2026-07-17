@@ -32,8 +32,15 @@
       "id": 3,
       "name": "Dr. Lucas Oliveira",
       "phone": "+55 (11) 98888-1234",
-      "active": false,
+      "active": true,
       "areaId": 1
+    },
+    {
+      "id": 4,
+      "name": "Dr. Scallet",
+      "phone": "+55 (11) 92222-1234",
+      "active": false,
+      "areaId": 3
     }
   ],
   "appointment-types": [

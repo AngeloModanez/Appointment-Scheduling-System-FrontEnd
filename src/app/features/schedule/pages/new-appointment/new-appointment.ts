@@ -13,6 +13,8 @@ import { Client } from '@models/client';
 import { Calendar } from "@features/schedule/components/calendar/calendar";
 import { ProfessionalService } from '@services/professional-service';
 import { Time } from "@features/schedule/components/time/time";
+import { TimeModel } from '@features/schedule/components/time/models/time-model';
+import { Appointment } from '@models/appointment';
 
 @Component({
   selector: 'app-new-appointment',
@@ -32,9 +34,14 @@ export class NewAppointment {
   areas = signal<Area[]>([]);
   appointmentTypes = signal<AppointmentType[]>([]);
   professionalsByArea = signal<Professional[]>([]);
+
   availableDays = signal<number[]>([]);
   calendarDate = signal<Date>(new Date());
   appointmentDate = signal<Date | null>(null);
+
+  availableTimes = signal<TimeModel[]>([]);
+  appointmentTime = signal<TimeModel | null>(null);
+
   selectedProfessional: Professional = {} as Professional;
 
   constructor() {
@@ -63,21 +70,50 @@ export class NewAppointment {
     })
   }
 
-  onSelectedProfessional(professional: Professional) {
-    this.selectedProfessional = professional;
-    this.calendarDate.set(new Date());
+  loadAvailableDays() {
     this.professionalService.getAvailableDays(this.selectedProfessional, this.calendarDate()).subscribe({
       next: days => this.availableDays.set(days)
     });
   }
 
-  onSelectedDate(date: Date) {
+  loadAvailableTimes() {
+    const date = this.appointmentDate();
+    if (!date || !this.selectedProfessional?.id) return;
+    this.professionalService.getAvailableTimes(this.selectedProfessional, date).subscribe({
+      next: times => this.availableTimes.set(times)
+    });
+  }
+
+  onSelectedProfessional(professional: Professional) {
+    this.selectedProfessional = professional;
+    this.calendarDate.set(new Date());
+    this.loadAvailableDays();
+    this.availableTimes.set([]);
+    this.appointmentDate.set(null);
+  }
+
+  onSelectedTime(time: TimeModel) {
+    this.appointmentTime.set(time);
+  }
+
+  onChangedMonth(date: Date) {
     this.calendarDate.set(date);
+    this.availableTimes.set([]);
+    this.appointmentDate.set(null);
+    this.appointmentTime.set(null);
+    this.loadAvailableDays();
+  }
+
+  onSelectedDate(date: Date) {
     this.appointmentDate.set(date);
+    this.appointmentTime.set(null);
+    this.availableTimes.set([]);
+    this.loadAvailableTimes();
   }
 
   onSelectedArea(area: Area) {
     this.availableDays.set([]);
+    this.availableTimes.set([]);
     this.areaService.getActiveProfessionalsFromArea(area).subscribe({
       next: professionals => {
         this.professionalsByArea.set(professionals);
@@ -86,14 +122,21 @@ export class NewAppointment {
   }
 
   createAppointment() {
-    if (this.formNewAppointment) {
-      this.formNewAppointment.appointmentForm.markAllAsTouched();
-      if (this.formNewAppointment.appointmentForm.valid && this.appointmentDate()) {
-        console.log({
-          ...this.formNewAppointment.appointmentForm.value,
-          date: this.appointmentDate()
-        });
-      }
-    }
+    if (!this.formNewAppointment?.appointmentForm.valid || !this.appointmentDate() || !this.appointmentTime()) return;
+    this.formNewAppointment.appointmentForm.markAllAsTouched();
+
+    const form = this.formNewAppointment.appointmentForm.value;
+    const appointment = {
+      ...form,
+      area: this.areas().find(a => a.id == form.area),
+      professional: this.selectedProfessional,
+      appointmentType: this.appointmentTypes().find(at => at.id == form.appointmentType),
+      date: this.appointmentDate()!,
+      startTime: this.appointmentTime()!.startTime,
+      endTime: this.appointmentTime()!.endTime,
+    } as Appointment;
+
+    console.log(JSON.stringify(appointment, null, 2));
+    alert(JSON.stringify(appointment, null, 2));
   }
 }
