@@ -34,11 +34,20 @@ export class FormNewAppointment {
   }
 
   appointmentForm = this.formBuilder.group({
-    area: [null, Validators.required],
-    professional: [{ value: null, disabled: true }, Validators.required],
-    appointmentType: [null, Validators.required],
-    client: [null, [Validators.required, this.clientValidator]],
-    comment: ['']
+    area: this.formBuilder.control<number | null>(null, Validators.required),
+    professional: this.formBuilder.control<number | null>(
+      { value: null, disabled: true },
+      Validators.required
+    ),
+    appointmentType: this.formBuilder.control<number | null>(
+      null,
+      Validators.required
+    ),
+    client: this.formBuilder.control<Client | null>(
+      null,
+      [Validators.required, this.clientValidator]
+    ),
+    comment: this.formBuilder.control<string>('', { nonNullable: true })
   });
 
   areaOptions = computed<SelectOption[]>(() =>

@@ -10,7 +10,7 @@ import { ButtonCalendar } from "@components/button-calendar/button-calendar";
   styles: ``,
 })
 export class Calendar {
-  calendarDate = signal<Date>(new Date());
+  calendarDate = input<Date>(new Date());
   availableDays = input<number[]>([]);
 
   changedDate = output<Date>();
@@ -23,7 +23,10 @@ export class Calendar {
     effect(() => {
       this.availableDays();
       this.calendarDate();
-      untracked(() => this.loadCalendar());
+      untracked(() => {
+        this.selectedDay.set(0);
+        this.loadCalendar();
+      });
     });
   }
 
@@ -97,31 +100,19 @@ export class Calendar {
   }
 
   onNextMonth() {
-    this.calendarDate.set(new Date(this.calendarDate()))
-    this.calendarDate().setMonth(this.calendarDate().getMonth() + 1);
-    this.calendarDate().setDate(1);
-    this.loadCalendar();
-    this.changedMonth.emit(new Date(this.calendarDate()));
+    const next = new Date(this.calendarDate());
+    next.setMonth(next.getMonth() + 1);
+    next.setDate(1);
     this.selectedDay.set(0);
+    this.changedMonth.emit(next);
   }
 
   onPreviousMonth() {
-    let previousDate = new Date(this.calendarDate())
-    previousDate.setMonth(this.calendarDate().getMonth() - 1);
-    previousDate.setDate(1);
-
-    if (previousDate >= new Date()) {
-      this.calendarDate.set(previousDate);
-    } else {
-      if (this.isDateCurrentMonthYear(previousDate)) {
-        previousDate.setDate(new Date().getDate());
-        this.calendarDate.set(previousDate);
-      }
-    }
-
-    this.loadCalendar();
-    this.changedMonth.emit(new Date(this.calendarDate()));
+    const prev = new Date(this.calendarDate());
+    prev.setMonth(prev.getMonth() - 1);
+    prev.setDate(1);
     this.selectedDay.set(0);
+    this.changedMonth.emit(prev);
   }
 
   showPreviousMonth(): boolean {

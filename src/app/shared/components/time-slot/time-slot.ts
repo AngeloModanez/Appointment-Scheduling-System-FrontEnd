@@ -16,7 +16,7 @@ import { TimePipe } from "../../pipes/time-pipe";
 
 export class TimeSlot {
   slot = input.required<TimeModel>();
-  selectedSlot = input<TimeModel>();
+  selectedSlot = input<TimeModel | null>();
   slotClicked = output<TimeModel>();
 
   onClick() {
