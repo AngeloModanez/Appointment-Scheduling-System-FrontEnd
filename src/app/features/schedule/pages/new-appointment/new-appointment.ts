@@ -121,6 +121,17 @@ export class NewAppointment {
     });
   }
 
+  resetForm() {
+    this.formNewAppointment?.appointmentForm.reset();
+    this.selectedProfessional = {} as Professional;
+    this.professionalsByArea.set([]);
+    this.availableDays.set([]);
+    this.availableTimes.set([]);
+    this.appointmentDate.set(null);
+    this.appointmentTime.set(null);
+    this.calendarDate.set(new Date());
+  }
+
   createAppointment() {
     if (!this.formNewAppointment?.appointmentForm.valid || !this.appointmentDate() || !this.appointmentTime()) return;
     this.formNewAppointment.appointmentForm.markAllAsTouched();
@@ -138,5 +149,6 @@ export class NewAppointment {
 
     console.log(JSON.stringify(appointment, null, 2));
     alert(JSON.stringify(appointment, null, 2));
+    this.resetForm();
   }
 }
