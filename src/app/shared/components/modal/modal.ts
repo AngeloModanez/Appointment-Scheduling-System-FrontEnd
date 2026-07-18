@@ -15,8 +15,8 @@ export class Modal {
   private modalContent!: TemplateRef<Modal>;
 
   title = input<string>();
-  size = input<'sm' | 'lg' | 'xl'>('lg');
-
+  size = input<'sm' | 'md' | 'lg' | 'xl'>('md');
+  
   open() {
     this.modalRef = this.modalService.open(this.modalContent, { size: this.size() });
     return this.modalRef.result;

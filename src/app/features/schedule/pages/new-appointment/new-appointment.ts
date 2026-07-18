@@ -16,6 +16,9 @@ import { Time } from "@features/schedule/components/time/time";
 import { TimeModel } from '@features/schedule/components/time/models/time-model';
 import { Appointment } from '@models/appointment';
 import { AppointmentModal } from "@features/schedule/components/appointment-modal/appointment-modal";
+import { Toast } from "@components/toast/toast";
+import { ToastService } from '@services/toast-service';
+import { AppointmentService } from '@services/appointment-service';
 
 @Component({
   selector: 'app-new-appointment',
@@ -28,6 +31,8 @@ export class NewAppointment {
   appointmentTypeService = inject(AppointmentTypeService);
   clientService = inject(ClientService);
   professionalService = inject(ProfessionalService);
+  appointmentService = inject(AppointmentService);
+  toastService = inject(ToastService);
 
   @ViewChild(FormNewAppointment)
   formNewAppointment?: FormNewAppointment;
@@ -185,7 +190,14 @@ export class NewAppointment {
       this.currentAppointment.set(this.createAppointmentObject());
       this.appointmentModal?.open().then(confirm => {
         if (confirm) {
-          this.resetForm();
+          this.appointmentService.save(this.currentAppointment()).subscribe({
+            next: () => {
+              this.toastService.success("Appointment scheduled successfully!");
+              this.resetForm();
+            }, error: () => {
+              this.toastService.error("Failed to schedule appointment. Try again.");
+            }
+          })
         }
       }).catch(() => { });
     }
