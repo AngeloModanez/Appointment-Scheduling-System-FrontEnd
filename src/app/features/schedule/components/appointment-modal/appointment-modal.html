@@ -3,7 +3,7 @@
     <p class="text-muted small fw-semibold text-uppercase mb-3">Patient Info</p>
     <div class="d-flex justify-content-between py-1 border-bottom">
       <span class="text-muted small">Client</span>
-      <span class="fw-semibold small">{{ appointment().client.name }}</span>
+      <span class="fw-semibold small">{{ appointment().client?.name }}</span>
     </div>
     <div class="d-flex justify-content-between py-1 border-bottom">
       <span class="text-muted small">Date</span>
@@ -19,15 +19,15 @@
     <p class="text-muted small fw-semibold text-uppercase mb-3">Appointment Details</p>
     <div class="d-flex justify-content-between py-1 border-bottom">
       <span class="text-muted small">Area</span>
-      <span class="fw-semibold small">{{ appointment().area.name }}</span>
+      <span class="fw-semibold small">{{ appointment().area?.name }}</span>
     </div>
     <div class="d-flex justify-content-between py-1 border-bottom">
       <span class="text-muted small">Professional</span>
-      <span class="fw-semibold small">{{ appointment().professional.name }}</span>
+      <span class="fw-semibold small">{{ appointment().professional?.name }}</span>
     </div>
     <div class="d-flex justify-content-between pt-1">
       <span class="text-muted small">Type</span>
-      <span class="fw-semibold small">{{ appointment().appointmentType.type }}</span>
+      <span class="fw-semibold small">{{ appointment().appointmentType?.type }}</span>
     </div>
   </div>
 
