@@ -1,1 +1,21 @@
-<p>schedule-appointment-page works!</p>
+<app-page-layout title="Schedule an Appointment">
+  <div class="row mt-5">
+    <div class="col-6">
+      <app-form-new-appointment [areas]="areas()" [appointmentTypes]="appointmentTypes()"
+        [professionals]="professionalsByArea()" [searchClients]="searchClients" (selectedArea)="onSelectedArea($event)"
+        (selectedProfessional)="onSelectedProfessional($event)" />
+    </div>
+    <div class="col-6">
+      <div class="container">
+        <app-calendar [availableDays]="availableDays()" [calendarDate]="calendarDate()"
+          (changedDate)="onSelectedDate($event)" (changedMonth)="onChangedMonth($event)" [error]="calendarError()" />
+      </div>
+      <app-time [availableTimes]="availableTimes()" (selectedTimeEvent)="onSelectedTime($event)"
+        [error]="timeError()" />
+    </div>
+  </div>
+  <app-button btnClass="btn btn-primary w-100 mt-1" buttonName="Schedule" (click)="createAppointment()"
+    [disable]="(formNewAppointment?.appointmentForm?.invalid ?? true) || !appointmentDate() || !appointmentTime()" />
+
+  <app-appointment-modal #appointmentModal [appointment]="currentAppointment()" />
+</app-page-layout>
