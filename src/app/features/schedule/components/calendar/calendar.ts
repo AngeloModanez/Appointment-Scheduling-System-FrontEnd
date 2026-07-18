@@ -12,6 +12,7 @@ import { ButtonCalendar } from "@components/button-calendar/button-calendar";
 export class Calendar {
   calendarDate = input<Date>(new Date());
   availableDays = input<number[]>([]);
+  error = input<string>("");
 
   changedDate = output<Date>();
   changedMonth = output<Date>();

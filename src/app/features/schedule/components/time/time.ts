@@ -32,6 +32,7 @@ export class Time {
   selectedTimeEvent = output<TimeModel>();
   selectedTime = signal<TimeModel | null>(null);
   times = signal<TimeModel[]>([]);
+  error = input<string>("");
 
   constructor() {
     this.times.set(this.defaultTimes);

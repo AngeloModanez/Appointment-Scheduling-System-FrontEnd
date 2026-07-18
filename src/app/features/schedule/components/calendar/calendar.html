@@ -24,4 +24,10 @@
     }
   </div>
   }
+
+  @if (error()) {
+  <div class="text-start text-danger mt-1">
+    <small><sup>*</sup>{{error()}}</small>
+  </div>
+  }
 </div>
