@@ -56,17 +56,7 @@ export class NewAppointment {
   calendarError = signal('');
   timeError = signal('');
 
-  currentAppointment = signal<Appointment>({
-    client: {} as Client,
-    area: {} as Area,
-    professional: {} as Professional,
-    appointmentType: {} as AppointmentType,
-    date: new Date(),
-    startTime: '',
-    endTime: '',
-    comments: '',
-    id: 0
-  });
+  currentAppointment = signal<Appointment>({} as Appointment);
 
   constructor() {
     this.loadAreas();
@@ -170,16 +160,11 @@ export class NewAppointment {
     } as Appointment;
   }
 
-  resetForm() {
-    this.formNewAppointment?.appointmentForm.reset();
-    this.formNewAppointment?.afProfessional.disable();
-    this.selectedProfessional = {} as Professional;
-    this.professionalsByArea.set([]);
-    this.availableDays.set([]);
+  clean() {
+    this.formNewAppointment?.cleanForm();
     this.availableTimes.set([]);
-    this.appointmentDate.set(null);
-    this.appointmentTime.set(null);
-    this.calendarDate.set(new Date());
+    this.availableDays.set([]);
+    this.currentAppointment.set({} as Appointment);
   }
 
   createAppointment() {
@@ -193,7 +178,7 @@ export class NewAppointment {
           this.appointmentService.save(this.currentAppointment()).subscribe({
             next: () => {
               this.toastService.success("Appointment scheduled successfully!");
-              this.resetForm();
+              this.clean();
             }, error: () => {
               this.toastService.error("Failed to schedule appointment. Try again.");
             }

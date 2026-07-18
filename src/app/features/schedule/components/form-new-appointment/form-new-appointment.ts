@@ -80,6 +80,10 @@ export class FormNewAppointment {
 
   formatClient = (client: Client) => client.name;
 
+  cleanForm() {
+    this.appointmentForm.reset();
+  }
+
   get selectedClient(): Client | null {
     return this.appointmentForm.controls["client"].value;
   }
