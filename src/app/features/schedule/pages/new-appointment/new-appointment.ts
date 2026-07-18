@@ -12,10 +12,17 @@ import { debounceTime, distinctUntilChanged, filter, Observable, switchMap } fro
 import { Client } from '@models/client';
 import { Calendar } from "@features/schedule/components/calendar/calendar";
 import { ProfessionalService } from '@services/professional-service';
+import { Time } from "@features/schedule/components/time/time";
+import { TimeModel } from '@features/schedule/components/time/models/time-model';
+import { Appointment } from '@models/appointment';
+import { AppointmentModal } from "@features/schedule/components/appointment-modal/appointment-modal";
+import { Toast } from "@components/toast/toast";
+import { ToastService } from '@services/toast-service';
+import { AppointmentService } from '@services/appointment-service';
 
 @Component({
   selector: 'app-new-appointment',
-  imports: [PageLayout, FormNewAppointment, Button, Calendar],
+  imports: [PageLayout, FormNewAppointment, Button, Calendar, Time, AppointmentModal],
   templateUrl: './new-appointment.html',
   styles: ``,
 })
@@ -24,17 +31,32 @@ export class NewAppointment {
   appointmentTypeService = inject(AppointmentTypeService);
   clientService = inject(ClientService);
   professionalService = inject(ProfessionalService);
+  appointmentService = inject(AppointmentService);
+  toastService = inject(ToastService);
 
   @ViewChild(FormNewAppointment)
   formNewAppointment?: FormNewAppointment;
 
+  @ViewChild(AppointmentModal)
+  appointmentModal?: AppointmentModal;
+
   areas = signal<Area[]>([]);
   appointmentTypes = signal<AppointmentType[]>([]);
   professionalsByArea = signal<Professional[]>([]);
+
   availableDays = signal<number[]>([]);
   calendarDate = signal<Date>(new Date());
   appointmentDate = signal<Date | null>(null);
+
+  availableTimes = signal<TimeModel[]>([]);
+  appointmentTime = signal<TimeModel | null>(null);
+
   selectedProfessional: Professional = {} as Professional;
+
+  calendarError = signal('');
+  timeError = signal('');
+
+  currentAppointment = signal<Appointment>({} as Appointment);
 
   constructor() {
     this.loadAreas();
@@ -62,21 +84,52 @@ export class NewAppointment {
     })
   }
 
-  onSelectedProfessional(professional: Professional) {
-    this.selectedProfessional = professional;
-    this.calendarDate.set(new Date());
+  loadAvailableDays() {
     this.professionalService.getAvailableDays(this.selectedProfessional, this.calendarDate()).subscribe({
       next: days => this.availableDays.set(days)
     });
   }
 
-  onSelectedDate(date: Date) {
+  loadAvailableTimes() {
+    const date = this.appointmentDate();
+    if (!date || !this.selectedProfessional?.id) return;
+    this.professionalService.getAvailableTimes(this.selectedProfessional, date).subscribe({
+      next: times => this.availableTimes.set(times)
+    });
+  }
+
+  onSelectedProfessional(professional: Professional) {
+    this.selectedProfessional = professional;
+    this.calendarDate.set(new Date());
+    this.loadAvailableDays();
+    this.availableTimes.set([]);
+    this.appointmentDate.set(null);
+  }
+
+  onSelectedTime(time: TimeModel) {
+    this.timeError.set('');
+    this.appointmentTime.set(time);
+  }
+
+  onChangedMonth(date: Date) {
     this.calendarDate.set(date);
+    this.availableTimes.set([]);
+    this.appointmentDate.set(null);
+    this.appointmentTime.set(null);
+    this.loadAvailableDays();
+  }
+
+  onSelectedDate(date: Date) {
+    this.calendarError.set('');
     this.appointmentDate.set(date);
+    this.appointmentTime.set(null);
+    this.availableTimes.set([]);
+    this.loadAvailableTimes();
   }
 
   onSelectedArea(area: Area) {
     this.availableDays.set([]);
+    this.availableTimes.set([]);
     this.areaService.getActiveProfessionalsFromArea(area).subscribe({
       next: professionals => {
         this.professionalsByArea.set(professionals);
@@ -84,15 +137,54 @@ export class NewAppointment {
     });
   }
 
+  private checkDateAndTimeErrors(): void {
+    if (!this.appointmentDate()) this.calendarError.set("Please select an available date");
+    if (!this.appointmentTime()) this.timeError.set("Please select an available time slot");
+  }
+
+  private isAppointmentValid(): boolean {
+    return !!(this.formNewAppointment?.appointmentForm.valid && this.calendarDate() && this.appointmentTime())
+  }
+
+
+  private createAppointmentObject(): Appointment {
+    const form = this.formNewAppointment!.appointmentForm.value;
+    return {
+      ...form,
+      area: this.areas().find(a => a.id == form.area),
+      professional: this.selectedProfessional,
+      appointmentType: this.appointmentTypes().find(at => at.id == form.appointmentType),
+      date: this.appointmentDate()!,
+      startTime: this.appointmentTime()!.startTime,
+      endTime: this.appointmentTime()!.endTime,
+    } as Appointment;
+  }
+
+  clean() {
+    this.formNewAppointment?.cleanForm();
+    this.availableTimes.set([]);
+    this.availableDays.set([]);
+    this.currentAppointment.set({} as Appointment);
+  }
+
   createAppointment() {
-    if (this.formNewAppointment) {
-      this.formNewAppointment.appointmentForm.markAllAsTouched();
-      if (this.formNewAppointment.appointmentForm.valid && this.appointmentDate()) {
-        console.log({
-          ...this.formNewAppointment.appointmentForm.value,
-          date: this.appointmentDate()
-        });
-      }
+    this.formNewAppointment?.appointmentForm.markAllAsTouched();
+    this.checkDateAndTimeErrors();
+
+    if (this.isAppointmentValid()) {
+      this.currentAppointment.set(this.createAppointmentObject());
+      this.appointmentModal?.open().then(confirm => {
+        if (confirm) {
+          this.appointmentService.save(this.currentAppointment()).subscribe({
+            next: () => {
+              this.toastService.success("Appointment scheduled successfully!");
+              this.clean();
+            }, error: () => {
+              this.toastService.error("Failed to schedule appointment. Try again.");
+            }
+          })
+        }
+      }).catch(() => { });
     }
   }
 }
