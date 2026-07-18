@@ -16,4 +16,8 @@
   </div>
   <app-button btnClass="btn btn-primary w-100 mt-1" buttonName="Schedule" (click)="createAppointment()"
     [disable]="(formNewAppointment?.appointmentForm?.invalid ?? true) || !appointmentDate() || !appointmentTime()" />
+
+  @if (currentAppointment().client) {
+  <app-appointment-modal #appointmentModal [appointment]="currentAppointment()" />
+  }
 </app-page-layout>

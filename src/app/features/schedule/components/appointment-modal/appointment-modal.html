@@ -1,39 +1,46 @@
 <app-modal title="Confirm Appointment?">
-  <div class="alert alert-secondary">
-    <div class="row mb-1">
-      <div class="col-4 text-muted">Client:</div>
-      <div class="col-8 fw-bold">{{ appointment().client.name }}</div>
+  <div class="card border-0 bg-light rounded-3 mb-3 p-3">
+    <p class="text-muted small fw-semibold text-uppercase mb-3">Patient Info</p>
+    <div class="d-flex justify-content-between py-1 border-bottom">
+      <span class="text-muted small">Client</span>
+      <span class="fw-semibold small">{{ appointment().client.name }}</span>
     </div>
-    <div class="row mb-1">
-      <div class="col-4 text-muted">Date:</div>
-      <div class="col-8 fw-bold">{{ appointment().date | date: 'dd/MM/yyyy' }}</div>
+    <div class="d-flex justify-content-between py-1 border-bottom">
+      <span class="text-muted small">Date</span>
+      <span class="fw-semibold small">{{ appointment().date | date: 'dd/MM/yyyy' }}</span>
     </div>
-    <div class="row">
-      <div class="col-4 text-muted">Time:</div>
-      <div class="col-8 fw-bold">{{ appointment().startTime }}</div>
-    </div>
-  </div>
-  <div class="alert alert-secondary">
-    <div class="row mb-1">
-      <div class="col-4 text-muted">Area:</div>
-      <div class="col-8 fw-bold">{{ appointment().area.name }}</div>
-    </div>
-    <div class="row mb-1">
-      <div class="col-4 text-muted">Professional:</div>
-      <div class="col-8 fw-bold">{{ appointment().professional.name }}</div>
-    </div>
-    <div class="row mb-1">
-      <div class="col-4 text-muted">Appointment Type:</div>
-      <div class="col-8 fw-bold">{{ appointment().appointmentType.type }}</div>
-    </div>
-    <div class="row">
-      <div class="col-4 text-muted">Notes:</div>
-      <div class="col-8 fw-bold">{{ appointment().comments || '-' }}</div>
+    <div class="d-flex justify-content-between pt-1">
+      <span class="text-muted small">Time</span>
+      <span class="fw-semibold small">{{ appointment().startTime }}</span>
     </div>
   </div>
+
+  <div class="card border-0 bg-light rounded-3 mb-3 p-3">
+    <p class="text-muted small fw-semibold text-uppercase mb-3">Appointment Details</p>
+    <div class="d-flex justify-content-between py-1 border-bottom">
+      <span class="text-muted small">Area</span>
+      <span class="fw-semibold small">{{ appointment().area.name }}</span>
+    </div>
+    <div class="d-flex justify-content-between py-1 border-bottom">
+      <span class="text-muted small">Professional</span>
+      <span class="fw-semibold small">{{ appointment().professional.name }}</span>
+    </div>
+    <div class="d-flex justify-content-between pt-1">
+      <span class="text-muted small">Type</span>
+      <span class="fw-semibold small">{{ appointment().appointmentType.type }}</span>
+    </div>
+  </div>
+
+  @if (appointment().comments) {
+  <div class="card border-0 bg-light rounded-3 p-3">
+    <p class="text-muted small fw-semibold text-uppercase mb-2">Notes</p>
+    <p class="small mb-0 text-wrap">{{ appointment().comments }}</p>
+  </div>
+  }
 
   <ng-container modal-footer>
     <app-button btnClass="btn btn-outline-secondary" buttonName="Back" (click)="modal.close(false)" />
     <app-button buttonName="Confirm" (click)="modal.close(true)" />
   </ng-container>
+
 </app-modal>

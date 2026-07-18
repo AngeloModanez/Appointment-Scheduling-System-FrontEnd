@@ -47,7 +47,7 @@ export class FormNewAppointment {
       null,
       [Validators.required, this.clientValidator]
     ),
-    comment: this.formBuilder.control<string>('', { nonNullable: true })
+    comments: this.formBuilder.control<string>('', { nonNullable: true })
   });
 
   areaOptions = computed<SelectOption[]>(() =>

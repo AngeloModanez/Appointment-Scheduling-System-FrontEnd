@@ -15,9 +15,10 @@ export class Modal {
   private modalContent!: TemplateRef<Modal>;
 
   title = input<string>();
+  size = input<'sm' | 'lg' | 'xl'>('lg');
 
   open() {
-    this.modalRef = this.modalService.open(this.modalContent, {});
+    this.modalRef = this.modalService.open(this.modalContent, { size: this.size() });
     return this.modalRef.result;
   }
 

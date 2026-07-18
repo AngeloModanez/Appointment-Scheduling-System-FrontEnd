@@ -15,10 +15,11 @@ import { ProfessionalService } from '@services/professional-service';
 import { Time } from "@features/schedule/components/time/time";
 import { TimeModel } from '@features/schedule/components/time/models/time-model';
 import { Appointment } from '@models/appointment';
+import { AppointmentModal } from "@features/schedule/components/appointment-modal/appointment-modal";
 
 @Component({
   selector: 'app-new-appointment',
-  imports: [PageLayout, FormNewAppointment, Button, Calendar, Time],
+  imports: [PageLayout, FormNewAppointment, Button, Calendar, Time, AppointmentModal],
   templateUrl: './new-appointment.html',
   styles: ``,
 })
@@ -30,6 +31,9 @@ export class NewAppointment {
 
   @ViewChild(FormNewAppointment)
   formNewAppointment?: FormNewAppointment;
+
+  @ViewChild(AppointmentModal)
+  appointmentModal?: AppointmentModal;
 
   areas = signal<Area[]>([]);
   appointmentTypes = signal<AppointmentType[]>([]);
@@ -46,6 +50,18 @@ export class NewAppointment {
 
   calendarError = signal('');
   timeError = signal('');
+
+  currentAppointment = signal<Appointment>({
+    client: {} as Client,
+    area: {} as Area,
+    professional: {} as Professional,
+    appointmentType: {} as AppointmentType,
+    date: new Date(),
+    startTime: '',
+    endTime: '',
+    comments: '',
+    id: 0
+  });
 
   constructor() {
     this.loadAreas();
@@ -166,9 +182,12 @@ export class NewAppointment {
     this.checkDateAndTimeErrors();
 
     if (this.isAppointmentValid()) {
-      let appointment = this.createAppointmentObject();
-      console.log(appointment)
-      this.resetForm();
+      this.currentAppointment.set(this.createAppointmentObject());
+      this.appointmentModal?.open().then(confirm => {
+        if (confirm) {
+          this.resetForm();
+        }
+      }).catch(() => { });
     }
   }
 }
