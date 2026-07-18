@@ -44,6 +44,9 @@ export class NewAppointment {
 
   selectedProfessional: Professional = {} as Professional;
 
+  calendarError = signal('');
+  timeError = signal('');
+
   constructor() {
     this.loadAreas();
     this.loadAppointmentTypes();
@@ -93,6 +96,7 @@ export class NewAppointment {
   }
 
   onSelectedTime(time: TimeModel) {
+    this.timeError.set('');
     this.appointmentTime.set(time);
   }
 
@@ -105,6 +109,7 @@ export class NewAppointment {
   }
 
   onSelectedDate(date: Date) {
+    this.calendarError.set('');
     this.appointmentDate.set(date);
     this.appointmentTime.set(null);
     this.availableTimes.set([]);
@@ -121,8 +126,32 @@ export class NewAppointment {
     });
   }
 
+  private checkDateAndTimeErrors(): void {
+    if (!this.appointmentDate()) this.calendarError.set("Please select an available date");
+    if (!this.appointmentTime()) this.timeError.set("Please select an available time slot");
+  }
+
+  private isAppointmentValid(): boolean {
+    return !!(this.formNewAppointment?.appointmentForm.valid && this.calendarDate() && this.appointmentTime())
+  }
+
+
+  private createAppointmentObject(): Appointment {
+    const form = this.formNewAppointment!.appointmentForm.value;
+    return {
+      ...form,
+      area: this.areas().find(a => a.id == form.area),
+      professional: this.selectedProfessional,
+      appointmentType: this.appointmentTypes().find(at => at.id == form.appointmentType),
+      date: this.appointmentDate()!,
+      startTime: this.appointmentTime()!.startTime,
+      endTime: this.appointmentTime()!.endTime,
+    } as Appointment;
+  }
+
   resetForm() {
     this.formNewAppointment?.appointmentForm.reset();
+    this.formNewAppointment?.afProfessional.disable();
     this.selectedProfessional = {} as Professional;
     this.professionalsByArea.set([]);
     this.availableDays.set([]);
@@ -133,22 +162,13 @@ export class NewAppointment {
   }
 
   createAppointment() {
-    if (!this.formNewAppointment?.appointmentForm.valid || !this.appointmentDate() || !this.appointmentTime()) return;
-    this.formNewAppointment.appointmentForm.markAllAsTouched();
+    this.formNewAppointment?.appointmentForm.markAllAsTouched();
+    this.checkDateAndTimeErrors();
 
-    const form = this.formNewAppointment.appointmentForm.value;
-    const appointment = {
-      ...form,
-      area: this.areas().find(a => a.id == form.area),
-      professional: this.selectedProfessional,
-      appointmentType: this.appointmentTypes().find(at => at.id == form.appointmentType),
-      date: this.appointmentDate()!,
-      startTime: this.appointmentTime()!.startTime,
-      endTime: this.appointmentTime()!.endTime,
-    } as Appointment;
-
-    console.log(JSON.stringify(appointment, null, 2));
-    alert(JSON.stringify(appointment, null, 2));
-    this.resetForm();
+    if (this.isAppointmentValid()) {
+      let appointment = this.createAppointmentObject();
+      console.log(appointment)
+      this.resetForm();
+    }
   }
 }

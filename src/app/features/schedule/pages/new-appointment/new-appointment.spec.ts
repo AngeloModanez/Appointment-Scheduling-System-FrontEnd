@@ -10,7 +10,7 @@ describe('NewAppointment', () => {
     await TestBed.configureTestingModule({
       imports: [NewAppointment]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(NewAppointment);
     component = fixture.componentInstance;
