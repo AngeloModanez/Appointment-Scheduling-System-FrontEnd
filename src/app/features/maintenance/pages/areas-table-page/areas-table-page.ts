@@ -26,17 +26,22 @@ export class AreasTablePage {
     totalElements: 0
   })
 
+  filter = signal('');
   page = signal(1);
   sort = signal('id');
 
   constructor() {
     effect(() => {
-      this.loadAreas();
+      const filter = this.filter();
+      const page = this.page();
+      const sort = this.sort();
+
+      this.loadAreas(filter, page, sort);
     });
   }
 
-  loadAreas() {
-    this.areaService.getAreasPage().subscribe({
+  loadAreas(filter: string, page: number, sort: string) {
+    this.areaService.getAreasPage(filter, page, sort).subscribe({
       next: response => {
         this.areaPage.set({
           content: response.body ?? [],
@@ -44,5 +49,10 @@ export class AreasTablePage {
         })
       }
     })
+  }
+
+  filterAreas(value: string) {
+    this.filter.set(value);
+    this.page.set(1);
   }
 }

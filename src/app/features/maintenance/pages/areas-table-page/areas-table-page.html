@@ -1,7 +1,7 @@
 <app-page-layout title="Areas Registration">
   <app-button layout-button buttonName="New Area"></app-button>
 
-  <app-search-input placeholder="Search areas"></app-search-input>
+  <app-search-input placeholder="Search areas" (search)="filterAreas($event)"></app-search-input>
 
   @if (areaPage().content.length > 0) {
   <app-table>

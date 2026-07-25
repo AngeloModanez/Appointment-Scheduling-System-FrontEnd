@@ -16,8 +16,9 @@ export class AreaService {
     return this.http.get<Area[]>(this.baseUrl);
   }
 
-  getAreasPage(): Observable<HttpResponse<Area[]>> {
-    return this.http.get<Area[]>(this.baseUrl, { observe: 'response' });
+  getAreasPage(nameFilter: string, page: number, sort: string): Observable<HttpResponse<Area[]>> {
+    let url = `${this.baseUrl}?name_like=${nameFilter}&_page=${page}&_limit=10&_sort=${sort}`
+    return this.http.get<Area[]>(url, { observe: 'response' });
   }
 
   getProfessionalsFromArea(area: Area): Observable<Professional[]> {
