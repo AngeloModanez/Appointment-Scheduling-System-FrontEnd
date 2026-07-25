@@ -25,7 +25,7 @@
         <th scope="row" class="text-muted">{{ area.id }}</th>
         <td class="fw-semibold">{{ area.name }}</td>
         <td>
-          <button class="btn btn-sm">
+          <button class="btn btn-sm" (click)="deleteArea(area, modalConfirm)">
             <i class="bi bi-trash-fill fs-5"></i>
           </button>
         </td>
@@ -41,3 +41,13 @@
   <app-card icon="bi-person-x" title="No areas found" message="Try a different search or add a new area"></app-card>
   }
 </app-page-layout>
+
+<app-modal #modalConfirm title="Delete Area">
+  @if (selectedArea) {
+  <p>Are you sure you want to delete <span class="fw-bold">{{ selectedArea.name }}</span>?</p>
+  }
+  <ng-container modal-footer>
+    <app-button btnClass="btn btn-outline-secondary" buttonName="Cancel" (click)="modalConfirm.close(false)" />
+    <app-button buttonName="Delete" (click)="modalConfirm.close(true)" />
+  </ng-container>
+</app-modal>

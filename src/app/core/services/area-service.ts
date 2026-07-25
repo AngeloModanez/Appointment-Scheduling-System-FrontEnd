@@ -30,4 +30,9 @@ export class AreaService {
     let url = `${this.baseUrl}/${area.id}/professionals?active=true`;
     return this.http.get<Professional[]>(url);
   }
+
+  delete(area: Area): Observable<void> {
+    let url = `${this.baseUrl}/${area.id}`;
+    return this.http.delete<void>(url);
+  }
 }

@@ -9,15 +9,18 @@ import { Table } from "@components/table/table";
 import { SortButton } from "@components/sort-button/sort-button";
 import { NgbPagination } from "@ng-bootstrap/ng-bootstrap";
 import { Card } from "@components/card/card";
+import { Modal } from "@components/modal/modal";
+import { ToastService } from '@services/toast-service';
 
 @Component({
   selector: 'app-areas-table-page',
-  imports: [PageLayout, Button, SearchInput, Table, SortButton, NgbPagination, Card],
+  imports: [PageLayout, Button, SearchInput, Table, SortButton, NgbPagination, Card, Modal],
   templateUrl: './areas-table-page.html',
   styles: ``,
 })
 export class AreasTablePage {
   private areaService = inject(AreaService);
+  private toastService = inject(ToastService);
 
   form: any;
 
@@ -29,6 +32,8 @@ export class AreasTablePage {
   filter = signal('');
   page = signal(1);
   sort = signal('id');
+
+  selectedArea!: Area;
 
   constructor() {
     effect(() => {
@@ -49,6 +54,21 @@ export class AreasTablePage {
         })
       }
     })
+  }
+
+  deleteArea(area: Area, modalConfirm: Modal) {
+    this.selectedArea = area;
+    modalConfirm.open().then(confirm => {
+      if (confirm) {
+        this.areaService.delete(area).subscribe({
+          next: () => {
+            this.toastService.success(`${area.name} deleted successfully!`);
+            this.loadAreas(this.filter(), this.page(), this.sort());
+          },
+          error: () => this.toastService.error("Failed to delete area. Try again.")
+        });
+      }
+    }).catch(() => { });
   }
 
   filterAreas(value: string) {
