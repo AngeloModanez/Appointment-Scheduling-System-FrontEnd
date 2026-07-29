@@ -1,5 +1,5 @@
 <app-page-layout title="Areas Registration">
-  <app-button layout-button buttonName="New Area"></app-button>
+  <app-button layout-button buttonName="New Area" [routerLink]="form"></app-button>
 
   <app-search-input placeholder="Search areas" (search)="filterAreas($event)"></app-search-input>
 

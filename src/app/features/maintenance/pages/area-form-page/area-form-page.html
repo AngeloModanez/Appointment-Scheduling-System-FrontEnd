@@ -1,0 +1,11 @@
+<app-page-layout title="Area Form">
+  <form [formGroup]="areaForm" (ngSubmit)="save()">
+    <app-form-input type="text" title="Area Name" id="areaName" placeholder="Cardiology" [control]="afName"
+      errorMessage="Area name must be at least 3 characters" />
+
+    <div class="d-flex justify-content-end gap-2">
+      <app-button btnClass="btn btn-outline-secondary" buttonName="Cancel" (click)="cancel()" />
+      <app-button buttonName="Confirm" (click)="save()" />
+    </div>
+  </form>
+</app-page-layout>

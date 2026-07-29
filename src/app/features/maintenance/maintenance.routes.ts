@@ -5,11 +5,16 @@ import { ClientsTablePage } from "./pages/clients-table-page/clients-table-page"
 import { UserPage } from "./pages/user-page/user-page";
 import { ClientFormPage } from "./pages/client-form-page/client-form-page";
 import { AreasTablePage } from "./pages/areas-table-page/areas-table-page";
+import { AreaFormPage } from "./pages/area-form-page/area-form-page";
 
 export const MAINTENANCE_ROUTES: Routes = [
   {
     path: 'areas-table',
     component: AreasTablePage
+  },
+  {
+    path: 'area-form',
+    component: AreaFormPage
   },
   {
     path: 'professionals',

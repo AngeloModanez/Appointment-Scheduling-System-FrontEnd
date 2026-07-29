@@ -22,7 +22,7 @@ export class AreasTablePage {
   private areaService = inject(AreaService);
   private toastService = inject(ToastService);
 
-  form: any;
+  form = '/management/area-form';
 
   areaPage = signal<Page<Area>>({
     content: [],
