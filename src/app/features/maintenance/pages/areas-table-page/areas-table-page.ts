@@ -11,10 +11,11 @@ import { NgbPagination } from "@ng-bootstrap/ng-bootstrap";
 import { Card } from "@components/card/card";
 import { Modal } from "@components/modal/modal";
 import { ToastService } from '@services/toast-service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-areas-table-page',
-  imports: [PageLayout, Button, SearchInput, Table, SortButton, NgbPagination, Card, Modal],
+  imports: [PageLayout, Button, SearchInput, Table, SortButton, NgbPagination, Card, Modal, RouterLink],
   templateUrl: './areas-table-page.html',
   styles: ``,
 })
