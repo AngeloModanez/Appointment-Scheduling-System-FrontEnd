@@ -6,8 +6,8 @@
 
     <div class="row">
       <div class="col-6">
-        <app-form-input type="text" title="Phone Number" id="phoneNumber" placeholder="(11) 99999-9999"
-          [control]="cfPhone" />
+        <app-form-input type="tel" title="Phone Number" id="phoneNumber" placeholder="+1 202 555 0143"
+          [control]="cfPhone" errorMessage="Please enter a valid phone number" />
       </div>
       <div class="col-6">
         <app-form-input type="date" title="Date of Birth" id="dateOfBirth" [control]="cfDateOfBirth" />

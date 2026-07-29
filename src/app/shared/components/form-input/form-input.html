@@ -14,12 +14,8 @@
   <div class="text-danger mt-1">
     @if (control().errors?.['required']) {
     <small><sup>*</sup>{{ title() }} is required</small>
-    } @else if (control().errors?.['minlength']) {
-    <small><sup>*</sup>{{ errorMessage() || 'Minimum length not reached' }}</small>
-    } @else if (control().errors?.['pattern']) {
-    <small><sup>*</sup>{{ errorMessage() || 'Invalid format' }}</small>
-    } @else if (errorMessage()) {
-    <small><sup>*</sup>{{ errorMessage() }}</small>
+    } @else {
+    <small><sup>*</sup>{{ errorMessage() || 'Invalid value' }}</small>
     }
   </div>
   }

@@ -7,6 +7,7 @@ import { ClientService } from '@services/client-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '@models/client';
 import { ToastService } from '@services/toast-service';
+import { internationalPhoneValidator } from 'src/app/shared/validators/phone-validator';
 
 @Component({
   selector: 'app-client-form-page',
@@ -25,7 +26,7 @@ export class ClientFormPage {
   clientForm = this.formBuilder.group({
     id: [0],
     name: ['', [Validators.required, Validators.minLength(3)]],
-    phone: ['', [Validators.required]],
+    phone: ['', [Validators.required, internationalPhoneValidator()]],
     dateOfBirth: ['', Validators.required],
   });
 
