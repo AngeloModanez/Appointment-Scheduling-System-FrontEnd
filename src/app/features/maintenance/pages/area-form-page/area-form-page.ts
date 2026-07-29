@@ -24,7 +24,7 @@ export class AreaFormPage {
 
   areaForm = this.formBuilder.group({
     id: [0],
-    name: ['', Validators.required, Validators.minLength(3)]
+    name: ['', [Validators.required, Validators.minLength(3)]]
   });
 
   isEditing: boolean = false;

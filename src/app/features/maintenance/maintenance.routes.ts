@@ -17,6 +17,10 @@ export const MAINTENANCE_ROUTES: Routes = [
     component: AreaFormPage
   },
   {
+    path: 'area-form/:id',
+    component: AreaFormPage
+  },
+  {
     path: 'professionals',
     component: ProfessionalPage
   },
