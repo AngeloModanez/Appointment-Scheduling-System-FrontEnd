@@ -1,6 +1,8 @@
-<app-page-layout title="Client Form">
+<app-page-layout title="Client Registration">
   <form [formGroup]="clientForm" (ngSubmit)="save()">
-    <app-form-input type="text" title="Client Name" id="clientName" placeholder="João Silva" [control]="cfName" />
+
+    <app-form-input type="text" title="Full Name" id="clientName" placeholder="João Silva" [control]="cfName"
+      errorMessage="Name must be at least 3 characters" />
 
     <div class="row">
       <div class="col-6">
@@ -11,9 +13,11 @@
         <app-form-input type="date" title="Date of Birth" id="dateOfBirth" [control]="cfDateOfBirth" />
       </div>
     </div>
-    <div class="d-flex justify-content-end gap-2">
+
+    <div class="d-flex justify-content-end gap-2 mt-2">
       <app-button btnClass="btn btn-outline-secondary" buttonName="Cancel" (click)="cancel()" />
-      <app-button buttonName="Confirm" [disable]="clientForm.invalid" (click)="save()" />
+      <app-button buttonName="Save Client" (click)="save()" />
     </div>
+
   </form>
 </app-page-layout>

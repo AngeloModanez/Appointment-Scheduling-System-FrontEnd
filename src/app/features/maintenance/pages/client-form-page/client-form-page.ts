@@ -24,8 +24,8 @@ export class ClientFormPage {
 
   clientForm = this.formBuilder.group({
     id: [0],
-    name: ['', Validators.required],
-    phone: ['', Validators.required],
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    phone: ['', [Validators.required]],
     dateOfBirth: ['', Validators.required],
   });
 
