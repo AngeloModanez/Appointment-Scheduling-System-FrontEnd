@@ -1,11 +1,12 @@
 import { Routes } from "@angular/router";
 import { ProfessionalPage } from "./pages/professional-page/professional-page";
-import { AppointmentTypePage } from "./pages/appointment-type-page/appointment-type-page";
 import { ClientsTablePage } from "./pages/clients-table-page/clients-table-page";
 import { UserPage } from "./pages/user-page/user-page";
 import { ClientFormPage } from "./pages/client-form-page/client-form-page";
 import { AreasTablePage } from "./pages/areas-table-page/areas-table-page";
 import { AreaFormPage } from "./pages/area-form-page/area-form-page";
+import { AppointmentTypesTablePage } from "./pages/appointment-types-table-page/appointment-types-table-page";
+import { AppointmentTypeFormPage } from "./pages/appointment-type-form-page/appointment-type-form-page";
 
 export const MAINTENANCE_ROUTES: Routes = [
   {
@@ -25,8 +26,16 @@ export const MAINTENANCE_ROUTES: Routes = [
     component: ProfessionalPage
   },
   {
-    path: 'types',
-    component: AppointmentTypePage
+    path: 'appointment-types-table',
+    component: AppointmentTypesTablePage
+  },
+  {
+    path: 'appointment-type-form',
+    component: AppointmentTypeFormPage
+  },
+  {
+    path: 'appointment-type-form/:id',
+    component: AppointmentTypeFormPage
   },
   {
     path: 'clients-table',
