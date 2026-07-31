@@ -37,7 +37,7 @@
         <td>{{ client.phone }}</td>
         <td>{{ client.dateOfBirth | date: 'dd/MM/yyyy' }}</td>
         <td>
-          <button class="btn btn-sm" (click)="deleteClient(client, modalConfirm); $event.stopPropagation()">
+          <button class="btn btn-sm btn-danger" (click)="deleteClient(client, modalConfirm); $event.stopPropagation()">
             <i class="bi bi-trash-fill fs-5"></i>
           </button>
         </td>
