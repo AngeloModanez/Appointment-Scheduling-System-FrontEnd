@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AppointmentType } from '@models/appointment-type';
 import { Observable } from 'rxjs';
@@ -14,4 +14,10 @@ export class AppointmentTypeService {
   getAppointmentTypes(): Observable<AppointmentType[]> {
     return this.http.get<AppointmentType[]>(this.baseUrl);
   }
+
+  getAppointmentTypePage(nameFilter: string, page: number, sort: string): Observable<HttpResponse<AppointmentType[]>> {
+    let url = `${this.baseUrl}?type_like=${nameFilter}&_page=${page}&_limit=10&_sort=${sort}`
+    return this.http.get<AppointmentType[]>(url, { observe: 'response' });
+  }
+
 }
