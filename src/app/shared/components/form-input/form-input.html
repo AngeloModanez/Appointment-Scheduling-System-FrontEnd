@@ -2,12 +2,21 @@
   <label [for]="id()" class="form-label fw-semibold text-dark mb-1">
     {{ title() }}
   </label>
+  @if (typeahead()) {
   <input [type]="type()" [id]="id()" [placeholder]="placeholder()" [formControl]="control()"
     class="form-control rounded-3 px-3" [class.is-invalid]="control().invalid && control().touched"
     [ngbTypeahead]="typeahead()!" [resultFormatter]="resultFormatter()!" [inputFormatter]="inputFormatter()!" />
+  } @else {
+  <input [type]="type()" [id]="id()" [placeholder]="placeholder()" [formControl]="control()"
+    class="form-control rounded-3 px-3" [class.is-invalid]="control().invalid && control().touched" />
+  }
   @if (control().invalid && control().touched) {
   <div class="text-danger mt-1">
-    <small><sup>*</sup>{{ errorMessage() || title() + ' is required' }}</small>
+    @if (control().errors?.['required']) {
+    <small><sup>*</sup>{{ title() }} is required</small>
+    } @else {
+    <small><sup>*</sup>{{ errorMessage() || 'Invalid value' }}</small>
+    }
   </div>
   }
   <ng-content></ng-content>

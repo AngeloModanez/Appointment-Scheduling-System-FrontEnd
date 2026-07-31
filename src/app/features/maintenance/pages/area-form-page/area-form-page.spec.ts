@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AreaPage } from './area-page';
+import { AreaFormPage } from './area-form-page';
 
-describe('AreaPage', () => {
-  let component: AreaPage;
-  let fixture: ComponentFixture<AreaPage>;
+describe('AreaFormPage', () => {
+  let component: AreaFormPage;
+  let fixture: ComponentFixture<AreaFormPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AreaPage]
+      imports: [AreaFormPage]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AreaPage);
+    fixture = TestBed.createComponent(AreaFormPage);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

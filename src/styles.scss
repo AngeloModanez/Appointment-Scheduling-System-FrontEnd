@@ -1,2 +1,42 @@
 @use 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.user-select-none {
+  user-select: none;
+}
+
+.custom-table {
+  border: 1px solid var(--bs-border-color);
+  border-radius: .75rem;
+  overflow: hidden;
+}
+
+.custom-table table {
+  margin-bottom: 0;
+}
+
+.custom-table td,
+.custom-table th {
+  padding: .5rem;
+}
+
+.table-row-hover {
+  cursor: pointer;
+  user-select: none;
+}
+
+.table-row-hover td,
+.table-row-hover th {
+  transition:
+    padding .15s ease;
+}
+
+.table-row-hover:hover td,
+.table-row-hover:hover th {
+  padding-top: .7rem;
+  padding-bottom: .7rem;
+}

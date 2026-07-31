@@ -26,7 +26,7 @@ export class FormNewAppointment {
   selectedArea = output<Area>();
   selectedProfessional = output<Professional>();
 
-  clientValidator(control: AbstractControl): ValidationErrors | null {
+  clientValidator = (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
     if (!value) return null;
     if (typeof value === 'object' && value.id) return null;

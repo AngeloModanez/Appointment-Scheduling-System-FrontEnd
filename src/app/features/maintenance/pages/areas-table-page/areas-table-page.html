@@ -1,0 +1,53 @@
+<app-page-layout title="Areas Registration">
+  <app-button layout-button buttonName="New Area" [routerLink]="form"></app-button>
+
+  <app-search-input placeholder="Search areas" (search)="filterAreas($event)"></app-search-input>
+
+  @if (areaPage().content.length > 0) {
+  <app-table>
+    <tr table-head>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'id'" (clicked)="sort.set('id')">
+          #
+        </app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'name'" (clicked)="sort.set('name')">
+          Area
+        </app-sort-button>
+      </th>
+      <th scope="col">Actions</th>
+    </tr>
+
+    <ng-container table-body>
+      @for (area of areaPage().content; track $index) {
+      <tr class="table-row-hover" [routerLink]="[form, area.id]">
+        <th scope="row" class="text-muted">{{ area.id }}</th>
+        <td class="fw-semibold">{{ area.name }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="deleteArea(area, modalConfirm); $event.stopPropagation()">
+            <i class="bi bi-trash-fill fs-5"></i>
+          </button>
+        </td>
+      </tr>
+      }
+    </ng-container>
+  </app-table>
+
+  <div class="d-flex justify-content-center mt-3">
+    <ngb-pagination [collectionSize]="areaPage().totalElements" [(page)]="page" />
+  </div>
+  } @else {
+  <app-card icon="bi-person-x" title="No areas found" message="Try a different search or add a new area"></app-card>
+  }
+</app-page-layout>
+
+<app-modal #modalConfirm title="Delete Area">
+  @if (selectedArea) {
+  <p>Are you sure you want to delete <span class="fw-bold">{{ selectedArea.name }}</span>?</p>
+  }
+  <ng-container modal-footer>
+    <app-button btnClass="btn btn-outline-secondary" buttonName="Cancel" (click)="modalConfirm.close(false)" />
+    <app-button buttonName="Delete" (click)="modalConfirm.close(true)" />
+  </ng-container>
+</app-modal>
