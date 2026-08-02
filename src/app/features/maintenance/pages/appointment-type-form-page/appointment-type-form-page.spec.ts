@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppointmentTypePage } from './appointment-type-page';
+import { AppointmentTypeFormPage } from './appointment-type-form-page';
 
-describe('AppointmentTypePage', () => {
-  let component: AppointmentTypePage;
-  let fixture: ComponentFixture<AppointmentTypePage>;
+describe('AppointmentTypeFormPage', () => {
+  let component: AppointmentTypeFormPage;
+  let fixture: ComponentFixture<AppointmentTypeFormPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppointmentTypePage]
+      imports: [AppointmentTypeFormPage]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AppointmentTypePage);
+    fixture = TestBed.createComponent(AppointmentTypeFormPage);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

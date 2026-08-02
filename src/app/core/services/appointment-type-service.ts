@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AppointmentType } from '@models/appointment-type';
 import { Observable } from 'rxjs';
@@ -13,5 +13,29 @@ export class AppointmentTypeService {
 
   getAppointmentTypes(): Observable<AppointmentType[]> {
     return this.http.get<AppointmentType[]>(this.baseUrl);
+  }
+
+  getAppointmentTypePage(typeFilter: string, page: number, sort: string): Observable<HttpResponse<AppointmentType[]>> {
+    let url = `${this.baseUrl}?type_like=${typeFilter}&_page=${page}&_limit=10&_sort=${sort}`
+    return this.http.get<AppointmentType[]>(url, { observe: 'response' });
+  }
+
+  getAppointmentTypeById(id: number): Observable<AppointmentType> {
+    let url = `${this.baseUrl}/${id}`;
+    return this.http.get<AppointmentType>(url);
+  }
+
+  save(appointmentType: AppointmentType): Observable<void> {
+    return this.http.post<void>(this.baseUrl, appointmentType);
+  }
+
+  update(appointmentType: AppointmentType): Observable<void> {
+    let url = `${this.baseUrl}/${appointmentType.id}`;
+    return this.http.put<void>(url, appointmentType);
+  }
+
+  delete(appointmentType: AppointmentType): Observable<void> {
+    let url = `${this.baseUrl}/${appointmentType.id}`;
+    return this.http.delete<void>(url);
   }
 }

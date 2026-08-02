@@ -1,0 +1,55 @@
+<app-page-layout title="Appointment Type Registration">
+  <app-button layout-button buttonName="New Type" [routerLink]="form"></app-button>
+
+  <app-search-input placeholder="Search types" (search)="filterAppointmentType($event)"></app-search-input>
+
+  @if (appointmentTypePage().content.length > 0) {
+  <app-table>
+    <tr table-head>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'id'" (clicked)="sort.set('id')">
+          #
+        </app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'type'" (clicked)="sort.set('type')">
+          Type
+        </app-sort-button>
+      </th>
+      <th scope="col">Actions</th>
+    </tr>
+
+    <ng-container table-body>
+      @for (appointmentType of appointmentTypePage().content; track $index) {
+      <tr class="table-row-hover" [routerLink]="[form, appointmentType.id]">
+        <th scope="row" class="text-muted">{{ appointmentType.id }}</th>
+        <td class="fw-semibold">{{ appointmentType.type }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger"
+            (click)="deleteAppointmentType(appointmentType, modalConfirm); $event.stopImmediatePropagation()">
+            <i class="bi bi-trash-fill fs-5"></i>
+          </button>
+        </td>
+      </tr>
+      }
+    </ng-container>
+  </app-table>
+
+  <div class="d-flex justify-content-center mt-3">
+    <ngb-pagination [collectionSize]="appointmentTypePage().totalElements" [(page)]="page" />
+  </div>
+  } @else {
+  <app-card icon="bi-person-x" title="No appointment type found"
+    message="Try a different search or add a new type"></app-card>
+  }
+</app-page-layout>
+
+<app-modal #modalConfirm title="Delete Appointment Type">
+  @if (selectedAppointmentType) {
+  <p>Are you sure you want to delete <span class="fw-bold">{{ selectedAppointmentType.type }}</span>?</p>
+  }
+  <ng-container modal-footer>
+    <app-button btnClass="btn btn-outline-secondary" buttonName="Cancel" (click)="modalConfirm.close(false)" />
+    <app-button buttonName="Delete" (click)="modalConfirm.close(true)" />
+  </ng-container>
+</app-modal>
