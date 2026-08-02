@@ -20,4 +20,17 @@ export class AppointmentTypeService {
     return this.http.get<AppointmentType[]>(url, { observe: 'response' });
   }
 
+  getAppointmentTypeById(id: number): Observable<AppointmentType> {
+    let url = `${this.baseUrl}/${id}`;
+    return this.http.get<AppointmentType>(url);
+  }
+
+  save(type: AppointmentType): Observable<void> {
+    return this.http.post<void>(this.baseUrl, type);
+  }
+
+  update(type: AppointmentType): Observable<void> {
+    let url = `${this.baseUrl}/${type.id}`;
+    return this.http.put<void>(url, type);
+  }
 }

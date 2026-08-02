@@ -1,7 +1,7 @@
 <app-page-layout title="Appointment Type Registration">
   <app-button layout-button buttonName="New Type" [routerLink]="form"></app-button>
 
-  <app-search-input placeholder="Search appointment type" (search)="filterAppointmentType($event)"></app-search-input>
+  <app-search-input placeholder="Search types" (search)="filterAppointmentType($event)"></app-search-input>
 
   @if (appointmentTypePage().content.length > 0) {
   <app-table>
@@ -13,7 +13,7 @@
       </th>
       <th scope="col">
         <app-sort-button [active]="sort() === 'type'" (clicked)="sort.set('type')">
-          Appointment Type
+          Type
         </app-sort-button>
       </th>
       <th scope="col">Actions</th>

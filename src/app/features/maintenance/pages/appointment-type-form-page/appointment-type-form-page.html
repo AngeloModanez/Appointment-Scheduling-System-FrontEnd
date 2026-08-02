@@ -1,1 +1,11 @@
-<p>appointment-type-form-page works!</p>
+<app-page-layout title="Appointment Type Form">
+  <form [formGroup]="appointmentTypeForm" (ngSubmit)="save()">
+    <app-form-input type="text" title="Appointment Type" id="appointmentType" placeholder="Routine Checkup"
+      [control]="afType" errorMessage="Appointment type name must be at least 3 characters" />
+
+    <div class="d-flex justify-content-end gap-2">
+      <app-button btnClass="btn btn-outline-secondary" buttonName="Cancel" (click)="cancel()" />
+      <app-button buttonName="Confirm" (click)="save()" />
+    </div>
+  </form>
+</app-page-layout>
