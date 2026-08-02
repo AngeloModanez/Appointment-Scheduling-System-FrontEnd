@@ -25,7 +25,8 @@
         <th scope="row" class="text-muted">{{ appointmentType.id }}</th>
         <td class="fw-semibold">{{ appointmentType.type }}</td>
         <td>
-          <button class="btn btn-sm btn-danger">
+          <button class="btn btn-sm btn-danger"
+            (click)="deleteAppointmentType(appointmentType, modalConfirm); $event.stopImmediatePropagation()">
             <i class="bi bi-trash-fill fs-5"></i>
           </button>
         </td>
@@ -42,3 +43,13 @@
     message="Try a different search or add a new type"></app-card>
   }
 </app-page-layout>
+
+<app-modal #modalConfirm title="Delete Appointment Type">
+  @if (selectedAppointmentType) {
+  <p>Are you sure you want to delete <span class="fw-bold">{{ selectedAppointmentType.type }}</span>?</p>
+  }
+  <ng-container modal-footer>
+    <app-button btnClass="btn btn-outline-secondary" buttonName="Cancel" (click)="modalConfirm.close(false)" />
+    <app-button buttonName="Delete" (click)="modalConfirm.close(true)" />
+  </ng-container>
+</app-modal>

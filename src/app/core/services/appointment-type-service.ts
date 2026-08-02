@@ -15,8 +15,8 @@ export class AppointmentTypeService {
     return this.http.get<AppointmentType[]>(this.baseUrl);
   }
 
-  getAppointmentTypePage(nameFilter: string, page: number, sort: string): Observable<HttpResponse<AppointmentType[]>> {
-    let url = `${this.baseUrl}?type_like=${nameFilter}&_page=${page}&_limit=10&_sort=${sort}`
+  getAppointmentTypePage(typeFilter: string, page: number, sort: string): Observable<HttpResponse<AppointmentType[]>> {
+    let url = `${this.baseUrl}?type_like=${typeFilter}&_page=${page}&_limit=10&_sort=${sort}`
     return this.http.get<AppointmentType[]>(url, { observe: 'response' });
   }
 
@@ -25,12 +25,17 @@ export class AppointmentTypeService {
     return this.http.get<AppointmentType>(url);
   }
 
-  save(type: AppointmentType): Observable<void> {
-    return this.http.post<void>(this.baseUrl, type);
+  save(appointmentType: AppointmentType): Observable<void> {
+    return this.http.post<void>(this.baseUrl, appointmentType);
   }
 
-  update(type: AppointmentType): Observable<void> {
-    let url = `${this.baseUrl}/${type.id}`;
-    return this.http.put<void>(url, type);
+  update(appointmentType: AppointmentType): Observable<void> {
+    let url = `${this.baseUrl}/${appointmentType.id}`;
+    return this.http.put<void>(url, appointmentType);
+  }
+
+  delete(appointmentType: AppointmentType): Observable<void> {
+    let url = `${this.baseUrl}/${appointmentType.id}`;
+    return this.http.delete<void>(url);
   }
 }

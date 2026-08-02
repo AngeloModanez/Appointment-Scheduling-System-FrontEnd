@@ -11,15 +11,17 @@ import { AppointmentType } from '@models/appointment-type';
 import { Page } from '@models/page';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentTypeService } from '@services/appointment-type-service';
+import { ToastService } from '@services/toast-service';
 
 @Component({
   selector: 'app-appointment-types-table-page',
-  imports: [PageLayout, Button, SearchInput, Table, SortButton, NgbPagination, Card, RouterLink],
+  imports: [PageLayout, Button, SearchInput, Table, SortButton, NgbPagination, Card, RouterLink, Modal],
   templateUrl: './appointment-types-table-page.html',
   styles: ``,
 })
 export class AppointmentTypesTablePage {
   private appointmentTypeService = inject(AppointmentTypeService);
+  private toastService = inject(ToastService);
 
   form = '/management/appointment-type-form';
 
@@ -53,6 +55,21 @@ export class AppointmentTypesTablePage {
         })
       }
     })
+  }
+
+  deleteAppointmentType(appointmentType: AppointmentType, modalConfirm: Modal) {
+    this.selectedAppointmentType = appointmentType;
+    modalConfirm.open().then(confirm => {
+      if (confirm) {
+        this.appointmentTypeService.delete(appointmentType).subscribe({
+          next: () => {
+            this.toastService.success(`${appointmentType.type} deleted successfully!`);
+            this.loadAppointmentType(this.filter(), this.page(), this.sort());
+          },
+          error: () => this.toastService.error("Failed to delete appointment type. Try again.")
+        });
+      }
+    }).catch(() => { });
   }
 
   filterAppointmentType(value: string) {
