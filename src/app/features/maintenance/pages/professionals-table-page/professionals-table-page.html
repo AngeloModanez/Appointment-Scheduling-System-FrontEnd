@@ -1,1 +1,63 @@
-<p>professionals-table-page works!</p>
+<app-page-layout title="Professional Registration">
+  <app-button layout-button buttonName="New Professional" [routerLink]="form"></app-button>
+
+  <app-search-input placeholder="Search professionals name" (search)="filterProfessionals($event)"></app-search-input>
+
+  @if(professionalPage().content.length> 0) {
+  <app-table>
+    <tr table-head>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'id'" (clicked)="sort.set('id')">
+          #
+        </app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'name'" (clicked)="sort.set('name')">
+          Full Name
+        </app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'phone'" (clicked)="sort.set('phone')">
+          Phone Number
+        </app-sort-button>
+      </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'active'" (clicked)="sort.set('active')">
+          Active
+        </app-sort-button>
+      </th>
+      <th scope="col">Actions</th>
+    </tr>
+
+    <ng-container table-body>
+      @for (professional of professionalPage().content; track $index) {
+      <tr class="table-row-hover" [routerLink]="[form, professional.id]">
+        <th scope="row" class="text-muted">{{ professional.id }}</th>
+        <td class="fw-semibold">{{ professional.name }}</td>
+        <td>{{ professional.phone }}</td>
+        <td>
+          @if (professional.active) {
+          <span class="badge bg-success">Active</span>
+          } @else {
+          <span class="badge bg-secondary">Inactive</span>
+          }
+        </td>
+        <td>
+          <button class="btn btn-sm btn-danger">
+            <i class="bi bi-trash-fill fs-5"></i>
+          </button>
+        </td>
+      </tr>
+      }
+    </ng-container>
+  </app-table>
+
+  <div class="d-flex justify-content-center mt-3">
+    <ngb-pagination [collectionSize]="professionalPage().totalElements" [(page)]="page" />
+  </div>
+  } @else {
+  <app-card icon="bi-person-x" title="No professionals found"
+    message="Try a different search or add a new professional"></app-card>
+  }
+
+</app-page-layout>
