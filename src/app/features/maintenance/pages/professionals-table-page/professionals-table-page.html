@@ -43,7 +43,8 @@
           }
         </td>
         <td>
-          <button class="btn btn-sm btn-danger">
+          <button class="btn btn-sm btn-danger"
+            (click)="deleteProfessional(professional, modalConfirm); $event.stopPropagation()">
             <i class="bi bi-trash-fill fs-5"></i>
           </button>
         </td>
@@ -61,3 +62,13 @@
   }
 
 </app-page-layout>
+
+<app-modal #modalConfirm title="Delete Professional">
+  @if (selectedProfessional) {
+  <p>Are you sure you want to delete <span class="fw-bold">{{ selectedProfessional.name }}</span>?</p>
+  }
+  <ng-container modal-footer>
+    <app-button btnClass="btn btn-outline-secondary" buttonName="Cancel" (click)="modalConfirm.close(false)" />
+    <app-button buttonName="Delete" (click)="modalConfirm.close(true)" />
+  </ng-container>
+</app-modal>

@@ -10,15 +10,19 @@ import { SortButton } from "@components/sort-button/sort-button";
 import { RouterLink } from '@angular/router';
 import { NgbPagination } from "@ng-bootstrap/ng-bootstrap";
 import { Card } from "@components/card/card";
+import { Modal } from "@components/modal/modal";
+import { ToastService } from '@services/toast-service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-professionals-table-page',
-  imports: [PageLayout, Button, SearchInput, Table, SortButton, RouterLink, NgbPagination, Card],
+  imports: [PageLayout, Button, SearchInput, Table, SortButton, RouterLink, NgbPagination, Card, Modal, FormsModule],
   templateUrl: './professionals-table-page.html',
   styles: ``,
 })
 export class ProfessionalsTablePage {
   private professionalService = inject(ProfessionalService);
+  private toastService = inject(ToastService);
 
   form = '/management/professional-form'
 
@@ -30,6 +34,8 @@ export class ProfessionalsTablePage {
   filter = signal('');
   page = signal(1);
   sort = signal('id');
+
+  selectedProfessional!: Professional;
 
   constructor() {
     effect(() => {
@@ -50,6 +56,21 @@ export class ProfessionalsTablePage {
         });
       }
     });
+  }
+
+  deleteProfessional(professional: Professional, modalConfirm: Modal) {
+    this.selectedProfessional = professional;
+    modalConfirm.open().then(confirm => {
+      if (confirm) {
+        this.professionalService.delete(professional).subscribe({
+          next: () => {
+            this.toastService.success(`${professional.name} deleted successfully!`);
+            this.loadProfessionals(this.filter(), this.page(), this.sort());
+          },
+          error: () => this.toastService.error("Failed to delete professional. Try again.")
+        });
+      }
+    }).catch(() => { });
   }
 
   filterProfessionals(value: string) {
