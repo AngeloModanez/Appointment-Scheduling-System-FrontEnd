@@ -30,6 +30,7 @@ export class ProfessionalFormPage {
   });
 
   isEditing: boolean = false;
+  table = '/management/professionals-table';
 
   constructor() {
     effect(() => {
@@ -58,7 +59,7 @@ export class ProfessionalFormPage {
         this.professionalService.update(professional).subscribe({
           next: () => {
             this.toastService.success("Professional update successfully!");
-            this.router.navigate(['/management/professionals-table']);
+            this.router.navigate([this.table]);
           },
           error: () => this.toastService.error("Failed to update professional. Try again."),
         })
@@ -66,7 +67,7 @@ export class ProfessionalFormPage {
         this.professionalService.save(professional).subscribe({
           next: () => {
             this.toastService.success("Professional created successfully!");
-            this.router.navigate(['/management/professionals-table']);
+            this.router.navigate([this.table]);
           },
           error: () => this.toastService.error("Failed to create professional. Try again."),
         });
@@ -75,7 +76,7 @@ export class ProfessionalFormPage {
   }
 
   cancel() {
-    this.router.navigate(['/management/professionals-table']);
+    this.router.navigate([this.table]);
   }
 
   get afName() { return this.professionalForm.get("name") as FormControl }
