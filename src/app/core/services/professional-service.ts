@@ -22,7 +22,7 @@ export class ProfessionalService {
     return this.http.get<Professional[]>(url, { observe: 'response' });
   }
 
-  getProfessionalsById(id: number): Observable<Professional> {
+  getProfessionalById(id: number): Observable<Professional> {
     let url = `${this.baseUrl}/${id}`;
     return this.http.get<Professional>(url);
   }
