@@ -6,6 +6,8 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 import { internationalPhoneValidator } from 'src/app/shared/validators/phone-validator';
 import { ProfessionalService } from '@services/professional-service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Professional } from '@models/professional';
+import { ToastService } from '@services/toast-service';
 
 @Component({
   selector: 'app-professional-form-page',
@@ -14,6 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styles: ``,
 })
 export class ProfessionalFormPage {
+  private toastService = inject(ToastService);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private professionalService = inject(ProfessionalService);
@@ -43,8 +46,32 @@ export class ProfessionalFormPage {
   loadProfessional(professionalId: number) {
     this.professionalService.getProfessionalById(professionalId).subscribe({
       next: professional => this.professionalForm.setValue(professional),
-      error: () => alert("Error on load Professional")
+      error: () => this.toastService.error("Error on load Professional. Try again.")
     });
+  }
+
+  save() {
+    this.professionalForm.markAllAsTouched();
+    if (this.professionalForm.valid) {
+      const professional = this.professionalForm.value as Professional;
+      if (this.isEditing) {
+        this.professionalService.update(professional).subscribe({
+          next: () => {
+            this.toastService.success("Professional update successfully!");
+            this.router.navigate(['/management/professionals-table']);
+          },
+          error: () => this.toastService.error("Failed to update professional. Try again."),
+        })
+      } else {
+        this.professionalService.save(professional).subscribe({
+          next: () => {
+            this.toastService.success("Professional created successfully!");
+            this.router.navigate(['/management/professionals-table']);
+          },
+          error: () => this.toastService.error("Failed to create professional. Try again."),
+        });
+      }
+    }
   }
 
   cancel() {
