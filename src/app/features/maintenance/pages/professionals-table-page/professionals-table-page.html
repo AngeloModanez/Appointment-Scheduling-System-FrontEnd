@@ -26,6 +26,11 @@
           Active
         </app-sort-button>
       </th>
+      <th scope="col">
+        <app-sort-button [active]="sort() === 'areas'" (clicked)="sort.set('areas')">
+          Areas
+        </app-sort-button>
+      </th>
       <th scope="col">Actions</th>
     </tr>
 
@@ -37,10 +42,17 @@
         <td>{{ professional.phone }}</td>
         <td>
           @if (professional.active) {
-          <span class="badge bg-success">Active</span>
+          <span class="badge bg-success px-3">Active</span>
           } @else {
           <span class="badge bg-secondary">Inactive</span>
           }
+        </td>
+        <td style="max-width: 200px;">
+          <div class="d-flex flex-wrap gap-1 justify-content-center">
+            @for (areaId of professional.areasId; track $index) {
+            <span class="badge bg-primary">{{ getAreaName(areaId) }}</span>
+            }
+          </div>
         </td>
         <td>
           <button class="btn btn-sm btn-danger"

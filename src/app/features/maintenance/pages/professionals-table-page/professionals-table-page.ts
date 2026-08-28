@@ -13,6 +13,8 @@ import { Card } from "@components/card/card";
 import { Modal } from "@components/modal/modal";
 import { ToastService } from '@services/toast-service';
 import { FormsModule } from '@angular/forms';
+import { Area } from '@models/area';
+import { AreaService } from '@services/area-service';
 
 @Component({
   selector: 'app-professionals-table-page',
@@ -21,6 +23,7 @@ import { FormsModule } from '@angular/forms';
   styles: ``,
 })
 export class ProfessionalsTablePage {
+  private areaService = inject(AreaService);
   private professionalService = inject(ProfessionalService);
   private toastService = inject(ToastService);
 
@@ -31,6 +34,8 @@ export class ProfessionalsTablePage {
     totalElements: 0
   });
 
+  areas = signal<Area[]>([]);
+
   filter = signal('');
   page = signal(1);
   sort = signal('id');
@@ -38,6 +43,8 @@ export class ProfessionalsTablePage {
   selectedProfessional!: Professional;
 
   constructor() {
+    this.loadAreas();
+
     effect(() => {
       const filter = this.filter();
       const page = this.page();
@@ -71,6 +78,16 @@ export class ProfessionalsTablePage {
         });
       }
     }).catch(() => { });
+  }
+
+  loadAreas() {
+    this.areaService.getAreas().subscribe({
+      next: areas => this.areas.set(areas)
+    });
+  }
+
+  getAreaName(areaId: number): string {
+    return this.areas().find(a => a.id === areaId)?.name ?? '';
   }
 
   filterProfessionals(value: string) {
