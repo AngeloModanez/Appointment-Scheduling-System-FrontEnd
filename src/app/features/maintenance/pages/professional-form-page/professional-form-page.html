@@ -12,13 +12,39 @@
       </div>
     </div>
 
-    <div class="col-5 d-flex align-items-center gap-3 mt-4">
-      <label for="activeStatus" class="form-label fw-semibold text-dark mb-0 user-select-none" style="cursor: pointer;">
-        Active Status
-      </label>
-      <div class="form-check form-switch mb-0">
-        <input class="form-check-input" type="checkbox" role="switch" id="activeStatus" [formControl]="afActive"
-          style="width: 3rem; height: 1.5rem; cursor: pointer;" />
+    <div class="row g-3">
+      <div class="col-12">
+        <label class="form-label fw-semibold text-dark mb-2">
+          Active Status
+        </label>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="activeStatus" [formControl]="afActive" />
+          <label class="form-check-label" for="activeStatus">
+            {{ afActive.value ? 'Active' : 'Inactive' }}
+          </label>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label fw-semibold text-dark">
+          Areas
+        </label>
+        <div class="d-flex flex-wrap gap-2">
+          @for (area of areas(); track area.id) {
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [id]="'area-' + area.id"
+              [checked]="afAreasId.value?.includes(area.id)" (change)="onAreaCheck(area.id, $event)" />
+            <label class="form-check-label" [for]="'area-' + area.id">
+              {{ area.name }}
+            </label>
+          </div>
+          }
+        </div>
+        @if (afAreasId.invalid && afAreasId.touched) {
+        <div class="invalid-feedback d-block">
+          <small>Select at least one area</small>
+        </div>
+        }
       </div>
     </div>
 
