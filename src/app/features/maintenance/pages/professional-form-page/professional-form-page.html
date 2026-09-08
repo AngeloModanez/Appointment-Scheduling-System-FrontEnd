@@ -1,0 +1,57 @@
+<app-page-layout title="Professional Registration">
+  <form [formGroup]="professionalForm">
+
+    <div class="row">
+      <div class="col-6">
+        <app-form-input type="text" title="Full Name" id="professionalName" placeholder="Dr. Andrew" [control]="afName"
+          errorMessage="Name must be at least 3 characters" />
+      </div>
+      <div class="col-6">
+        <app-form-input type="tel" title="Phone Number" id="phoneNumber" placeholder="+1 202 555 0143"
+          [control]="afPhone" errorMessage="Please enter a valid phone number" />
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12">
+        <label class="form-label fw-semibold text-dark mb-2">
+          Active Status
+        </label>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="activeStatus" [formControl]="afActive" />
+          <label class="form-check-label" for="activeStatus">
+            {{ afActive.value ? 'Active' : 'Inactive' }}
+          </label>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label fw-semibold text-dark">
+          Areas
+        </label>
+        <div class="d-flex flex-wrap gap-2">
+          @for (area of areas(); track area.id) {
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [id]="'area-' + area.id"
+              [checked]="afAreasId.value?.includes(area.id)" (change)="onAreaCheck(area.id, $event)" />
+            <label class="form-check-label" [for]="'area-' + area.id">
+              {{ area.name }}
+            </label>
+          </div>
+          }
+        </div>
+        @if (afAreasId.invalid && afAreasId.touched) {
+        <div class="invalid-feedback d-block">
+          <small>Select at least one area</small>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-2">
+      <app-button btnClass="btn btn-outline-secondary" buttonName="Cancel" (click)="cancel()" />
+      <app-button buttonName="Save Professional" (click)="save()" />
+    </div>
+
+  </form>
+</app-page-layout>

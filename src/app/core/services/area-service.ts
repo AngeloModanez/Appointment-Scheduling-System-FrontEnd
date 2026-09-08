@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Area } from '@models/area';
 import { Professional } from '@models/professional';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -26,14 +26,16 @@ export class AreaService {
     return this.http.get<Area>(url);
   }
 
-  getProfessionalsFromArea(area: Area): Observable<Professional[]> {
-    let url = `${this.baseUrl}/${area.id}/professionals`;
-    return this.http.get<Professional[]>(url);
+  getActiveProfessionalsFromArea(area: Area): Observable<Professional[]> {
+    return this.http.get<Professional[]>('http://localhost:3000/professionals?active=true').pipe(
+      map(professionals => professionals.filter(p => p.areasId.includes(area.id)))
+    );
   }
 
-  getActiveProfessionalsFromArea(area: Area): Observable<Professional[]> {
-    let url = `${this.baseUrl}/${area.id}/professionals?active=true`;
-    return this.http.get<Professional[]>(url);
+  getProfessionalsFromArea(area: Area): Observable<Professional[]> {
+    return this.http.get<Professional[]>('http://localhost:3000/professionals').pipe(
+      map(professionals => professionals.filter(p => p.areasId.includes(area.id)))
+    );
   }
 
   save(area: Area): Observable<void> {

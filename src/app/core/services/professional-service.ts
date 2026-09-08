@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { TimeModel } from '@features/schedule/components/time/models/time-model';
 import { Professional } from '@models/professional';
@@ -11,6 +11,35 @@ export class ProfessionalService {
   private http = inject(HttpClient);
 
   baseUrl = "http://localhost:3000/professionals";
+
+  getProfessionalPage(nameFilter: string, page: number, sort: string): Observable<HttpResponse<Professional[]>> {
+    let url = `${this.baseUrl}?name_like=${nameFilter}&_page=${page}&_limit=10&_sort=${sort}`;
+
+    if (sort === 'active') {
+      url = `${url}&_order=desc`;
+    }
+
+    return this.http.get<Professional[]>(url, { observe: 'response' });
+  }
+
+  getProfessionalById(id: number): Observable<Professional> {
+    let url = `${this.baseUrl}/${id}`;
+    return this.http.get<Professional>(url);
+  }
+
+  save(professional: Professional): Observable<void> {
+    return this.http.post<void>(this.baseUrl, professional);
+  }
+
+  update(professional: Professional): Observable<void> {
+    let url = `${this.baseUrl}/${professional.id}`;
+    return this.http.put<void>(url, professional);
+  }
+
+  delete(professional: Professional): Observable<void> {
+    let url = `${this.baseUrl}/${professional.id}`;
+    return this.http.delete<void>(url);
+  }
 
   getAvailableDays(professional: Professional, calendar: Date): Observable<number[]> {
     let month = calendar.getMonth() + 1;

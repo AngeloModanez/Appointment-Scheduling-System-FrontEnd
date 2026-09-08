@@ -12,6 +12,54 @@
     {
       "id": 3,
       "name": "Cardiology"
+    },
+    {
+      "id": 4,
+      "name": "Dermatology"
+    },
+    {
+      "id": 5,
+      "name": "Pediatrics"
+    },
+    {
+      "id": 6,
+      "name": "Orthopedics"
+    },
+    {
+      "id": 7,
+      "name": "Neurology"
+    },
+    {
+      "id": 8,
+      "name": "Psychiatry"
+    },
+    {
+      "id": 9,
+      "name": "Ophthalmology"
+    },
+    {
+      "id": 10,
+      "name": "Gynecology"
+    },
+    {
+      "id": 11,
+      "name": "Urology"
+    },
+    {
+      "id": 12,
+      "name": "Endocrinology"
+    },
+    {
+      "id": 13,
+      "name": "Gastroenterology"
+    },
+    {
+      "id": 14,
+      "name": "Otolaryngology"
+    },
+    {
+      "id": 15,
+      "name": "Nutrition"
     }
   ],
   "professionals": [
@@ -20,28 +68,148 @@
       "name": "Dr. Michael Johnson",
       "phone": "+1 (212) 555-0198",
       "active": true,
-      "areaId": 1
+      "areasId": [
+        1
+      ]
     },
     {
       "id": 2,
       "name": "Dr. Emily Carter",
-      "phone": "+1 (310) 555-2211",
+      "phone": "+1 310 555 2211",
       "active": true,
-      "areaId": 2
+      "areasId": [
+        2,
+        6
+      ]
     },
     {
       "id": 3,
       "name": "Dr. Lucas Oliveira",
       "phone": "+55 (11) 98888-1234",
       "active": true,
-      "areaId": 1
+      "areasId": [
+        1,
+        3
+      ]
     },
     {
       "id": 4,
       "name": "Dr. Scallet",
-      "phone": "+55 (11) 92222-1234",
+      "phone": "+55 11 922221234",
       "active": false,
-      "areaId": 3
+      "areasId": [
+        3
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Dr. Sophie Martin",
+      "phone": "+33 (1) 42685320",
+      "active": true,
+      "areasId": [
+        4,
+        9
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Dr. Daniel Wilson",
+      "phone": "+44 20 7946-0958",
+      "active": false,
+      "areasId": [
+        5
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Dr. Hans Müller",
+      "phone": "+49-30-901820",
+      "active": true,
+      "areasId": [
+        6,
+        7
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Dr. Isabella Rossi",
+      "phone": "+39 06 6982 1234",
+      "active": true,
+      "areasId": [
+        7,
+        8
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Dr. Kenji Nakamura",
+      "phone": "+81 (3) 55501234",
+      "active": false,
+      "areasId": [
+        8
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Dr. Claire Dubois",
+      "phone": "+33-4-91223344",
+      "active": true,
+      "areasId": [
+        9,
+        14
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Dr. Ahmed Hassan",
+      "phone": "+20 (2) 5551-2345",
+      "active": false,
+      "areasId": [
+        10,
+        11
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Dr. Sofia Petrova",
+      "phone": "+7 495 555 1234",
+      "active": true,
+      "areasId": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Dr. Liam O'Connor",
+      "phone": "+353 1 555-1234",
+      "active": true,
+      "areasId": [
+        12,
+        13,
+        15
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Dr. Priya Sharma",
+      "phone": "+91 (11) 55551234",
+      "active": false,
+      "areasId": [
+        13,
+        15
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Dr. Mateo García",
+      "phone": "+34 91 555-6789",
+      "active": true,
+      "areasId": [
+        1,
+        4,
+        15
+      ]
     }
   ],
   "appointment-types": [
@@ -56,6 +224,54 @@
     {
       "id": 3,
       "type": "Routine Checkup"
+    },
+    {
+      "id": 4,
+      "type": "Initial Assessment"
+    },
+    {
+      "id": 5,
+      "type": "Physical Therapy Session"
+    },
+    {
+      "id": 6,
+      "type": "Specialist Consultation"
+    },
+    {
+      "id": 7,
+      "type": "Medical Evaluation"
+    },
+    {
+      "id": 8,
+      "type": "Diagnostic Consultation"
+    },
+    {
+      "id": 9,
+      "type": "Preventive Care Visit"
+    },
+    {
+      "id": 10,
+      "type": "Annual Health Examination"
+    },
+    {
+      "id": 11,
+      "type": "Postoperative Follow-up"
+    },
+    {
+      "id": 12,
+      "type": "Treatment Planning"
+    },
+    {
+      "id": 13,
+      "type": "Health Screening"
+    },
+    {
+      "id": 14,
+      "type": "Second Opinion"
+    },
+    {
+      "id": 15,
+      "type": "Telemedicine Consultation"
     }
   ],
   "clients": [
@@ -68,92 +284,86 @@
     {
       "id": 2,
       "name": "Liam Anderson",
-      "phone": "+1 (646) 555-3344",
+      "phone": "+1 646 555-3344",
       "dateOfBirth": "1988-11-02"
     },
     {
       "id": 3,
       "name": "Olivia Martinez",
-      "phone": "+1 (305) 555-7788",
+      "phone": "+1-305-555-7788",
       "dateOfBirth": "1995-07-23"
     },
     {
       "id": 4,
       "name": "Noah Thompson",
-      "phone": "+1 (213) 555-8899",
+      "phone": "+12135558899",
       "dateOfBirth": "2000-01-30"
     },
     {
       "id": 5,
       "name": "Ava Robinson",
-      "phone": "+1 (312) 555-6677",
+      "phone": "+55 (11) 97777-6677",
       "dateOfBirth": "1997-09-18"
     },
     {
       "id": 6,
       "name": "William Clark",
-      "phone": "+1 (408) 555-2233",
+      "phone": "+55 41 98888 2233",
       "dateOfBirth": "1985-03-12"
     },
     {
       "id": 7,
       "name": "Sophia Lewis",
-      "phone": "+1 (718) 555-9988",
+      "phone": "+44 (20) 7555-9988",
       "dateOfBirth": "1999-06-27"
     },
     {
       "id": 8,
       "name": "James Walker",
-      "phone": "+1 (917) 555-5566",
+      "phone": "+44 161 555 5566",
       "dateOfBirth": "1993-12-09"
     },
     {
       "id": 9,
       "name": "Isabella Hall",
-      "phone": "+1 (646) 555-1111",
+      "phone": "+33-1-55551111",
       "dateOfBirth": "2001-04-05"
     },
     {
       "id": 10,
       "name": "Benjamin Allen",
-      "phone": "+1 (202) 555-2222",
+      "phone": "+49 (30) 555-2222",
       "dateOfBirth": "1987-08-21"
     },
     {
       "id": 11,
       "name": "Lucas Andrade",
-      "phone": "+55 (11) 97532-8809",
+      "phone": "+5511975328809",
       "dateOfBirth": "2000-01-17"
     },
     {
       "id": 12,
       "name": "Fernanda Oliveira",
-      "phone": "+55 (31) 97655-8890",
+      "phone": "+351 (21) 555-8890",
       "dateOfBirth": "1988-09-30"
     },
     {
       "id": 13,
       "name": "Carlos Eduardo",
-      "phone": "+55 (21) 98844-1023",
+      "phone": "+55-21-988441023",
       "dateOfBirth": "1995-04-12"
     },
     {
       "id": 14,
       "name": "Juliana Ferreira",
-      "phone": "+55 (61) 97345-2210",
+      "phone": "+971 (4) 555-2210",
       "dateOfBirth": "1993-03-25"
     },
     {
       "id": 15,
       "name": "Rafael Teixeira",
-      "phone": "+55 (16) 99388-7710",
+      "phone": "+5516993887710",
       "dateOfBirth": "1987-04-21"
-    },
-    {
-      "id": 16,
-      "name": "Amir Tariq Al-Din",
-      "phone": "+971 (4) 234 5679",
-      "dateOfBirth": "1987-03-28"
     }
   ]
 }
